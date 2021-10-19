@@ -65,6 +65,7 @@ import uniandes.isis2304.parranderos.negocio.VOPuntoDeAtencion;
  */
 @SuppressWarnings("serial")
 
+
 public class InterfazParranderosApp extends JFrame implements ActionListener
 {
 	/* ****************************************************************
@@ -115,6 +116,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
      * Menú de la aplicación
      */
     private JMenuBar menuBar;
+    private boolean adminBanc=false;
+    private boolean gerenteOficina=false;
+    private boolean cajero=false;
+    private boolean cliente=false;
+    
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -285,8 +291,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     
     public void adicionarUsuario( )
     {
+   
     	try 
     	{
+    		if ( adminBanc || gerenteOficina)
+        	{
     		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de usuario?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		String login = JOptionPane.showInputDialog (this, "Login?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		String clave = JOptionPane.showInputDialog (this, "Clave?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
@@ -312,9 +321,15 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
+    		
     		else
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("No es un administrado banca andes ni un gerente oficina esta accion no se puede realizar");
     		}
 		} 
     	catch (Exception e) 
@@ -329,7 +344,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
-    		
+    		if (gerenteOficina)
+    		{
     		String estado=JOptionPane.showInputDialog (this, "Estado?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		String tipo =JOptionPane.showInputDialog (this, "Tipo de prestamo?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
@@ -351,9 +367,14 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
+    		
     		else
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+    		}
+    		else {
+    			panelDatos.actualizarInterfaz("No es un gerente oficina");
     		}
 		} 
     	catch (Exception e) 
@@ -369,7 +390,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
-    		
+    		if(cajero)
+    		{
     		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de cliente?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE);
     		long valorCuota = Integer.parseInt(JOptionPane.showInputDialog (this, "Cuota?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID del prestamo?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
@@ -395,6 +417,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
     		}
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("No es un cajero");
+    		}
 		} 
     	catch (Exception e) 
     	{
@@ -408,10 +435,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
-    		
-    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de cliente?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE);
-    		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Dinero(para sacar - y meter +) ?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
-    		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		if(cajero || cliente)
+    		{
+    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de cliente?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE);
+    		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Dinero(para sacar - y meter +) ?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
+    		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTb != null )
     		{
     			parranderos.operacionCuenta(nombreTb,id,saldo);
@@ -434,6 +462,10 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
     		}
+    		}
+    		else{
+    			panelDatos.actualizarInterfaz("No es un cliente o cajero");
+    		}
 		} 
     	catch (Exception e) 
     	{
@@ -446,7 +478,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
-    		
+    		if (gerenteOficina)
+    		{
     		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE);
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID del prestamo?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTb != null )
@@ -467,9 +500,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
+    		else {
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+    		}
     		else
     		{
-    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    			panelDatos.actualizarInterfaz("No es un gerente oficina");
     		}
 		} 
     	catch (Exception e) 
@@ -482,8 +519,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     
     public void cerrarCuenta( )
     {
+    	
     	try 
     	{
+    		if (gerenteOficina)
+        	{
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		
     		parranderos.cerrarCuenta(id);
@@ -503,7 +543,12 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		panelDatos.actualizarInterfaz(resultado);
     		
     		
-		} 
+		}
+    		else {
+        		panelDatos.actualizarInterfaz("No es un gerente oficina");
+        	}
+    	}
+    
     	catch (Exception e) 
     	{
 //			e.printStackTrace();
@@ -516,6 +561,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
+    		if(adminBanc)
+    		{
     		String nombre = JOptionPane.showInputDialog (this, "Nombre de la oficina?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
     		String direccion = JOptionPane.showInputDialog (this, "Direccion?", "Adicionar direccion", JOptionPane.QUESTION_MESSAGE);
     		String gerenteUsuario = JOptionPane.showInputDialog (this, "Usuario del gerente?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
@@ -538,6 +585,12 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
     		}
+    		}
+   
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("No es un administrado banca andes");
+    		}
 		} 
     	catch (Exception e) 
     	{
@@ -556,6 +609,10 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
+    		if(adminBanc)
+    		{
+    			
+    		
     		String tipo = JOptionPane.showInputDialog (this, "Tipo del punto de atencion?", "Adicionar tipo", JOptionPane.QUESTION_MESSAGE);
     		String localizacion = JOptionPane.showInputDialog (this, "Localizacion?", "Adicionar locaclizacion", JOptionPane.QUESTION_MESSAGE);
     		String oficina = JOptionPane.showInputDialog (this, "Oficina en caso de tener?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
@@ -576,6 +633,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
     		}
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("No es un gerente oficina");
+    		}
 		} 
     	catch (Exception e) 
     	{
@@ -589,6 +651,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
+    		if (gerenteOficina) {
     		String tipo = JOptionPane.showInputDialog (this, "Tipo de la cuenta?", "Adicionar tipo", JOptionPane.QUESTION_MESSAGE);
     		long saldo =Integer.parseInt( JOptionPane.showInputDialog (this, "Saldo inicial de la cuenta?", "Adicionar saldo", JOptionPane.QUESTION_MESSAGE));
     		String cliente = JOptionPane.showInputDialog (this, "Cliente de la cuenta?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
@@ -610,6 +673,10 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		else
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+    		}
+    		else {
+    			panelDatos.actualizarInterfaz("No es un gerente Oficina");
     		}
 		} 
     	catch (Exception e) 
@@ -714,11 +781,33 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
+    	     adminBanc=false;
+    	     gerenteOficina=false;
+    	     cajero=false;
+    	     cliente=false;
     		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		if (loginTb != null & claveTb!= null)
     		{
-    			VOUsuario tipoUsuario1 = parranderos.darUsuario(loginTb,claveTb);
+    			String tipo = parranderos.darUsuario(loginTb,claveTb);
+    			if (tipo.toLowerCase()=="cliente" )
+    			{
+    				cliente=true;
+    			}
+    			else if (tipo.toLowerCase()=="cajero")
+    			{
+    				cajero=true;
+    			}
+    			else if (tipo.toLowerCase()=="adminbanc")
+    			{
+    				adminBanc=true;
+    			}
+    			else if (tipo.toLowerCase()=="gerenteoficina")
+    			{
+    				gerenteOficina=true;
+    			}
+
+    
     			String resultado = "En buscar Tipo Bebida por nombre\n\n";
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);

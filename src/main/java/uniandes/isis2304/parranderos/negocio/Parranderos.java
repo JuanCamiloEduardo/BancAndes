@@ -254,15 +254,13 @@ public class Parranderos
 		return !tb.isEmpty () ? tb.get (0) : null;
 	}
 	
-	public Usuario darUsuario (String login,String clave)
+	public String darUsuario (String login,String clave)
 	{
 		log.info ("Buscando Tipo de bebida por nombre: " + login);
 		List<Usuario> tb = pp.darUsuario ();
 		String hola=tb.get(0).getTipo();
 		System. out. println(hola);
-
-		System. out. println(tb.toString());
-		return !tb.isEmpty () ? tb.get (0) : null;
+		return hola;
 	}
 	
 	public GerenteOficina darTipoGerenteOficina (String login,String clave)
