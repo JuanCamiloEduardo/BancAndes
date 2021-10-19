@@ -43,7 +43,7 @@ import uniandes.isis2304.parranderos.negocio.Usuario;
 import uniandes.isis2304.parranderos.negocio.Oficina;
 import uniandes.isis2304.parranderos.negocio.PuntoDeAtencion;
 import uniandes.isis2304.parranderos.negocio.Visitan;
-import uniandes.isis2304.parranderos.negocio.Cuenta;
+
 
 /**
  * Clase para el manejador de persistencia del proyecto Parranderos
@@ -129,13 +129,13 @@ public class PersistenciaParranderos
 	 */
 	private SQLVisitan sqlVisitan;
 	private SQLUsuario sqlUsuario;
-<<<<<<< HEAD
+
 	private SQLPrestamo sqlPrestamo;
-=======
+
 	private SQLOficina sqlOficina;
 	private SQLPuntoDeAtencion sqlPuntoDeAtencion;
 	private SQLCuenta sqlCuenta;
->>>>>>> d.pulidon
+
 
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -160,13 +160,11 @@ public class PersistenciaParranderos
 		tablas.add ("SIRVEN");
 		tablas.add ("VISITAN");
 		tablas.add("USUARIO");
-<<<<<<< HEAD
 		tablas.add("Prestamo");
-=======
 		tablas.add("OFICINA");
 		tablas.add("PUNTODEATENCION");
 		tablas.add("CUENTA");
->>>>>>> d.pulidon
+
 }
 
 	/**
@@ -329,12 +327,6 @@ public class PersistenciaParranderos
 	{
 		return tablas.get (8);
 	}
-<<<<<<< HEAD
-	public String darTablaPrestamo ()
-	{
-		return tablas.get (12);
-	}
-=======
 	
 	public String darTablaOficina ()
 	{
@@ -351,7 +343,11 @@ public class PersistenciaParranderos
 		return tablas.get (11);
 	}
 	
->>>>>>> d.pulidon
+	public String darTablaPrestamo ()
+	{
+		return tablas.get (12);
+	}
+
 	private long nextval ()
 	{
         long resp = sqlUtil.nextval (pmf.getPersistenceManager());
@@ -447,25 +443,9 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
+
 	
-<<<<<<< HEAD
-	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
-	{
-		System.out.println("3");
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long idPrestamo = nextval ();
-            System.out.println("4");
-            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, idPrestamo,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
-            tx.commit();
-            System.out.println("8");
-            log.trace ("Inserción de tipo de bebida: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
-            System.out.println("9");
-            return new Prestamo (idPrestamo,tipo,estado, nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
-=======
+	
 	public Oficina adicionarOficina(String nombre,String direccion,String gerenteUsuario,long puntosDeAtencion)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -479,11 +459,11 @@ public class PersistenciaParranderos
             log.trace ("Inserción de oficina: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             
             return new Oficina (idOficina,nombre,direccion,gerenteUsuario,puntosDeAtencion);
->>>>>>> d.pulidon
+
         }
         catch (Exception e)
         {
-//        	e.printStackTrace();
+//       	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
@@ -496,23 +476,9 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
-<<<<<<< HEAD
 
-	public long cambioPrestamo (String nombre,long id,long nuevaCuota)
-	{
-		System.out.println("7");
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long resp = sqlPrestamo.cambioPrestamo(pm, nombre,id,nuevaCuota);
-            System.out.println("10");
-            tx.commit();
-
-            return resp;
-=======
 	
+
 	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -543,6 +509,71 @@ public class PersistenciaParranderos
         }
 	}
 	
+	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
+	{
+		System.out.println("3");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idPrestamo = nextval ();
+            System.out.println("4");
+            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, idPrestamo,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
+            tx.commit();
+            System.out.println("8");
+            log.trace ("Inserción de tipo de bebida: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println("9");
+            return new Prestamo (idPrestamo,tipo,estado, nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	public long cambioPrestamo (String nombre,long id,long nuevaCuota)
+	{
+		System.out.println("7");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPrestamo.cambioPrestamo(pm, nombre,id,nuevaCuota);
+            System.out.println("10");
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	
+	
 	public Cuenta adicionarCuenta(String tipo,String cliente,String gerente)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -556,17 +587,12 @@ public class PersistenciaParranderos
             log.trace ("Inserción de cuenta: " + tuplasInsertadas + " tuplas insertadas");
             
             return new Cuenta (idCuenta, tipo,cliente,gerente);
->>>>>>> d.pulidon
         }
         catch (Exception e)
         {
 //        	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-<<<<<<< HEAD
-            return -1;
-=======
         	return null;
->>>>>>> d.pulidon
         }
         finally
         {
@@ -577,11 +603,9 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> d.pulidon
+
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoBebida, dado el nombre del tipo de bebida
 	 * Adiciona entradas al log de la aplicación

@@ -47,12 +47,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.Parranderos;
-<<<<<<< HEAD
+
 import uniandes.isis2304.parranderos.negocio.Prestamo;
 import uniandes.isis2304.parranderos.negocio.VOPrestamo;
-=======
+
 import uniandes.isis2304.parranderos.negocio.VOCuenta;
->>>>>>> d.pulidon
+
 import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 import uniandes.isis2304.parranderos.negocio.VOUsuario;
 import uniandes.isis2304.parranderos.negocio.VOOficina;
@@ -324,8 +324,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
     }
-<<<<<<< HEAD
-    
+
     public void adicionarPrestamo( )
     {
     	try 
@@ -349,27 +348,6 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         		}
         		String resultado = "En adicionarTipoBebida\n\n";
         		resultado += "Tipo de bebida adicionado exitosamente: " + tb;
-=======
-
-    public void adicionarOficina( )
-    {
-    	try 
-    	{
-    		String nombre = JOptionPane.showInputDialog (this, "Nombre de la oficina?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
-    		String direccion = JOptionPane.showInputDialog (this, "Direccion?", "Adicionar direccion", JOptionPane.QUESTION_MESSAGE);
-    		String gerenteUsuario = JOptionPane.showInputDialog (this, "Usuario del gerente?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
-    		long puntosDeAtencion =Integer.parseInt( JOptionPane.showInputDialog (this, "numero de puntos de atencion?", "Adicionar puntos de atencion", JOptionPane.QUESTION_MESSAGE));
-    		
-    		if (nombre != null & direccion!= null & gerenteUsuario!= null)
-    		{
-        		VOOficina tb = parranderos.adicionarOficina(nombre,direccion,gerenteUsuario,puntosDeAtencion);
-        		if (tb == null)
-        		{
-        			throw new Exception ("No se pudo crear una oficina con nombre: " + nombre);
-        		}
-        		String resultado = "En adicionarOficina\n\n";
-        		resultado += "Oficina adicionada exitosamente: " + tb;
->>>>>>> d.pulidon
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
@@ -384,10 +362,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
-<<<<<<< HEAD
     	
     }
-    
     
     public void OperacionPrestamo( )
     {
@@ -412,8 +388,61 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     			{
         			resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";    				
     			}*/
-=======
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
     }
+
+    public void adicionarOficina( )
+    {
+    	try 
+    	{
+    		String nombre = JOptionPane.showInputDialog (this, "Nombre de la oficina?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
+    		String direccion = JOptionPane.showInputDialog (this, "Direccion?", "Adicionar direccion", JOptionPane.QUESTION_MESSAGE);
+    		String gerenteUsuario = JOptionPane.showInputDialog (this, "Usuario del gerente?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
+    		long puntosDeAtencion =Integer.parseInt( JOptionPane.showInputDialog (this, "numero de puntos de atencion?", "Adicionar puntos de atencion", JOptionPane.QUESTION_MESSAGE));
+    		
+    		if (nombre != null & direccion!= null & gerenteUsuario!= null)
+    		{
+        		VOOficina tb = parranderos.adicionarOficina(nombre,direccion,gerenteUsuario,puntosDeAtencion);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear una oficina con nombre: " + nombre);
+        		}
+        		String resultado = "En adicionarOficina\n\n";
+        		resultado += "Oficina adicionada exitosamente: " + tb;
+
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+
+    	
+    }
+    
+    
+    
     
     public void adicionarPuntoDeAtencion( )
     {
@@ -465,7 +494,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         		}
         		String resultado = "En adicionarCuenta\n\n";
         		resultado += "Cuenta adicionada exitosamente: " + tb;
->>>>>>> d.pulidon
+
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
@@ -481,10 +510,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> d.pulidon
+
     /**
      * Consulta en la base de datos los tipos de bebida existentes y los muestra en el panel de datos de la aplicación
      */

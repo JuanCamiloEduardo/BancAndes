@@ -597,3 +597,29 @@ ORA-00001: restricción única (ISIS2304D01202120.UN_TIPOBEB_NOMBRE) violada
 01:33:24,770 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando prestamo: Prestamo [id=90, tipo=casa, estado=abierto, nombre=yo, monto=420000, interes=50, numeroCuotas=150, diaPaga=jueves, valorCuota=20000]
 01:34:06,775 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 90
 01:34:06,936 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas
+02:12:06,199 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - NO se encontró un archivo de configuración válido
+02:12:10,654 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración por defecto
+02:12:10,656 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - NO se encontró un archivo de configuración válido
+02:18:16,139 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+02:18:16,140 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+02:18:16,163 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+02:19:32,758 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+02:19:32,758 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+02:19:32,786 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+02:24:05,449 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+02:24:05,449 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+02:24:05,475 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+02:24:20,658 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando usuario: a
+02:24:21,270 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando usuario: Usuario [id=24, nombre=a, login=a, clave=a, numeroDocumento=5, tipoDocumento=a, nacionalidad=a, direccionFisica=a, direccionElectronica=a, telefono=5, ciudad=a, departamento=a, codigoPostal=5]
+02:24:48,770 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando prestamo: a
+02:24:48,897 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando prestamo: Prestamo [id=25, tipo=a, estado=a, nombre=a, monto=50000000, interes=5, numeroCuotas=50, diaPaga=a, valorCuota=5]
+02:25:17,608 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 25
+02:25:17,685 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas
+02:26:01,960 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 25
+02:26:02,024 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 0 tuplas actualizadas
+02:26:30,734 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando oficina: a
+02:26:30,866 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando oficina: Oficina [id=26, direccion=a, nombre=a, numeroPuntoAtencion=5]
+02:26:38,129 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando punto de atencion
+02:26:38,261 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando punto de atencion
+02:26:44,006 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
+02:26:44,108 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
