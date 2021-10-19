@@ -47,8 +47,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.Parranderos;
+import uniandes.isis2304.parranderos.negocio.VOCuenta;
 import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 import uniandes.isis2304.parranderos.negocio.VOUsuario;
+import uniandes.isis2304.parranderos.negocio.VOOficina;
+import uniandes.isis2304.parranderos.negocio.VOPuntoDeAtencion;
+
 
 /**
  * Clase principal de la interfaz
@@ -315,6 +319,106 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		}
     }
 
+    public void adicionarOficina( )
+    {
+    	try 
+    	{
+    		String nombre = JOptionPane.showInputDialog (this, "Nombre de la oficina?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
+    		String direccion = JOptionPane.showInputDialog (this, "Direccion?", "Adicionar direccion", JOptionPane.QUESTION_MESSAGE);
+    		String gerenteUsuario = JOptionPane.showInputDialog (this, "Usuario del gerente?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
+    		long puntosDeAtencion =Integer.parseInt( JOptionPane.showInputDialog (this, "numero de puntos de atencion?", "Adicionar puntos de atencion", JOptionPane.QUESTION_MESSAGE));
+    		
+    		if (nombre != null & direccion!= null & gerenteUsuario!= null)
+    		{
+        		VOOficina tb = parranderos.adicionarOficina(nombre,direccion,gerenteUsuario,puntosDeAtencion);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear una oficina con nombre: " + nombre);
+        		}
+        		String resultado = "En adicionarOficina\n\n";
+        		resultado += "Oficina adicionada exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+    public void adicionarPuntoDeAtencion( )
+    {
+    	try 
+    	{
+    		String tipo = JOptionPane.showInputDialog (this, "Tipo del punto de atencion?", "Adicionar tipo", JOptionPane.QUESTION_MESSAGE);
+    		String localizacion = JOptionPane.showInputDialog (this, "Localizacion?", "Adicionar locaclizacion", JOptionPane.QUESTION_MESSAGE);
+    		String oficina = JOptionPane.showInputDialog (this, "Oficina en caso de tener?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
+    		
+    		if (tipo != null & localizacion!= null)
+    		{
+        		VOPuntoDeAtencion tb = parranderos.adicionarPuntoDeAtencion(tipo,localizacion,oficina);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear el punto de atencion");
+        		}
+        		String resultado = "En adicionarPuntoDeAtencion\n\n";
+        		resultado += "Punto de Atencion adicionado exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+    public void adicionarCuenta( )
+    {
+    	try 
+    	{
+    		String tipo = JOptionPane.showInputDialog (this, "Tipo de la cuenta?", "Adicionar tipo", JOptionPane.QUESTION_MESSAGE);
+    		String cliente = JOptionPane.showInputDialog (this, "Cliente de la cuenta?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
+    		String gerente = JOptionPane.showInputDialog (this, "Gerente de la cuenta?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
+    		
+    		if (tipo != null & cliente!= null & gerente!=null)
+    		{
+        		VOCuenta tb = parranderos.adicionarCuenta(tipo,cliente,gerente);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear la cuenta");
+        		}
+        		String resultado = "En adicionarCuenta\n\n";
+        		resultado += "Cuenta adicionada exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
     /**
      * Consulta en la base de datos los tipos de bebida existentes y los muestra en el panel de datos de la aplicación
      */

@@ -34,11 +34,15 @@ import com.google.gson.JsonObject;
 import uniandes.isis2304.parranderos.negocio.Bar;
 import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.parranderos.negocio.Bebida;
+import uniandes.isis2304.parranderos.negocio.Cuenta;
 import uniandes.isis2304.parranderos.negocio.Gustan;
 import uniandes.isis2304.parranderos.negocio.Sirven;
 import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
+import uniandes.isis2304.parranderos.negocio.Oficina;
+import uniandes.isis2304.parranderos.negocio.PuntoDeAtencion;
 import uniandes.isis2304.parranderos.negocio.Visitan;
+import uniandes.isis2304.parranderos.negocio.Cuenta;
 
 /**
  * Clase para el manejador de persistencia del proyecto Parranderos
@@ -124,6 +128,9 @@ public class PersistenciaParranderos
 	 */
 	private SQLVisitan sqlVisitan;
 	private SQLUsuario sqlUsuario;
+	private SQLOficina sqlOficina;
+	private SQLPuntoDeAtencion sqlPuntoDeAtencion;
+	private SQLCuenta sqlCuenta;
 
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -148,6 +155,9 @@ public class PersistenciaParranderos
 		tablas.add ("SIRVEN");
 		tablas.add ("VISITAN");
 		tablas.add("USUARIO");
+		tablas.add("OFICINA");
+		tablas.add("PUNTODEATENCION");
+		tablas.add("CUENTA");
 }
 
 	/**
@@ -230,6 +240,9 @@ public class PersistenciaParranderos
 		sqlSirven = new SQLSirven (this);
 		sqlVisitan = new SQLVisitan(this);	
 		sqlUsuario=new SQLUsuario(this);
+		sqlOficina=new SQLOficina(this);
+		sqlPuntoDeAtencion=new SQLPuntoDeAtencion(this);
+		sqlCuenta=new SQLCuenta(this);
 		sqlUtil = new SQLUtil(this);
 	}
 
@@ -306,6 +319,22 @@ public class PersistenciaParranderos
 	{
 		return tablas.get (8);
 	}
+	
+	public String darTablaOficina ()
+	{
+		return tablas.get (9);
+	}
+	
+	public String darTablaPuntoDeAtencion ()
+	{
+		return tablas.get (10);
+	}
+	
+	public String darTablaCuenta ()
+	{
+		return tablas.get (11);
+	}
+	
 	private long nextval ()
 	{
         long resp = sqlUtil.nextval (pmf.getPersistenceManager());
@@ -401,7 +430,97 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
-
+	
+	public Oficina adicionarOficina(String nombre,String direccion,String gerenteUsuario,long puntosDeAtencion)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {   
+            tx.begin();
+            long idOficina = nextval ();
+            long tuplasInsertadas = sqlOficina.adicionarOficina(pm, idOficina, nombre,direccion,gerenteUsuario,puntosDeAtencion);
+            tx.commit();
+            log.trace ("Inserción de oficina: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new Oficina (idOficina,nombre,direccion,gerenteUsuario,puntosDeAtencion);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {   
+            tx.begin();
+            long idPuntoDeAtencion = nextval ();
+            long tuplasInsertadas = sqlPuntoDeAtencion.adicionarPuntoDeAtencion(pm, idPuntoDeAtencion, tipo,localizacion,oficina);
+            tx.commit();
+            log.trace ("Inserción de punto de atencion: " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new PuntoDeAtencion (idPuntoDeAtencion, tipo,localizacion,oficina);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public Cuenta adicionarCuenta(String tipo,String cliente,String gerente)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {   
+            tx.begin();
+            long idCuenta = nextval ();
+            long tuplasInsertadas = sqlCuenta.adicionarCuenta(pm, idCuenta, tipo,cliente,gerente);
+            tx.commit();
+            log.trace ("Inserción de cuenta: " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new Cuenta (idCuenta, tipo,cliente,gerente);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoBebida, dado el nombre del tipo de bebida
 	 * Adiciona entradas al log de la aplicación

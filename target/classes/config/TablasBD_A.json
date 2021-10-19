@@ -11,7 +11,9 @@
 		"A_GUSTAN",
 		"A_SIRVEN",
 		"A_VISITAN",
-		"USUARIO"
+		"USUARIO",
+		"OFICINA",
+		"PUNTODEATENCION"
 		
 	]
 }

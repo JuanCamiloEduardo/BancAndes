@@ -27,6 +27,18 @@
 				{
 					"label": "Adicionar Usuario",
 					"event": "adicionarUsuario"
+				},
+				{
+					"label": "Adicionar Oficina",
+					"event": "adicionarOficina"
+				},
+				{
+					"label": "Adicionar Punto de Atencion",
+					"event": "adicionarPuntoDeAtencion"
+				},
+				{
+					"label": "Adicionar Cuenta",
+					"event": "adicionarCuenta"
 				}
 			]
 		},
