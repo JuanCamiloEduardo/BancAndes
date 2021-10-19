@@ -35,6 +35,7 @@ import uniandes.isis2304.parranderos.negocio.Bar;
 import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.parranderos.negocio.Bebida;
 import uniandes.isis2304.parranderos.negocio.Gustan;
+import uniandes.isis2304.parranderos.negocio.Prestamo;
 import uniandes.isis2304.parranderos.negocio.Sirven;
 import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
@@ -124,6 +125,7 @@ public class PersistenciaParranderos
 	 */
 	private SQLVisitan sqlVisitan;
 	private SQLUsuario sqlUsuario;
+	private SQLPrestamo sqlPrestamo;
 
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -148,6 +150,7 @@ public class PersistenciaParranderos
 		tablas.add ("SIRVEN");
 		tablas.add ("VISITAN");
 		tablas.add("USUARIO");
+		tablas.add("Prestamo");
 }
 
 	/**
@@ -231,6 +234,7 @@ public class PersistenciaParranderos
 		sqlVisitan = new SQLVisitan(this);	
 		sqlUsuario=new SQLUsuario(this);
 		sqlUtil = new SQLUtil(this);
+		sqlPrestamo=new SQLPrestamo(this);
 	}
 
 	/**
@@ -305,6 +309,10 @@ public class PersistenciaParranderos
 	public String darTablaUsuario ()
 	{
 		return tablas.get (8);
+	}
+	public String darTablaPrestamo ()
+	{
+		return tablas.get (9);
 	}
 	private long nextval ()
 	{
@@ -391,6 +399,69 @@ public class PersistenciaParranderos
 //        	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
+	{
+		System.out.println("3");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idPrestamo = nextval ();
+            System.out.println("4");
+            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, idPrestamo,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
+            tx.commit();
+            System.out.println("8");
+            log.trace ("Inserción de tipo de bebida: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println("9");
+            return new Prestamo (idPrestamo,tipo,estado, nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	public long cambioPrestamo (String nombre,long id,long nuevaCuota)
+	{
+		System.out.println("7");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPrestamo.cambioPrestamo(pm, nombre,id,nuevaCuota);
+            System.out.println("10");
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
         }
         finally
         {
@@ -1157,7 +1228,7 @@ public class PersistenciaParranderos
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
 	public long aumentarSedesBaresCiudad (String ciudad)
-	{
+	{ 
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try

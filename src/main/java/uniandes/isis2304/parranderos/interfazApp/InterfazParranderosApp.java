@@ -47,6 +47,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.Parranderos;
+import uniandes.isis2304.parranderos.negocio.Prestamo;
+import uniandes.isis2304.parranderos.negocio.VOPrestamo;
 import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 import uniandes.isis2304.parranderos.negocio.VOUsuario;
 
@@ -292,6 +294,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long codigoPostal=Integer.parseInt(JOptionPane.showInputDialog (this, "Codigopostal?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTipo != null & login!= null & clave!= null  & tipoDocumento!= null & nacionalidad!= null & direccionFisica!= null & direccionElectronica!= null & ciudad!= null & departamento!= null  )
     		{
+    			System.out.println("0");
         		VOUsuario tb = parranderos.adicionarUsuario(nombreTipo,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,departamento,codigoPostal);
         		if (tb == null)
         		{
@@ -314,7 +317,86 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
     }
-
+    
+    public void adicionarPrestamo( )
+    {
+    	try 
+    	{
+    		
+    		String estado=JOptionPane.showInputDialog (this, "Estado?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		String tipo =JOptionPane.showInputDialog (this, "Tipo de prestamo?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		long monto=Integer.parseInt(JOptionPane.showInputDialog (this, "Monto?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		long interes=Integer.parseInt(JOptionPane.showInputDialog (this, "Interes?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		long numeroCuotas=Integer.parseInt(JOptionPane.showInputDialog (this, "NumeroCuotas?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		String diaPaga=JOptionPane.showInputDialog (this, "Dia Pago Cuota?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		long valorCuota=Integer.parseInt(JOptionPane.showInputDialog (this, "Valor Cuota Minima?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		if (nombreTipo != null & estado!= null & tipo!= null & diaPaga!=null )
+    		{
+    			System.out.println("0");
+        		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
+        		}
+        		String resultado = "En adicionarTipoBebida\n\n";
+        		resultado += "Tipo de bebida adicionado exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    	
+    }
+    
+    
+    public void OperacionPrestamo( )
+    {
+    	try 
+    	{
+    		
+    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de cliente?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		long valorCuota = Integer.parseInt(JOptionPane.showInputDialog (this, "Cuota?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID del prestamo?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		if (nombreTb != null )
+    		{
+    			long tipoBebida = parranderos.operacionPrestamo(nombreTb,id,valorCuota);
+    			
+    			
+    			String resultado = "En buscar Tipo Bebida por nombre\n\n";
+    			/*
+    			if (tipoBebida != null)
+    			{
+        			resultado += "El tipo de bebida es: " + tipoBebida;
+    			}
+    			else
+    			{
+        			resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";    				
+    			}*/
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
     /**
      * Consulta en la base de datos los tipos de bebida existentes y los muestra en el panel de datos de la aplicación
      */

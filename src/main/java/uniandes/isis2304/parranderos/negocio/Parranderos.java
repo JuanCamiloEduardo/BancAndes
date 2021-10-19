@@ -94,12 +94,32 @@ public class Parranderos
 	
 	public Usuario adicionarUsuario(String nombre,String login,String clave,long numeroDocumento,String tipoDocumento,String nacionalidad,String direccionFisica,String direccionElectronica,long telefono,String ciudad,String departamento,long codigoPostal)
 	{
+		System.out.println("1");
         log.info ("Adicionando usuario: " + nombre);
+        System.out.println("2");
         Usuario tipoBebida = pp.adicionarUsuario(nombre,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,departamento,codigoPostal);		
         log.info ("Adicionando usuario: " + tipoBebida);
         return tipoBebida;
 	}
 	
+	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
+	{
+		System.out.println("1");
+        log.info ("Adicionando prestamo: " + nombre);
+        System.out.println("2");
+        Prestamo tipoBebida = pp.adicionarPrestamo (tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);		
+        log.info ("Adicionando prestamo: " + tipoBebida);
+        return tipoBebida;
+	}
+	public long operacionPrestamo (String nombre,long id,long valorCuota)
+	{	
+		System.out.println("0");
+		log.info ("Realizando un cambio en el prestamo: " + id );
+		long tb = pp.cambioPrestamo (nombre,id,valorCuota);
+		System.out.println("10");
+		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
+		return tb;
+	}
 	/**
 	 * Elimina un tipo de bebida por su nombre
 	 * Adiciona entradas al log de la aplicación
@@ -169,8 +189,13 @@ public class Parranderos
 	{
 		log.info ("Buscando Tipo de bebida por nombre: " + nombre);
 		List<TipoBebida> tb = pp.darTipoBebidaPorNombre (nombre);
+		String hola=tb.get(0).getNombre();
+		String hola2=tb.get(0).getNombre();
+		System. out. println(hola);
+		System. out. println(hola2);
 		return !tb.isEmpty () ? tb.get (0) : null;
 	}
+	
 
 	/* ****************************************************************
 	 * 			Métodos para manejar las BEBIDAS
@@ -550,6 +575,18 @@ public class Parranderos
 		log.info ("Generando los VO de Bares: " + voBares.size () + " bares existentes");
 		return voBares;
 	}
+	/*
+	public List<VOPrestamo> darVOPrestamo ()
+	{
+		log.info ("Generando los VO de Prestamo");
+		List<VOPrestamo> voBares = new LinkedList<VOPrestamo> ();
+		for (Prestamo pre: pp.darPrestamo ())
+		{
+			voPrestamo.add (pre);
+		}
+		log.info ("Generando los VO de Bares: " + voBares.size () + " bares existentes");
+		return voBares;
+	}*/
 
 	/**
 	 * Aumenta en 1 el número de sedes de los bares de una ciudad

@@ -101,15 +101,6 @@ class SQLSirven
 		return (List<Sirven>) q.execute();
 	}
 	
-	public long adicionarUsuario (PersistenceManager pm, long idTipoBebida, String nombre) 
-	{
-		System. out. println("0");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaUsuario  () + "(id, nombre) values (?, ?)");
-        System. out. println("7");
-        q.setParameters(idTipoBebida, nombre);
-        System. out. println("8");
-        return (long) q.executeUnique();            
-	}
 
  
 	/**

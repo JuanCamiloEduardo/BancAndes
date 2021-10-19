@@ -111,6 +111,7 @@ class SQLTipoBebida
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoBebida  () + " WHERE id = ?");
 		q.setResultClass(TipoBebida.class);
 		q.setParameters(idTipoBebida);
+
 		return (TipoBebida) q.executeUnique();
 	}
 

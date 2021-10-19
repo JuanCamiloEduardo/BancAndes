@@ -27,6 +27,14 @@
 				{
 					"label": "Adicionar Usuario",
 					"event": "adicionarUsuario"
+				},
+				{
+					"label": "Adicionar Prestamo",
+					"event": "adicionarPrestamo"
+				},
+				{
+					"label": "Cambio Prestamo",
+					"event": "OperacionPrestamo"
 				}
 			]
 		},
