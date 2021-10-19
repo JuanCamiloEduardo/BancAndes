@@ -54,13 +54,6 @@ class SQLCliente {
         return (long) q.executeUnique();            
 	}
 
-	public List<Cliente> darTipoCliente (PersistenceManager pm,String login, String clave)
-	{	
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCliente  () + " WHERE login = ? AND clave = ?");
-		q.setResultClass(Cliente.class);
-		System.out.print(q.toString());
-		q.setParameters(login,clave);
-		return (List<Cliente>) q.executeList();
-	}
+
 
 }

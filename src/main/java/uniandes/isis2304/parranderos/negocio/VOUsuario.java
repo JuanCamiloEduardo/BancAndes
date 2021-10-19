@@ -13,7 +13,7 @@ public interface VOUsuario {
 	public String getDireccionElectronica();
 	public long getTelefono();
 	public String getCiudad();
-	public String getDepartamento();
+	public String getTipo();
 	public long getCodigoPostal() ;
 	@Override
 	public String toString();

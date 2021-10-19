@@ -258,6 +258,7 @@ public class PersistenciaParranderos
 		sqlPuntoDeAtencion=new SQLPuntoDeAtencion(this);
 		sqlCuenta=new SQLCuenta(this);
 		sqlUtil = new SQLUtil(this);
+		sqlCliente= new SQLCliente(this);
 		sqlPrestamo=new SQLPrestamo(this);
 	}
 
@@ -795,10 +796,10 @@ public class PersistenciaParranderos
 		return sqlTipoBebida.darTiposBebidaPorNombre (pmf.getPersistenceManager(), nombre);
 	}
 	
-	public List<Cliente> darTipoCliente (String login, String clave)
+	public List<Usuario> darTipoCliente (String login, String clave)
 	{	
 		System.out.print("todo bien");
-		return sqlCliente.darTipoCliente (pmf.getPersistenceManager(), login,clave);
+		return sqlUsuario.darUsuario (pmf.getPersistenceManager(), login,clave);
 	}
 	
 	public List<GerenteOficina> darTipoGerenteOficina (String login, String clave)

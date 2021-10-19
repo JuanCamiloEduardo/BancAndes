@@ -297,7 +297,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String direccionElectronica=JOptionPane.showInputDialog (this, "direccionElectronica?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		long telefono=Integer.parseInt(JOptionPane.showInputDialog (this, "telefono?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE));
     		String ciudad=JOptionPane.showInputDialog (this, "ciudad?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
-    		String departamento=JOptionPane.showInputDialog (this, "departamento?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
+    		String departamento=JOptionPane.showInputDialog (this, "Tipo Usuario?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		long codigoPostal=Integer.parseInt(JOptionPane.showInputDialog (this, "Codigopostal?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTipo != null & login!= null & clave!= null  & tipoDocumento!= null & nacionalidad!= null & direccionFisica!= null & direccionElectronica!= null & ciudad!= null & departamento!= null  )
     		{
@@ -718,8 +718,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		if (loginTb != null & claveTb!= null)
     		{
-    			VOCliente tipoUsuario1 = parranderos.darTipoCliente(loginTb,claveTb);
-    			VOGerenteOficina tipoUsuario2 = parranderos.darTipoGerenteOficina (loginTb,claveTb);
+    			VOUsuario tipoUsuario1 = parranderos.darUsuario(loginTb,claveTb);
     			String resultado = "En buscar Tipo Bebida por nombre\n\n";
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);

@@ -125,9 +125,7 @@ class SQLTipoBebida
 	public List<TipoBebida> darTiposBebidaPorNombre (PersistenceManager pm, String nombreTipoBebida) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoBebida  () + " WHERE nombre = ?");
-		System.out.println("tabla");
-		System.out.println("SELECT * FROM " + pp.darTablaTipoBebida  () + " WHERE nombre = ?");
-		System.out.println("tabla2");
+	
 		q.setResultClass(TipoBebida.class);
 		System.out.print(q.toString());
 		q.setParameters(nombreTipoBebida);

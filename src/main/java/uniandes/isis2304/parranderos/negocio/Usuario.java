@@ -13,7 +13,7 @@ public class Usuario implements VOUsuario {
 	private String direccionElectronica;
 	private long telefono;
 	private String ciudad;
-	private String departamento;
+	private String tipo;
 	private long codigoPostal;
 	
 	public Usuario() {
@@ -27,13 +27,13 @@ public class Usuario implements VOUsuario {
 		this.direccionElectronica="";
 		this.telefono=0;
 		this.ciudad="";
-		this.departamento="";
+		this.tipo="";
 		this.codigoPostal=0;
 	}
 	
 	public Usuario(long id, String nombre, String login, String clave, long numeroDocumento, String tipoDocumento,
 			String nacionalidad, String direccionFisica, String direccionElectronica, long telefono, String ciudad,
-			String departamento, long codigoPostal) {
+			String tipo, long codigoPostal) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -46,7 +46,7 @@ public class Usuario implements VOUsuario {
 		this.direccionElectronica = direccionElectronica;
 		this.telefono = telefono;
 		this.ciudad = ciudad;
-		this.departamento = departamento;
+		this.tipo = tipo;
 		this.codigoPostal = codigoPostal;
 	}
 
@@ -146,12 +146,12 @@ public class Usuario implements VOUsuario {
 		this.ciudad = ciudad;
 	}
 
-	public String getDepartamento() {
-		return departamento;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
+	public void setTipo(String tipo) {
+		this.tipo =tipo;
 	}
 
 	public long getCodigoPostal() {
@@ -167,9 +167,11 @@ public class Usuario implements VOUsuario {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", login=" + login + ", clave=" + clave
 				+ ", numeroDocumento=" + numeroDocumento + ", tipoDocumento=" + tipoDocumento + ", nacionalidad="
 				+ nacionalidad + ", direccionFisica=" + direccionFisica + ", direccionElectronica="
-				+ direccionElectronica + ", telefono=" + telefono + ", ciudad=" + ciudad + ", departamento="
-				+ departamento + ", codigoPostal=" + codigoPostal + "]";
+				+ direccionElectronica + ", telefono=" + telefono + ", ciudad=" + ciudad + ", tipo=" + tipo
+				+ ", codigoPostal=" + codigoPostal + "]";
 	}
+
+
 
 
 

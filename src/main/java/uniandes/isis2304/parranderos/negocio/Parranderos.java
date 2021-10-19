@@ -248,20 +248,19 @@ public class Parranderos
 		log.info ("Buscando Tipo de bebida por nombre: " + nombre);
 		List<TipoBebida> tb = pp.darTipoBebidaPorNombre (nombre);
 		String hola=tb.get(0).getNombre();
-		String hola2=tb.get(0).getNombre();
 		System. out. println(hola);
-		System. out. println(hola2);
+
 		System. out. println(tb.toString());
 		return !tb.isEmpty () ? tb.get (0) : null;
 	}
 	
-	public Cliente darTipoCliente (String login,String clave)
+	public Usuario darUsuario (String login,String clave)
 	{
-		log.info ("Buscando Usuario : " + login);
-		List<Cliente> tb = pp.darTipoCliente (login,clave);
-		System. out. println("hola1");
-		System. out. println("hola2");
-		System. out. println("hola3");
+		log.info ("Buscando Tipo de bebida por nombre: " + login);
+		List<Usuario> tb = pp.darUsuario ();
+		String hola=tb.get(0).getTipo();
+		System. out. println(hola);
+
 		System. out. println(tb.toString());
 		return !tb.isEmpty () ? tb.get (0) : null;
 	}

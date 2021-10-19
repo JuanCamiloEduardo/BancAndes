@@ -70,12 +70,12 @@ class SQLUsuario
 	 * @param horario - El horario en que el bar sirve la bebida (DIURNO, NOCTURNO, TDOOS)
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarUsuario (PersistenceManager pm, long idTipoBebida, String nombre,String login,String clave,long numeroDocumento,String tipoDocumento,String nacionalidad,String direccionFisica,String direccionElectronica,long telefono,String ciudad,String departamento,long codigoPostal) 
+	public long adicionarUsuario (PersistenceManager pm, long idTipoBebida, String nombre,String login,String clave,long numeroDocumento,String tipoDocumento,String nacionalidad,String direccionFisica,String direccionElectronica,long telefono,String ciudad,String tipo,long codigoPostal) 
 	{
 		System. out. println("6");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaUsuario  () + "(id, nombre,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,departamento,codigoPostal) values (?, ?,?,?,?,?, ?,?,?,?,?,?,?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaUsuario  () + "(id, nombre,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,tipo,codigoPostal) values (?, ?,?,?,?,?, ?,?,?,?,?,?,?)");
         System. out. println("7");
-        q.setParameters(idTipoBebida, nombre,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,departamento,codigoPostal);
+        q.setParameters(idTipoBebida, nombre,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,tipo,codigoPostal);
         System. out. println("8");
         return (long) q.executeUnique();            
 	}
@@ -101,7 +101,7 @@ class SQLUsuario
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario ());
 		q.setResultClass(Usuario.class);
 		System.out.print("todo bien4");
-		return (List<Usuario>) q.execute();
+		return (List<Usuario>) q.executeList();
 	}
  
 	/**
@@ -111,6 +111,13 @@ class SQLUsuario
 	 * @return Una lista de parejas de objetos, el primer elemento de cada pareja representa el identificador de un bar,
 	 * 	el segundo elemento representa el número de bebidas que sirve (Una bebida que se sirve en dos horarios cuenta dos veces)
 	 */
-
+	public List<Usuario> darUsuario(PersistenceManager pm,String login, String clave)
+	{	
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario  () + " WHERE login = ? AND clave = ?");
+		q.setResultClass(Usuario.class);
+		System.out.print(q.toString());
+		q.setParameters(login,clave);
+		return (List<Usuario>) q.executeList();
+	}
 
 }
