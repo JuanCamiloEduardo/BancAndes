@@ -53,6 +53,15 @@ class SQLPrestamo {
         return (long) q.executeUnique();
 	}
 	
+	public long cerrarPrestamo (PersistenceManager pm, String nombre,long id) 
+	{
+		System.out.println("8");
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPrestamo() + " SET estado='cerrado'  WHERE nombre = ? AND id=? AND monto=0");
+		q.setParameters(nombre,id);
+		System.out.println("9");
+        return (long) q.executeUnique();
+	}
+	
 	public List<Prestamo> darPrestamo (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPrestamo ());

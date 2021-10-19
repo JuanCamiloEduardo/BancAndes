@@ -572,9 +572,96 @@ public class PersistenciaParranderos
         }
 	}
 	
+	public long cambioCuenta (String nombre,long id,long saldo)
+	{
+		System.out.println("7");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.cambioCuenta(pm, nombre,id,saldo);
+            System.out.println("10");
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	public long cerrarPrestamo (String nombre,long id)
+	{
+		System.out.println("7");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPrestamo.cerrarPrestamo(pm, nombre,id);
+            System.out.println("10");
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 	
+	public long cerrarCuenta (long id)
+	{
+		System.out.println("7");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.cerrarCuenta(pm,id);
+            System.out.println("10");
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 	
-	public Cuenta adicionarCuenta(String tipo,String cliente,String gerente)
+	public Cuenta adicionarCuenta(String tipo,long saldo,String cliente,String gerente)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -582,11 +669,11 @@ public class PersistenciaParranderos
         {   
             tx.begin();
             long idCuenta = nextval ();
-            long tuplasInsertadas = sqlCuenta.adicionarCuenta(pm, idCuenta, tipo,cliente,gerente);
+            long tuplasInsertadas = sqlCuenta.adicionarCuenta(pm, idCuenta, tipo,saldo,cliente,gerente);
             tx.commit();
             log.trace ("Inserción de cuenta: " + tuplasInsertadas + " tuplas insertadas");
             
-            return new Cuenta (idCuenta, tipo,cliente,gerente);
+            return new Cuenta (idCuenta, tipo,saldo,cliente,gerente);
         }
         catch (Exception e)
         {

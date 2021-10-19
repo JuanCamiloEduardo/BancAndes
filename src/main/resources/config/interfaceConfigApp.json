@@ -48,7 +48,18 @@
 				{
 					"label": "Adicionar Cuenta",
 					"event": "adicionarCuenta"
-
+				},
+				{
+					"label": "Cerrar Cuenta",
+					"event": "cerrarCuenta"
+				},
+				{
+					"label": "Cambio Cuenta",
+					"event": "OperacionCuenta"
+				},
+				{
+					"label": "Cerrar Prestamo",
+					"event": "cerrarPrestamo"
 				}
 			]
 		},

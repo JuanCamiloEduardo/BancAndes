@@ -45,15 +45,32 @@ public class SQLCuenta {
 	 * @param horario - El horario en que el bar sirve la bebida (DIURNO, NOCTURNO, TDOOS)
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarCuenta (PersistenceManager pm, long idCuenta, String tipo,String cliente,String gerente) 
+	public long adicionarCuenta (PersistenceManager pm, long idCuenta, String tipo,long saldo,String cliente,String gerente) 
 	{
 		System. out. println("6");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCuenta  () + "(id, tipo,cliente,gerente) values (?,?,?,?)");
-        q.setParameters(idCuenta, tipo,cliente,gerente);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCuenta  () + "(id, tipo,saldo,cliente,gerente) values (?,?,?,?,?)");
+        q.setParameters(idCuenta, tipo,saldo,cliente,gerente);
         return (long) q.executeUnique();            
 	}
 
-
+	public long cambioCuenta (PersistenceManager pm, String cliente,long id,long saldo) 
+	{
+		System.out.println("8");
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCuenta() + " SET saldo=saldo+?  WHERE cliente = ? AND id=?");
+		q.setParameters(saldo,cliente,id);
+		System.out.println("9");
+        return (long) q.executeUnique();
+	}
+	
+	public long cerrarCuenta (PersistenceManager pm,long id) 
+	{
+		System.out.println("8");
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCuenta() + " SET tipo='cerrada' WHERE id=? AND saldo=0");
+		q.setParameters(id);
+		System.out.println("9");
+        return (long) q.executeUnique();
+	}
+	
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN SIRVEN de la base de datos de Parranderos, por sus identificador
 	 * @param pm - El manejador de persistencia

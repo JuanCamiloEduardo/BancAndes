@@ -121,6 +121,33 @@ public class Parranderos
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
+	
+	public long operacionCuenta (String nombre,long id,long saldo)
+	{	
+		System.out.println("0");
+		log.info ("Realizando un cambio en el prestamo: " + id );
+		long tb = pp.cambioCuenta (nombre,id,saldo);
+		System.out.println("10");
+		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
+		return tb;
+	}
+	public long cerrarPrestamo (String nombre,long id)
+	{	
+		System.out.println("0");
+		log.info ("Realizando un cambio en el prestamo: " + id );
+		long tb = pp.cerrarPrestamo (nombre,id);
+		System.out.println("10");
+		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
+		return tb;
+	}
+	
+	public long cerrarCuenta (long id)
+	{	
+		System.out.println("0");
+		log.info ("Realizando un cambio en la cuenta: " + id );
+		long tb = pp.cerrarCuenta (id);
+		return tb;
+	}
 
 	public Oficina adicionarOficina(String nombre,String direccion,String gerenteUsuario,long puntosDeAtencion)
 	{
@@ -138,10 +165,10 @@ public class Parranderos
         return puntoDeAtencion;
 	}
 	
-	public Cuenta adicionarCuenta(String tipo, String cliente, String gerente)
+	public Cuenta adicionarCuenta(String tipo, long saldo, String cliente, String gerente)
 	{
         log.info ("Adicionando cuenta");
-        Cuenta cuenta = pp.adicionarCuenta(tipo,cliente,gerente);		
+        Cuenta cuenta = pp.adicionarCuenta(tipo,saldo,cliente,gerente);		
         log.info ("Adicionando cuenta");
         return cuenta;
 	}

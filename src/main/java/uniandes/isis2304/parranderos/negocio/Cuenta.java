@@ -4,6 +4,7 @@ public class Cuenta implements VOCuenta{
 	
 	private long id;
 	private String tipo;
+	private long saldo;
 	private String cliente;
 	private String gerente;
 	
@@ -11,14 +12,16 @@ public class Cuenta implements VOCuenta{
 		super();
 		this.id = 0;
 		this.tipo = "";
+		this.saldo = 0;
 		this.cliente = "";
 		this.gerente = "";
 	}
 	
-	public Cuenta(long id, String tipo, String cliente, String gerente) {
+	public Cuenta(long id, String tipo, long saldo, String cliente, String gerente) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
+		this.saldo = saldo;
 		this.cliente = cliente;
 		this.gerente = gerente;
 	}
@@ -39,6 +42,14 @@ public class Cuenta implements VOCuenta{
 		this.tipo = tipo;
 	}
 
+	public long getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(long saldo) {
+		this.saldo = saldo;
+	}
+
 	public String getCliente() {
 		return cliente;
 	}
@@ -57,7 +68,8 @@ public class Cuenta implements VOCuenta{
 
 	@Override
 	public String toString() {
-		return "Cuenta [id=" + id + ", tipo=" + tipo + ", cliente=" + cliente + ", gerente=" + gerente + "]";
+		return "Cuenta [id=" + id + ", tipo=" + tipo + ", saldo=" + saldo + ", cliente=" + cliente + ", gerente="
+				+ gerente + "]";
 	}
 	
 }

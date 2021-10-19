@@ -48,7 +48,6 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.Parranderos;
 
-import uniandes.isis2304.parranderos.negocio.Prestamo;
 import uniandes.isis2304.parranderos.negocio.VOPrestamo;
 
 import uniandes.isis2304.parranderos.negocio.VOCuenta;
@@ -375,7 +374,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID del prestamo?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTb != null )
     		{
-    			long tipoBebida = parranderos.operacionPrestamo(nombreTb,id,valorCuota);
+    			parranderos.operacionPrestamo(nombreTb,id,valorCuota);
     			
     			
     			String resultado = "En buscar Tipo Bebida por nombre\n\n";
@@ -395,6 +394,114 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		{
     			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
     		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+    public void OperacionCuenta( )
+    {
+    	try 
+    	{
+    		
+    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de cliente?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Dinero(para sacar - y meter +) ?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		if (nombreTb != null )
+    		{
+    			parranderos.operacionCuenta(nombreTb,id,saldo);
+    			
+    
+    			String resultado = "En operacion cuenta\n\n";
+    			/*
+    			if (tipoBebida != null)
+    			{
+        			resultado += "El tipo de bebida es: " + tipoBebida;
+    			}
+    			else
+    			{
+        			resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";    				
+    			}*/
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    public void cerrarPrestamo( )
+    {
+    	try 
+    	{
+    		
+    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID del prestamo?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		if (nombreTb != null )
+    		{
+    			parranderos.cerrarPrestamo(nombreTb,id);
+    			
+    			
+    			String resultado = "En buscar Tipo Bebida por nombre\n\n";
+    			/*
+    			if (tipoBebida != null)
+    			{
+        			resultado += "El tipo de bebida es: " + tipoBebida;
+    			}
+    			else
+    			{
+        			resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";    				
+    			}*/
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+    public void cerrarCuenta( )
+    {
+    	try 
+    	{
+    		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
+    		
+    		parranderos.cerrarCuenta(id);
+    			
+    		
+    		String resultado = "En cerrar cuenta por nombre\n\n";
+    			/*
+    			if (tipoBebida != null)
+    			{
+        			resultado += "El tipo de bebida es: " + tipoBebida;
+    			}
+    			else
+    			{
+        			resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";    				
+    			}*/
+    		resultado += "\n Operación terminada";
+    		panelDatos.actualizarInterfaz(resultado);
+    		
+    		
 		} 
     	catch (Exception e) 
     	{
@@ -482,12 +589,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     	try 
     	{
     		String tipo = JOptionPane.showInputDialog (this, "Tipo de la cuenta?", "Adicionar tipo", JOptionPane.QUESTION_MESSAGE);
+    		long saldo =Integer.parseInt( JOptionPane.showInputDialog (this, "Saldo inicial de la cuenta?", "Adicionar saldo", JOptionPane.QUESTION_MESSAGE));
     		String cliente = JOptionPane.showInputDialog (this, "Cliente de la cuenta?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
     		String gerente = JOptionPane.showInputDialog (this, "Gerente de la cuenta?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
     		
     		if (tipo != null & cliente!= null & gerente!=null)
     		{
-        		VOCuenta tb = parranderos.adicionarCuenta(tipo,cliente,gerente);
+        		VOCuenta tb = parranderos.adicionarCuenta(tipo,saldo,cliente,gerente);
         		if (tb == null)
         		{
         			throw new Exception ("No se pudo crear la cuenta");
