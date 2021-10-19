@@ -102,6 +102,7 @@ public class Parranderos
         return tipoBebida;
 	}
 	
+<<<<<<< HEAD
 	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
 	{
 		System.out.println("1");
@@ -120,6 +121,32 @@ public class Parranderos
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
+=======
+	public Oficina adicionarOficina(String nombre,String direccion,String gerenteUsuario,long puntosDeAtencion)
+	{
+        log.info ("Adicionando oficina: " + nombre);
+        Oficina oficina = pp.adicionarOficina(nombre,direccion,gerenteUsuario,puntosDeAtencion);		
+        log.info ("Adicionando oficina: " + oficina);
+        return oficina;
+	}
+	
+	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo, String localizacion, String oficina)
+	{
+        log.info ("Adicionando punto de atencion");
+        PuntoDeAtencion puntoDeAtencion = pp.adicionarPuntoDeAtencion(tipo,localizacion,oficina);		
+        log.info ("Adicionando punto de atencion");
+        return puntoDeAtencion;
+	}
+	
+	public Cuenta adicionarCuenta(String tipo, String cliente, String gerente)
+	{
+        log.info ("Adicionando cuenta");
+        Cuenta cuenta = pp.adicionarCuenta(tipo,cliente,gerente);		
+        log.info ("Adicionando cuenta");
+        return cuenta;
+	}
+	
+>>>>>>> d.pulidon
 	/**
 	 * Elimina un tipo de bebida por su nombre
 	 * Adiciona entradas al log de la aplicación

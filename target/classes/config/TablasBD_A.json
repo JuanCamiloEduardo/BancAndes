@@ -12,7 +12,14 @@
 		"A_SIRVEN",
 		"A_VISITAN",
 		"USUARIO",
+		"OFICINA",
+		"PUNTODEATENCION",
+<<<<<<< HEAD
+		"CUENTA",
 		"PRESTAMO"
+=======
+		"CUENTA"
+>>>>>>> d.pulidon
 		
 	]
 }

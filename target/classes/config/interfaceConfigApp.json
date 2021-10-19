@@ -29,12 +29,25 @@
 					"event": "adicionarUsuario"
 				},
 				{
+<<<<<<< HEAD
 					"label": "Adicionar Prestamo",
 					"event": "adicionarPrestamo"
 				},
 				{
 					"label": "Cambio Prestamo",
 					"event": "OperacionPrestamo"
+=======
+					"label": "Adicionar Oficina",
+					"event": "adicionarOficina"
+				},
+				{
+					"label": "Adicionar Punto de Atencion",
+					"event": "adicionarPuntoDeAtencion"
+				},
+				{
+					"label": "Adicionar Cuenta",
+					"event": "adicionarCuenta"
+>>>>>>> d.pulidon
 				}
 			]
 		},
