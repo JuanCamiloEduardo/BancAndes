@@ -590,3 +590,10 @@ ORA-00001: restricción única (ISIS2304D01202120.UN_TIPOBEB_NOMBRE) violada
 01:17:10,174 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando usuario: Usuario [id=88, nombre=hla, login=has, clave=ada, numeroDocumento=526, tipoDocumento=asd, nacionalidad=sad, direccionFisica=asd, direccionElectronica=ad, telefono=54, ciudad=sd, departamento=asd, codigoPostal=45]
 01:17:48,314 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando prestamo: asd
 01:17:49,059 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando prestamo: Prestamo [id=89, tipo=asd, estado=dsa, nombre=asd, monto=46454456, interes=5, numeroCuotas=54654, diaPaga=sad, valorCuota=2587]
+01:32:26,670 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+01:32:26,671 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+01:32:26,750 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+01:33:23,635 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando prestamo: yo
+01:33:24,770 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando prestamo: Prestamo [id=90, tipo=casa, estado=abierto, nombre=yo, monto=420000, interes=50, numeroCuotas=150, diaPaga=jueves, valorCuota=20000]
+01:34:06,775 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 90
+01:34:06,936 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas

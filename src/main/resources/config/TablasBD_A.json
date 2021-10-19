@@ -12,6 +12,9 @@
 		"A_SIRVEN",
 		"A_VISITAN",
 		"USUARIO",
+		"OFICINA",
+		"PUNTODEATENCION",
+		"CUENTA",
 		"PRESTAMO"
 		
 	]

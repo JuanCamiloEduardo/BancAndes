@@ -312,7 +312,7 @@ public class PersistenciaParranderos
 	}
 	public String darTablaPrestamo ()
 	{
-		return tablas.get (9);
+		return tablas.get (12);
 	}
 	private long nextval ()
 	{
