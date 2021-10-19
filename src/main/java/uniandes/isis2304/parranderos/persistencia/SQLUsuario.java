@@ -20,6 +20,9 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.parranderos.negocio.Cliente;
+import uniandes.isis2304.parranderos.negocio.GerenteOficina;
+import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
 
 /**
@@ -97,6 +100,7 @@ class SQLUsuario
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario ());
 		q.setResultClass(Usuario.class);
+		System.out.print("todo bien4");
 		return (List<Usuario>) q.execute();
 	}
  

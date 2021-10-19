@@ -18,6 +18,7 @@ package uniandes.isis2304.parranderos.persistencia;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +35,9 @@ import com.google.gson.JsonObject;
 import uniandes.isis2304.parranderos.negocio.Bar;
 import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.parranderos.negocio.Bebida;
+import uniandes.isis2304.parranderos.negocio.Cliente;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
+import uniandes.isis2304.parranderos.negocio.GerenteOficina;
 import uniandes.isis2304.parranderos.negocio.Gustan;
 import uniandes.isis2304.parranderos.negocio.Prestamo;
 import uniandes.isis2304.parranderos.negocio.Sirven;
@@ -135,6 +138,8 @@ public class PersistenciaParranderos
 	private SQLOficina sqlOficina;
 	private SQLPuntoDeAtencion sqlPuntoDeAtencion;
 	private SQLCuenta sqlCuenta;
+	private SQLCliente sqlCliente;
+	private SQLGerenteOficina sqlGerenteOficina;
 
 
 	/* ****************************************************************
@@ -164,6 +169,8 @@ public class PersistenciaParranderos
 		tablas.add("OFICINA");
 		tablas.add("PUNTODEATENCION");
 		tablas.add("CUENTA");
+		tablas.add("CLIENTE");
+		tablas.add("GERENTEOFICINA");
 
 }
 
@@ -347,7 +354,17 @@ public class PersistenciaParranderos
 	{
 		return tablas.get (12);
 	}
-
+	
+	public String darTablaCliente ()
+	{
+		return tablas.get (13);
+	}
+	
+	public String darTablaGerenteOficina ()
+	{
+		return tablas.get (14);
+	}
+	
 	private long nextval ()
 	{
         long resp = sqlUtil.nextval (pmf.getPersistenceManager());
@@ -776,6 +793,17 @@ public class PersistenciaParranderos
 	public List<TipoBebida> darTipoBebidaPorNombre (String nombre)
 	{
 		return sqlTipoBebida.darTiposBebidaPorNombre (pmf.getPersistenceManager(), nombre);
+	}
+	
+	public List<Cliente> darTipoCliente (String login, String clave)
+	{	
+		System.out.print("todo bien");
+		return sqlCliente.darTipoCliente (pmf.getPersistenceManager(), login,clave);
+	}
+	
+	public List<GerenteOficina> darTipoGerenteOficina (String login, String clave)
+	{
+		return sqlGerenteOficina.darTipoGerenteOficina (pmf.getPersistenceManager(), login,clave);
 	}
  
 	/**

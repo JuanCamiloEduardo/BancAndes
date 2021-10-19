@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
@@ -47,11 +48,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.Parranderos;
-
+import uniandes.isis2304.parranderos.negocio.VOCliente;
 import uniandes.isis2304.parranderos.negocio.VOPrestamo;
 
 import uniandes.isis2304.parranderos.negocio.VOCuenta;
-
+import uniandes.isis2304.parranderos.negocio.VOGerenteOficina;
 import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 import uniandes.isis2304.parranderos.negocio.VOUsuario;
 import uniandes.isis2304.parranderos.negocio.VOOficina;
@@ -709,7 +710,33 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		}
     }
 
-
+    public void buscarTipoUsuario( )
+    {
+    	try 
+    	{
+    		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
+    		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
+    		if (loginTb != null & claveTb!= null)
+    		{
+    			VOCliente tipoUsuario1 = parranderos.darTipoCliente(loginTb,claveTb);
+    			VOGerenteOficina tipoUsuario2 = parranderos.darTipoGerenteOficina (loginTb,claveTb);
+    			String resultado = "En buscar Tipo Bebida por nombre\n\n";
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
 	/* ****************************************************************
 	 * 			Métodos administrativos
 	 *****************************************************************/
@@ -987,7 +1014,6 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
         try
         {
-        	
             // Unifica la interfaz para Mac y para Windows.
             UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
             InterfazParranderosApp interfaz = new InterfazParranderosApp( );

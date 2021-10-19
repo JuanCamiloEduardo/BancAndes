@@ -16,6 +16,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,6 +38,9 @@ public class Parranderos
 	/**
 	 * Logger para escribir la traza de la ejecución
 	 */
+	
+	
+	
 	private static Logger log = Logger.getLogger(Parranderos.class.getName());
 	
 	/* ****************************************************************
@@ -247,10 +251,29 @@ public class Parranderos
 		String hola2=tb.get(0).getNombre();
 		System. out. println(hola);
 		System. out. println(hola2);
+		System. out. println(tb.toString());
 		return !tb.isEmpty () ? tb.get (0) : null;
 	}
 	
-
+	public Cliente darTipoCliente (String login,String clave)
+	{
+		log.info ("Buscando Usuario : " + login);
+		List<Cliente> tb = pp.darTipoCliente (login,clave);
+		System. out. println("hola1");
+		System. out. println("hola2");
+		System. out. println("hola3");
+		System. out. println(tb.toString());
+		return !tb.isEmpty () ? tb.get (0) : null;
+	}
+	
+	public GerenteOficina darTipoGerenteOficina (String login,String clave)
+	{
+		log.info ("Buscando Usuario : " + login);
+		List<GerenteOficina> tb = pp.darTipoGerenteOficina (login,clave);
+		System. out. println("hola4");
+		return !tb.isEmpty () ? tb.get (0) : null;
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar las BEBIDAS
 	 *****************************************************************/
