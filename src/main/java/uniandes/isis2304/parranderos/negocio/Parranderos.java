@@ -259,7 +259,7 @@ public class Parranderos
 		log.info ("Buscando Tipo de bebida por nombre: " + login);
 		List<Usuario> tb = pp.darUsuario ();
 		String hola=tb.get(0).getTipo();
-		System. out. println(hola);
+		System. out. println(tb);
 		return hola;
 	}
 	

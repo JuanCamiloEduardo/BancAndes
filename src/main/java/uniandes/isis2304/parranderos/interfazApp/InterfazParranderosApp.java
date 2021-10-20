@@ -293,7 +293,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
    
     	try 
-    	{
+    	{	
     		if ( adminBanc || gerenteOficina)
         	{
     		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de usuario?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
@@ -780,29 +780,29 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     public void buscarTipoUsuario( )
     {
     	try 
-    	{
-    	     adminBanc=false;
-    	     gerenteOficina=false;
-    	     cajero=false;
-    	     cliente=false;
+    	{	System.out.println("paso1");
+    	    adminBanc=false;
+    	    gerenteOficina=false;
+    	    cajero=false;
+    	    cliente=false;
     		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		if (loginTb != null & claveTb!= null)
-    		{
+    		{	
     			String tipo = parranderos.darUsuario(loginTb,claveTb);
-    			if (tipo.toLowerCase()=="cliente" )
+    			if (tipo.toLowerCase().equals("cliente") )
     			{
     				cliente=true;
     			}
-    			else if (tipo.toLowerCase()=="cajero")
+    			else if (tipo.toLowerCase().equals("cajero"))
     			{
     				cajero=true;
     			}
-    			else if (tipo.toLowerCase()=="adminbanc")
-    			{
+    			else if (tipo.toLowerCase().equals("adminbanc"))
+    			{	
     				adminBanc=true;
     			}
-    			else if (tipo.toLowerCase()=="gerenteoficina")
+    			else if (tipo.toLowerCase().equals("gerenteoficina"))
     			{
     				gerenteOficina=true;
     			}

@@ -100,7 +100,7 @@ class SQLUsuario
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario ());
 		q.setResultClass(Usuario.class);
-		System.out.print("todo bien4");
+		System.out.println("todo bien4");
 		return (List<Usuario>) q.executeList();
 	}
  
