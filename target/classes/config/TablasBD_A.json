@@ -4,19 +4,10 @@
 	"tablas":
 	[
 		"Parranderos_sequence",
-		"A_TIPOBEBIDA",
-		"A_BEBIDA",
-		"A_BAR",
-		"A_BEBEDOR",
-		"A_GUSTAN",
-		"A_SIRVEN",
-		"A_VISITAN",
 		"USUARIO",
 		"OFICINA",
 		"PUNTODEATENCION",
 		"CUENTA",
-		"PRESTAMO",
-		"CLIENTE",
-		"GERENTEOFICINA"
+		"PRESTAMO"
 	]
 }

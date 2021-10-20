@@ -5,25 +5,10 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
-		{ "menuTitle": "TipoBebida",
+		{ "menuTitle": "Requerimientos Funcionales",
 		  "options":
 			[
-				{
-					"label": "Adicionar",
-					"event": "adicionarTipoBebida"
-				},
-				{
-					"label": "Listar",
-					"event": "listarTipoBebida"
-				},
-				{
-					"label": "Borrar por Id",
-					"event": "eliminarTipoBebidaPorId"
-				},
-				{
-					"label": "Buscar por Nombre",
-					"event": "buscarTipoBebidaPorNombre"
-				},
+				
 				{
 					"label": "Adicionar Usuario",
 					"event": "adicionarUsuario"
@@ -62,7 +47,7 @@
 					"event": "cerrarPrestamo"
 				},
 				{
-					"label": "Buscar Tipo de Cuenta",
+					"label": "Iniciar/Cambiar Sesion",
 					"event": "buscarTipoUsuario"
 				}
 			]
@@ -71,7 +56,7 @@
 		  "options":
 			[
 				{
-					"label": "Mostrar log Parranderos",
+					"label": "Mostrar log Bancandes",
 					"event": "mostrarLogParranderos"
 				},
 				{
@@ -79,7 +64,7 @@
 					"event": "mostrarLogDatanuecleus"
 				},
 				{
-					"label": "Limpiar log de parranderos",
+					"label": "Limpiar log de bancandes",
 					"event": "limpiarLogParranderos"
 				},
 				{
