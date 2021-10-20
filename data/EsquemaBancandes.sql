@@ -61,8 +61,8 @@ CREATE TABLE Oficina (
     id NUMBER,
     nombre VARCHAR(20),
     direccion VARCHAR(20),
-    puntosDeAtencion NUMBER,
     gerenteUsuario VARCHAR(20),
+    puntosDeAtencion NUMBER,
     CONSTRAINT Oficina_PK PRIMARY KEY (id)
 );
 
@@ -91,6 +91,7 @@ ENABLE;
 CREATE TABLE Cuenta(
     id NUMBER,
     tipo VARCHAR(20),
+    saldo NUMBER,
     cliente VARCHAR(20),
     gerente VARCHAR(20)
 );
