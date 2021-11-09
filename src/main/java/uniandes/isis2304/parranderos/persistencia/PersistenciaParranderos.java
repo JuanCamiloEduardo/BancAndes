@@ -36,6 +36,7 @@ import uniandes.isis2304.parranderos.negocio.Bar;
 import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.parranderos.negocio.Bebida;
 import uniandes.isis2304.parranderos.negocio.Cliente;
+import uniandes.isis2304.parranderos.negocio.Consigna;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
 import uniandes.isis2304.parranderos.negocio.GerenteOficina;
 import uniandes.isis2304.parranderos.negocio.Gustan;
@@ -104,6 +105,7 @@ public class PersistenciaParranderos
 	private SQLOficina sqlOficina;
 	private SQLPuntoDeAtencion sqlPuntoDeAtencion;
 	private SQLCuenta sqlCuenta;
+	private SQLConsigna sqlConsigna;
 
 
 	/* ****************************************************************
@@ -128,6 +130,7 @@ public class PersistenciaParranderos
 		tablas.add("CUENTA");
 		tablas.add("CLIENTE");
 		tablas.add("GERENTEOFICINA");
+		tablas.add("CONSIGNA");
 
 }
 
@@ -209,6 +212,7 @@ public class PersistenciaParranderos
 		sqlCuenta=new SQLCuenta(this);
 		sqlUtil = new SQLUtil(this);
 		sqlPrestamo=new SQLPrestamo(this);
+		sqlConsigna=new SQLConsigna(this);
 	}
 
 	/**
@@ -238,7 +242,7 @@ public class PersistenciaParranderos
 	{
 		return tablas.get (3);
 	}
-	
+
 	public String darTablaCuenta ()
 	{
 		return tablas.get (4);
@@ -247,6 +251,11 @@ public class PersistenciaParranderos
 	public String darTablaPrestamo ()
 	{
 		return tablas.get (5);
+	}
+	
+	public String darTablaConsigna ()
+	{
+		return tablas.get (6);
 	}
 	
 	private long nextval ()
@@ -646,5 +655,36 @@ public class PersistenciaParranderos
 		return sqlUsuario.darUsuario (pmf.getPersistenceManager());
 	}
 	
+	public Consigna adicionarConsigna(String jefe,String empleado,long monto,String fecha)
+    {
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	System.out.println("Aja2");
+            tx.begin();
+            long tuplasInsertadas = sqlConsigna.adicionarConsigna(pm,jefe,empleado,monto,fecha );
+            System.out.println("Aja5");
+            tx.commit();
+
+            log.trace ("Inserción de consigna: " + jefe + ": " + tuplasInsertadas + " tuplas insertadas");
+
+            return new Consigna (jefe, empleado,monto,fecha);
+        }
+        catch (Exception e)
+        {
+//            e.printStackTrace();
+            log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+    }
 
  }

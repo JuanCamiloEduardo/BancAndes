@@ -176,6 +176,15 @@ public class Parranderos
 		System.out.print(tb.get(numero));
 		return hola;
 	}
+	
+	public Consigna adicionarConsigna(String jefe,String empleado,long Monto,String fecha)
+    {
+        System.out.println("Aja1");
+		log.info ("Adicionando Consigna: " + jefe);
+        Consigna nuevaconsigna = pp.adicionarConsigna (jefe,empleado,Monto,fecha);
+        log.info ("Adicionando Consigna: " + nuevaconsigna);
+        return nuevaconsigna;
+    }
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los BEBEDORES

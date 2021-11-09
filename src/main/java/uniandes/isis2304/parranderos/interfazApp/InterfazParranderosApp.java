@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.Parranderos;
 import uniandes.isis2304.parranderos.negocio.VOCliente;
+import uniandes.isis2304.parranderos.negocio.VOConsigna;
 import uniandes.isis2304.parranderos.negocio.VOPrestamo;
 
 import uniandes.isis2304.parranderos.negocio.VOCuenta;
@@ -120,6 +122,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     private boolean gerenteOficina=false;
     private boolean cajero=false;
     private boolean cliente=false;
+    private String nombre = "";
     
 
 	/* ****************************************************************
@@ -662,6 +665,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		if (loginTb != null & claveTb!= null)
     		{	
+    			nombre=loginTb;
     			String tipo = parranderos.darUsuario(loginTb,claveTb);
     			if (tipo.toLowerCase().equals("cliente") )
     			{
@@ -696,6 +700,51 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+    }
+    
+    public void adicionarConsigna( )
+    {
+        try 
+        {
+            String jefe = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            String empleado = JOptionPane.showInputDialog (this, "Nombre del empleado?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            long saldo =Integer.parseInt( JOptionPane.showInputDialog (this, "Monto?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            String Dias=JOptionPane.showInputDialog (this, "Mensual(M) o Quincenal(Q)?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            String fecha;
+            if (Dias.equals("M"))
+            {
+            fecha=LocalDate.now().plusDays(30).toString();
+            }
+            else
+            {
+            fecha=LocalDate.now().plusDays(15).toString();
+            }
+            if (jefe != null && empleado != null && Dias != null )
+            {
+            	if (nombre.equals(jefe)){
+	                VOConsigna tb = parranderos.adicionarConsigna (jefe,empleado,saldo,fecha);
+	
+	                if (tb == null)
+	                {
+	                    throw new Exception ("No se pudo");
+	                }
+	                String resultado = "En adicionarTipoBebida\n\n";
+	                resultado += "Tipo de bebida adicionado exitosamente: " + tb;
+	                resultado += "\n Operación terminada";
+	                panelDatos.actualizarInterfaz(resultado);
+            	}
+            }
+            else
+            {
+                panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+            }
+        } 
+        catch (Exception e) 
+        {
+//            e.printStackTrace();
+            String resultado = generarMensajeError(e);
+            panelDatos.actualizarInterfaz(resultado);
+        }
     }
     
 	/* ****************************************************************
@@ -908,6 +957,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	/* ****************************************************************
 	 * 			Métodos de la Interacción

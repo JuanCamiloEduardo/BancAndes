@@ -49,6 +49,10 @@
 				{
 					"label": "Iniciar/Cambiar Sesion",
 					"event": "buscarTipoUsuario"
+				},
+				{
+					"label": "Adicionar consigna periodicamente",
+					"event": "adicionarConsigna"
 				}
 			]
 		},
