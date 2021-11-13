@@ -474,6 +474,37 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
+	
+	public long cambioPrestamov2 (String nombre,long id,long saldo,long idprestamo)
+	{
+		System.out.println("7");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.cambioCuenta(pm, nombre,id,(-1)*Math.abs(saldo));
+            sqlPrestamo.cambioPrestamo(pm, nombre, idprestamo,Math.abs(saldo));
+            System.out.println("10");
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 	public long cerrarPrestamo (String nombre,long id)
 	{
 		System.out.println("7");

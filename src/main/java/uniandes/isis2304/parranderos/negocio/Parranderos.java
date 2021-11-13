@@ -119,6 +119,15 @@ public class Parranderos
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
+	public long operacionPrestamoV2 (String nombre,long id,long saldo,long idprestamo)
+	{	
+		System.out.println("0");
+		log.info ("Realizando un cambio en el prestamo: " + id );
+		long tb = pp.cambioPrestamov2(nombre,id,saldo,idprestamo);
+		System.out.println("10");
+		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
+		return tb;
+	}
 	public long cerrarPrestamo (String nombre,long id)
 	{	
 		System.out.println("0");
