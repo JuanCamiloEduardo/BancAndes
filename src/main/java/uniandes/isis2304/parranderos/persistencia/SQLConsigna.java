@@ -70,11 +70,11 @@ class SQLConsigna
 	 * @param horario - El horario en que el bar sirve la bebida (DIURNO, NOCTURNO, TDOOS)
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarConsigna (PersistenceManager pm,String jefe,String empleado,long saldo,String fecha) 
+	public long adicionarConsigna (PersistenceManager pm,String jefe, long idJefe, String empleado, long idEmpleado, long monto, String fecha,String frecuencia) 
     {
 		System.out.println("Aja3");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaConsigna  () + "(jefe,empleado,monto,fecha) values (?, ?,?,?)");
-        q.setParameters(jefe,empleado,saldo,fecha);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaConsigna  () + "(jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia) values (?,?,?,?,?,?,?)");
+        q.setParameters(jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia);
         System.out.println("Aja4");
         return (long) q.executeUnique();
     }

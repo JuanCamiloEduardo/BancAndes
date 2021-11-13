@@ -655,7 +655,7 @@ public class PersistenciaParranderos
 		return sqlUsuario.darUsuario (pmf.getPersistenceManager());
 	}
 	
-	public Consigna adicionarConsigna(String jefe,String empleado,long monto,String fecha)
+	public Consigna adicionarConsigna(String jefe, long idJefe, String empleado, long idEmpleado, long monto,String fecha, String frecuencia)
     {
         PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -663,13 +663,13 @@ public class PersistenciaParranderos
         {
         	System.out.println("Aja2");
             tx.begin();
-            long tuplasInsertadas = sqlConsigna.adicionarConsigna(pm,jefe,empleado,monto,fecha );
+            long tuplasInsertadas = sqlConsigna.adicionarConsigna(pm,jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia);
             System.out.println("Aja5");
             tx.commit();
 
             log.trace ("Inserción de consigna: " + jefe + ": " + tuplasInsertadas + " tuplas insertadas");
 
-            return new Consigna (jefe, empleado,monto,fecha);
+            return new Consigna (jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia);
         }
         catch (Exception e)
         {
@@ -686,5 +686,36 @@ public class PersistenciaParranderos
             pm.close();
         }
     }
+	
+	public long cambioCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
+	{
+		System.out.println("7");
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.cambioCuenta(pm, nombreConsignador,idConsignador,(Math.abs(saldo))*(-1));
+            sqlCuenta.cambioCuenta(pm, nombreDestino,idDestino,Math.abs(saldo));
+            System.out.println("10");
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 
  }

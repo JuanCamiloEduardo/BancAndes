@@ -177,15 +177,24 @@ public class Parranderos
 		return hola;
 	}
 	
-	public Consigna adicionarConsigna(String jefe,String empleado,long Monto,String fecha)
+	public Consigna adicionarConsigna(String jefe, long idJefe, String empleado, long idEmpleado, long monto,String fecha, String frecuencia)
     {
         System.out.println("Aja1");
 		log.info ("Adicionando Consigna: " + jefe);
-        Consigna nuevaconsigna = pp.adicionarConsigna (jefe,empleado,Monto,fecha);
+        Consigna nuevaconsigna = pp.adicionarConsigna (jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia);
         log.info ("Adicionando Consigna: " + nuevaconsigna);
         return nuevaconsigna;
     }
 
+	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
+	{	
+		System.out.println("0");
+		log.info ("Realizando un cambio en las cuentas");
+		long tb = pp.cambioCuentaV2 (nombreConsignador,idConsignador,saldo,nombreDestino,idDestino);
+		System.out.println("10");
+		return tb;
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los BEBEDORES
 	 *****************************************************************/
