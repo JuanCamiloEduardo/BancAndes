@@ -717,6 +717,66 @@ public class PersistenciaParranderos
             pm.close();
         }
     }
+	/*
+	public List<Cuentaa> darTipoBebidaPorNombre (String nombre)
+    {
+       return sqlTipoBebida.darTiposBebidaPorNombre (pmf.getPersistenceManager(), nombre);
+    }
+
+	*/
+	public void eliminaryCrearConsigna(long cuentaEliminar,long nuevaId,String jefe) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        
+        
+        try
+        {
+            tx.begin();
+            System.out.print("**************************************************************");
+            System.out.print("**************************************************************");
+            List<Cuenta> verificar =sqlCuenta.verificar(pm, nuevaId);
+            
+            System.out.print(verificar );
+            System.out.print("------------------------------------------------------------");
+            if(verificar.isEmpty()) 
+            {
+            	
+            	return;
+            }
+            List<Consigna> lista = sqlConsigna.darConsignasEliminar(pm, jefe,cuentaEliminar);
+            sqlConsigna.eliminarConsigna(pm, jefe, cuentaEliminar);
+            
+            for (int i = 0; i<lista.size(); i++) {
+            	
+            	sqlConsigna.adicionarConsigna(pm,lista.get(i).getJefe(),nuevaId,lista.get(i).getEmpleado(),lista.get(i).getIdEmpleado(),lista.get(i).getMonto(),lista.get(i).getFecha(),lista.get(i).getFrecuencia());
+            	
+            	
+            }
+            lista.clear();
+            
+            tx.commit();
+           
+
+
+            return;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+		
+	}
 	
 	public long cambioCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
 	{
@@ -728,6 +788,7 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlCuenta.cambioCuenta(pm, nombreConsignador,idConsignador,(Math.abs(saldo))*(-1));
             sqlCuenta.cambioCuenta(pm, nombreDestino,idDestino,Math.abs(saldo));
+            
             System.out.println("10");
             tx.commit();
 

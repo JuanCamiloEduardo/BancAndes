@@ -1,10 +1,12 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.parranderos.negocio.Consigna;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
 
 public class SQLCuenta {
@@ -61,6 +63,14 @@ public class SQLCuenta {
 		System.out.println("9");
         return (long) q.executeUnique();
 	}
+	public List<Cuenta> verificar (PersistenceManager pm, long id) 
+    {
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCuenta ()+" WHERE  id= ?");
+        q.setResultClass(Cuenta.class);
+        q.setParameters(id);
+        
+        return (List<Cuenta>) q.executeList();
+    }
 	
 	public long cerrarCuenta (PersistenceManager pm,long id) 
 	{

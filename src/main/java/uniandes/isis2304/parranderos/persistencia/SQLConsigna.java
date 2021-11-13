@@ -82,6 +82,23 @@ class SQLConsigna
         return (long) q.executeUnique();
     }
 	
+	public long eliminarConsigna (PersistenceManager pm,String jefe, long idJefe) 
+    {
+		System.out.println("Aja3");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaConsigna  () + " WHERE jefe=? AND idJefe=? ");
+        q.setParameters(jefe,idJefe);
+        System.out.println("Aja4");
+        return (long) q.executeUnique();
+    }
+	public long eliminarsara (PersistenceManager pm) 
+    {
+		System.out.println("Aja3");
+        Query q = pm.newQuery(SQL, "DROP TABLE " + pp.darTablaConsigna  ());
+        q.setParameters();
+        System.out.println("Aja4");
+        return (long) q.executeUnique();
+    }
+	
 	public void consignar15Dias(PersistenceManager pm, LocalDate fecha) {
 		
 		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaConsigna() + " SET fecha=?  WHERE fecha = ? AND frecuencia='Q'");
@@ -119,6 +136,14 @@ class SQLConsigna
         Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaConsigna ()+" WHERE FECHA = ?");
         q.setResultClass(Consigna.class);
         q.setParameters(fecha.toString());
+        return (List<Consigna>) q.executeList();
+    }
+	public List<Consigna> darConsignasEliminar (PersistenceManager pm, String jefe,long idJefe) 
+    {
+		/*WHERE jefe=? AND idJefe=?*/
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaConsigna ());
+        q.setResultClass(Consigna.class);
+        q.setParameters();
         return (List<Consigna>) q.executeList();
     }
 

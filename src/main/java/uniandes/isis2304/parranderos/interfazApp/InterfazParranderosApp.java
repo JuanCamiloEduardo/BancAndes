@@ -792,6 +792,67 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
             panelDatos.actualizarInterfaz(resultado);
         }
     }
+public void eliminarCrearConsigna( )
+    
+    {
+        try 
+        {
+        	if(cliente)
+    		{
+            String jefe = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            long idJefe = Integer.parseInt(JOptionPane.showInputDialog (this, "Id de la cuenta del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            long nuevaId = Integer.parseInt(JOptionPane.showInputDialog (this, "Id de la nueva cuenta del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            
+            if (jefe != null )
+            {
+            	if (nombre.equals(jefe))
+            	{
+	                parranderos.eliminarCrearConsigna (jefe,nuevaId,idJefe);
+	
+            	}
+            	}
+            }
+        }
+        catch (Exception e) 
+        {
+//            e.printStackTrace();
+            String resultado = generarMensajeError(e);
+            panelDatos.actualizarInterfaz(resultado);
+        }
+    }
+/*
+public void buscarTipoBebidaPorNombre( )
+{
+    try 
+    {
+        String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Buscar tipo de bebida por nombre", JOptionPane.QUESTION_MESSAGE);
+        if (nombreTb != null)
+        {
+            VOTipoBebida tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTb);
+            String resultado = "En buscar Tipo Bebida por nombre\n\n";
+            if (tipoBebida != null)
+            {
+                resultado += "El tipo de bebida es: " + tipoBebida;
+            }
+            else
+            {
+                resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";
+            }
+            resultado += "\n Operación terminada";
+            panelDatos.actualizarInterfaz(resultado);
+        }
+        else
+        {
+            panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+        }
+    } 
+    catch (Exception e) 
+    {
+//        e.printStackTrace();
+        String resultado = generarMensajeError(e);
+        panelDatos.actualizarInterfaz(resultado);
+    }
+}*/
     
     public void verificarPagosAutomaticos(LocalDate fecha) {
     	
