@@ -15,12 +15,21 @@
 
 package uniandes.isis2304.parranderos.persistencia;
 
+<<<<<<< Updated upstream
+=======
+import java.time.LocalDate;
+>>>>>>> Stashed changes
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.parranderos.negocio.Cliente;
+<<<<<<< Updated upstream
+=======
+import uniandes.isis2304.parranderos.negocio.Consigna;
+import uniandes.isis2304.parranderos.negocio.Cuenta;
+>>>>>>> Stashed changes
 import uniandes.isis2304.parranderos.negocio.GerenteOficina;
 import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
@@ -78,8 +87,28 @@ class SQLConsigna
         System.out.println("Aja4");
         return (long) q.executeUnique();
     }
+<<<<<<< Updated upstream
 
 
+=======
+	
+	public void consignar15Dias(PersistenceManager pm, LocalDate fecha) {
+		
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaConsigna() + " SET fecha=?  WHERE fecha = ? AND frecuencia='Q'");
+		q.setParameters(fecha.plusDays(15).toString(),fecha.toString());
+        q.executeUnique();
+		
+	}
+
+	public void consignar30Dias(PersistenceManager pm, LocalDate fecha) {
+		
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaConsigna() + " SET fecha=?  WHERE fecha = ? AND frecuencia='M'");
+		q.setParameters(fecha.plusDays(30).toString(),fecha.toString());
+        q.executeUnique();
+		
+	}
+	
+>>>>>>> Stashed changes
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN SIRVEN de la base de datos de Parranderos, por sus identificador
 	 * @param pm - El manejador de persistencia
@@ -95,6 +124,7 @@ class SQLConsigna
 	 * @return Una lista de parejas de objetos, el primer elemento de cada pareja representa el identificador de un bar,
 	 * 	el segundo elemento representa el número de bebidas que sirve (Una bebida que se sirve en dos horarios cuenta dos veces)
 	 */
+<<<<<<< Updated upstream
 	public List<Usuario> darUsuario(PersistenceManager pm,String login, String clave)
 	{	
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario  () + " WHERE login = ? AND clave = ?");
@@ -103,5 +133,15 @@ class SQLConsigna
 		q.setParameters(login,clave);
 		return (List<Usuario>) q.executeList();
 	}
+=======
+	
+	public List<Consigna> darConsignas (PersistenceManager pm, LocalDate fecha) 
+    {
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaConsigna ()+" WHERE FECHA = ?");
+        q.setResultClass(Consigna.class);
+        q.setParameters(fecha.toString());
+        return (List<Consigna>) q.executeList();
+    }
+>>>>>>> Stashed changes
 
 }

@@ -16,6 +16,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -195,6 +196,15 @@ public class Parranderos
 		return tb;
 	}
 	
+<<<<<<< Updated upstream
+=======
+	public void verificarPagosAutomaticos(LocalDate fecha) {
+		
+		pp.verificarPagosAutomaticos(fecha);
+		
+	}
+	
+>>>>>>> Stashed changes
 	/* ****************************************************************
 	 * 			Métodos para manejar los BEBEDORES
 	 *****************************************************************/

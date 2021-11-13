@@ -18,6 +18,7 @@ package uniandes.isis2304.parranderos.persistencia;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,7 +48,6 @@ import uniandes.isis2304.parranderos.negocio.Usuario;
 import uniandes.isis2304.parranderos.negocio.Oficina;
 import uniandes.isis2304.parranderos.negocio.PuntoDeAtencion;
 import uniandes.isis2304.parranderos.negocio.Visitan;
-
 
 /**
  * Clase para el manejador de persistencia del proyecto Parranderos
@@ -717,5 +717,49 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
+<<<<<<< Updated upstream
+=======
+	
+	public void verificarPagosAutomaticos(LocalDate fecha) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            
+            List<Consigna> lista = sqlConsigna.darConsignas(pm, fecha);
+            
+            for (int i = 0; i<lista.size(); i++) {
+            	
+            	cambioCuentaV2(lista.get(i).getJefe(),lista.get(i).getIdJefe(),lista.get(i).getMonto(),lista.get(i).getEmpleado(),lista.get(i).getIdEmpleado());
+            	
+            }
+            
+            
+            sqlConsigna.consignar15Dias(pm, fecha);
+            sqlConsigna.consignar30Dias(pm, fecha);
+            
+            tx.commit();
+
+            return;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+		
+	}
+>>>>>>> Stashed changes
 
  }

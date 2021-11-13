@@ -656,14 +656,18 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     public void buscarTipoUsuario( )
     {
     	try 
-    	{	System.out.println("paso1");
+    	{	
     	    adminBanc=false;
     	    gerenteOficina=false;
     	    cajero=false;
     	    cliente=false;
     		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
+<<<<<<< Updated upstream
     		verificarPagosAutomaticos(LocalDate.now().toString());
+=======
+    		verificarPagosAutomaticos(LocalDate.now());
+>>>>>>> Stashed changes
     		if (loginTb != null & claveTb!= null)
     		{	
     			nombre=loginTb;
@@ -719,7 +723,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
             String fecha;
             if (frecuencia.equals("M"))
             {
+<<<<<<< Updated upstream
             fecha=LocalDate.now().plusDays(30).toString();
+=======
+            	
+            fecha=LocalDate.now().plusDays(30).toString();
+            
+>>>>>>> Stashed changes
             System.out.print(fecha);
             }
             else
@@ -755,9 +765,26 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         }
     }
     
+<<<<<<< Updated upstream
     public void verificarPagosAutomaticos(String fecha) {
     	
     	
+=======
+    public void verificarPagosAutomaticos(LocalDate fecha) {
+    	
+    	try {
+    		
+    		parranderos.verificarPagosAutomaticos(LocalDate.now());
+    		
+    	}
+    	
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+>>>>>>> Stashed changes
     	
     }
     
