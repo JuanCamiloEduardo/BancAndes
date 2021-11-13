@@ -718,7 +718,10 @@ public class PersistenciaParranderos
         }
 	}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 	
 	public void verificarPagosAutomaticos(LocalDate fecha) {
 		
@@ -760,6 +763,9 @@ public class PersistenciaParranderos
         }
 		
 	}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
  }

@@ -197,13 +197,19 @@ public class Parranderos
 	}
 	
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 	public void verificarPagosAutomaticos(LocalDate fecha) {
 		
 		pp.verificarPagosAutomaticos(fecha);
 		
 	}
 	
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	/* ****************************************************************
 	 * 			Métodos para manejar los BEBEDORES

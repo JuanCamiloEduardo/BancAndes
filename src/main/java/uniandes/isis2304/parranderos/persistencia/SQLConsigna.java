@@ -16,6 +16,10 @@
 package uniandes.isis2304.parranderos.persistencia;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+import java.time.LocalDate;
+>>>>>>> Stashed changes
 =======
 import java.time.LocalDate;
 >>>>>>> Stashed changes
@@ -26,6 +30,11 @@ import javax.jdo.Query;
 
 import uniandes.isis2304.parranderos.negocio.Cliente;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+import uniandes.isis2304.parranderos.negocio.Consigna;
+import uniandes.isis2304.parranderos.negocio.Cuenta;
+>>>>>>> Stashed changes
 =======
 import uniandes.isis2304.parranderos.negocio.Consigna;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
@@ -88,9 +97,12 @@ class SQLConsigna
         return (long) q.executeUnique();
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
 =======
+=======
+>>>>>>> Stashed changes
 	
 	public void consignar15Dias(PersistenceManager pm, LocalDate fecha) {
 		
@@ -108,6 +120,9 @@ class SQLConsigna
 		
 	}
 	
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN SIRVEN de la base de datos de Parranderos, por sus identificador
@@ -125,6 +140,7 @@ class SQLConsigna
 	 * 	el segundo elemento representa el número de bebidas que sirve (Una bebida que se sirve en dos horarios cuenta dos veces)
 	 */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	public List<Usuario> darUsuario(PersistenceManager pm,String login, String clave)
 	{	
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario  () + " WHERE login = ? AND clave = ?");
@@ -134,6 +150,8 @@ class SQLConsigna
 		return (List<Usuario>) q.executeList();
 	}
 =======
+=======
+>>>>>>> Stashed changes
 	
 	public List<Consigna> darConsignas (PersistenceManager pm, LocalDate fecha) 
     {
@@ -142,6 +160,9 @@ class SQLConsigna
         q.setParameters(fecha.toString());
         return (List<Consigna>) q.executeList();
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 }

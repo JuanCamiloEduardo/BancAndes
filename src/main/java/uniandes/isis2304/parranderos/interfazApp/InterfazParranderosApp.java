@@ -664,7 +664,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     		verificarPagosAutomaticos(LocalDate.now().toString());
+=======
+    		verificarPagosAutomaticos(LocalDate.now());
+>>>>>>> Stashed changes
 =======
     		verificarPagosAutomaticos(LocalDate.now());
 >>>>>>> Stashed changes
@@ -724,7 +728,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
             if (frecuencia.equals("M"))
             {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             fecha=LocalDate.now().plusDays(30).toString();
+=======
+            	
+            fecha=LocalDate.now().plusDays(30).toString();
+            
+>>>>>>> Stashed changes
 =======
             	
             fecha=LocalDate.now().plusDays(30).toString();
@@ -766,10 +776,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     }
     
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public void verificarPagosAutomaticos(String fecha) {
     	
     	
 =======
+=======
+>>>>>>> Stashed changes
     public void verificarPagosAutomaticos(LocalDate fecha) {
     	
     	try {
@@ -784,6 +797,9 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     	
     }
