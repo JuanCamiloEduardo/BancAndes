@@ -140,10 +140,9 @@ class SQLConsigna
     }
 	public List<Consigna> darConsignasEliminar (PersistenceManager pm, String jefe,long idJefe) 
     {
-		/*WHERE jefe=? AND idJefe=?*/
-        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaConsigna ());
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaConsigna ()+" WHERE jefe=? AND idJefe=?");
         q.setResultClass(Consigna.class);
-        q.setParameters();
+        q.setParameters(jefe, idJefe);
         return (List<Consigna>) q.executeList();
     }
 
