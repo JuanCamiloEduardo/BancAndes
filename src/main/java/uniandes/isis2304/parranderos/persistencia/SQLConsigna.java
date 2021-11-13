@@ -15,15 +15,21 @@
 
 package uniandes.isis2304.parranderos.persistencia;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
+=======
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.parranderos.negocio.Cliente;
+<<<<<<< HEAD
 import uniandes.isis2304.parranderos.negocio.Consigna;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
+=======
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
 import uniandes.isis2304.parranderos.negocio.GerenteOficina;
 import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
@@ -81,6 +87,7 @@ class SQLConsigna
         System.out.println("Aja4");
         return (long) q.executeUnique();
     }
+<<<<<<< HEAD
 	
 	public void consignar15Dias(PersistenceManager pm, LocalDate fecha) {
 		
@@ -98,6 +105,10 @@ class SQLConsigna
 		
 	}
 	
+=======
+
+
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN SIRVEN de la base de datos de Parranderos, por sus identificador
 	 * @param pm - El manejador de persistencia
@@ -113,6 +124,7 @@ class SQLConsigna
 	 * @return Una lista de parejas de objetos, el primer elemento de cada pareja representa el identificador de un bar,
 	 * 	el segundo elemento representa el número de bebidas que sirve (Una bebida que se sirve en dos horarios cuenta dos veces)
 	 */
+<<<<<<< HEAD
 	
 	public List<Consigna> darConsignas (PersistenceManager pm, LocalDate fecha) 
     {
@@ -121,5 +133,15 @@ class SQLConsigna
         q.setParameters(fecha.toString());
         return (List<Consigna>) q.executeList();
     }
+=======
+	public List<Usuario> darUsuario(PersistenceManager pm,String login, String clave)
+	{	
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario  () + " WHERE login = ? AND clave = ?");
+		q.setResultClass(Usuario.class);
+		System.out.print(q.toString());
+		q.setParameters(login,clave);
+		return (List<Usuario>) q.executeList();
+	}
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
 
 }

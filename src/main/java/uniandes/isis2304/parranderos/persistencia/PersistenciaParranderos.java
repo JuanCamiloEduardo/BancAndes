@@ -717,6 +717,7 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
+<<<<<<< HEAD
 	
 	public void verificarPagosAutomaticos(LocalDate fecha) {
 		
@@ -758,5 +759,7 @@ public class PersistenciaParranderos
         }
 		
 	}
+=======
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
 
  }

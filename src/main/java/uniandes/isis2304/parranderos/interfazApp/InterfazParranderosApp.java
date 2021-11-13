@@ -396,6 +396,46 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
     }
+    public void OperacionPrestamov2( )
+    {
+    	try 
+    	{
+    		if(cajero || cliente)
+    		{
+    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de cliente?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		long valorCuota = Integer.parseInt(JOptionPane.showInputDialog (this, "Cuota?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		long idcuenta = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		long idprestamo = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID del prestamo?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		if (nombreTb != null )
+    		{
+    			long Quitar=-valorCuota;
+    			//Operacion en la cuenta 
+    			parranderos.operacionCuenta(nombreTb,idcuenta,Quitar);
+    			String resultado = "Realizando su transaccion ";
+    			//Operacion en el prestamo
+    			parranderos.operacionPrestamo(nombreTb,idprestamo,valorCuota);
+    			
+    			
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("No es un cajero");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
     
     public void OperacionCuenta( )
     {
@@ -663,7 +703,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     	    cliente=false;
     		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
+<<<<<<< HEAD
     		verificarPagosAutomaticos(LocalDate.now());
+=======
+    		verificarPagosAutomaticos(LocalDate.now().toString());
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
     		if (loginTb != null & claveTb!= null)
     		{	
     			nombre=loginTb;
@@ -719,9 +763,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
             String fecha;
             if (frecuencia.equals("M"))
             {
+<<<<<<< HEAD
             	
             fecha=LocalDate.now().plusDays(30).toString();
             
+=======
+            fecha=LocalDate.now().plusDays(30).toString();
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
             System.out.print(fecha);
             }
             else
@@ -757,6 +805,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         }
     }
     
+<<<<<<< HEAD
     public void verificarPagosAutomaticos(LocalDate fecha) {
     	
     	try {
@@ -771,6 +820,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+=======
+    public void verificarPagosAutomaticos(String fecha) {
+    	
+    	
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
     	
     }
     

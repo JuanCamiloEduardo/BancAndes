@@ -196,12 +196,15 @@ public class Parranderos
 		return tb;
 	}
 	
+<<<<<<< HEAD
 	public void verificarPagosAutomaticos(LocalDate fecha) {
 		
 		pp.verificarPagosAutomaticos(fecha);
 		
 	}
 	
+=======
+>>>>>>> aa06a0bab7b4d4b3d9b01819fe3db046bcaa5daf
 	/* ****************************************************************
 	 * 			Métodos para manejar los BEBEDORES
 	 *****************************************************************/
