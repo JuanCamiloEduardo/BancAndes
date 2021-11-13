@@ -752,18 +752,47 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
             long idEmpleado = Integer.parseInt(JOptionPane.showInputDialog (this, "Id de la cuenta del empleado?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
             long saldo =Integer.parseInt( JOptionPane.showInputDialog (this, "Monto?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
             String frecuencia=JOptionPane.showInputDialog (this, "Mensual(M) o Quincenal(Q)?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
-            String fecha;
-            if (frecuencia.equals("M"))
-            {
-            	
-            fecha=LocalDate.now().plusDays(30).toString();
+            int dia=Integer.parseInt(JOptionPane.showInputDialog (this, "Que dia del mes desea que se haga la consignacion?", JOptionPane.QUESTION_MESSAGE));
             
-            System.out.print(fecha);
+            LocalDate hoy = LocalDate.now();
+            int mes = hoy.getMonthValue();
+            int anio = hoy.getYear();
+            LocalDate fechalocal = LocalDate.of(anio, mes, dia);
+            String fecha = fechalocal.toString();	
+            
+            if (fechalocal.isBefore(hoy)) {
+            	
+            	if (frecuencia.equals("M"))
+                {
+                
+                fecha=fechalocal.plusDays(30).toString();
+                
+
+                }
+                
+                else
+                {
+                fecha=fechalocal.plusDays(15).toString();
+                }
+            	
             }
-            else
-            {
-            fecha=LocalDate.now().plusDays(15).toString();
+            
+            if (fechalocal.isBefore(hoy)) {
+            	
+            	if (frecuencia.equals("M"))
+                {
+                
+                fecha=fechalocal.plusDays(30).toString();
+
+                }
+                
+                else
+                {
+                fecha=fechalocal.plusDays(15).toString();
+                }
+            	
             }
+            
             if (jefe != null && empleado != null && frecuencia != null )
             {
             	if (nombre.equals(jefe)){
@@ -792,6 +821,67 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
             panelDatos.actualizarInterfaz(resultado);
         }
     }
+public void eliminarCrearConsigna( )
+    
+    {
+        try 
+        {
+        	if(cliente)
+    		{
+            String jefe = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            long idJefe = Integer.parseInt(JOptionPane.showInputDialog (this, "Id de la cuenta del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            long nuevaId = Integer.parseInt(JOptionPane.showInputDialog (this, "Id de la nueva cuenta del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            
+            if (jefe != null )
+            {
+            	if (nombre.equals(jefe))
+            	{
+	                parranderos.eliminarCrearConsigna (jefe,nuevaId,idJefe);
+	
+            	}
+            	}
+            }
+        }
+        catch (Exception e) 
+        {
+//            e.printStackTrace();
+            String resultado = generarMensajeError(e);
+            panelDatos.actualizarInterfaz(resultado);
+        }
+    }
+/*
+public void buscarTipoBebidaPorNombre( )
+{
+    try 
+    {
+        String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Buscar tipo de bebida por nombre", JOptionPane.QUESTION_MESSAGE);
+        if (nombreTb != null)
+        {
+            VOTipoBebida tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTb);
+            String resultado = "En buscar Tipo Bebida por nombre\n\n";
+            if (tipoBebida != null)
+            {
+                resultado += "El tipo de bebida es: " + tipoBebida;
+            }
+            else
+            {
+                resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";
+            }
+            resultado += "\n Operación terminada";
+            panelDatos.actualizarInterfaz(resultado);
+        }
+        else
+        {
+            panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+        }
+    } 
+    catch (Exception e) 
+    {
+//        e.printStackTrace();
+        String resultado = generarMensajeError(e);
+        panelDatos.actualizarInterfaz(resultado);
+    }
+}*/
     
     public void verificarPagosAutomaticos(LocalDate fecha) {
     	

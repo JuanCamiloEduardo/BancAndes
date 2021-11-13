@@ -195,6 +195,20 @@ public class Parranderos
         log.info ("Adicionando Consigna: " + nuevaconsigna);
         return nuevaconsigna;
     }
+	public void eliminarCrearConsigna(String jefe,long nuevaId, long idJefe)
+    {
+        System.out.println("Aja1");
+		log.info ("Adicionando Consigna: " + jefe);
+        pp.eliminaryCrearConsigna(idJefe,nuevaId,jefe);
+
+    }
+	/*
+	public TipoBebida darTipoBebidaPorNombre (String nombre)
+    {
+        log.info ("Buscando Tipo de bebida por nombre: " + nombre);
+        List<TipoBebida> tb = pp.darTipoBebidaPorNombre (nombre);
+        return !tb.isEmpty () ? tb.get (0) : null;
+    }*/
 
 	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
 	{	
