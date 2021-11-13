@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.Parranderos;
 import uniandes.isis2304.parranderos.negocio.VOCliente;
+import uniandes.isis2304.parranderos.negocio.VOConsigna;
 import uniandes.isis2304.parranderos.negocio.VOPrestamo;
 
 import uniandes.isis2304.parranderos.negocio.VOCuenta;
@@ -120,6 +122,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     private boolean gerenteOficina=false;
     private boolean cajero=false;
     private boolean cliente=false;
+    private String nombre = "";
     
 
 	/* ****************************************************************
@@ -660,8 +663,10 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     	    cliente=false;
     		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
+    		verificarPagosAutomaticos(LocalDate.now().toString());
     		if (loginTb != null & claveTb!= null)
     		{	
+    			nombre=loginTb;
     			String tipo = parranderos.darUsuario(loginTb,claveTb);
     			if (tipo.toLowerCase().equals("cliente") )
     			{
@@ -696,6 +701,104 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+    }
+    
+    public void adicionarConsigna( )
+    
+    {
+        try 
+        {
+        	if(cliente)
+    		{
+            String jefe = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            long idJefe = Integer.parseInt(JOptionPane.showInputDialog (this, "Id de la cuenta del jefe?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            String empleado = JOptionPane.showInputDialog (this, "Nombre del empleado?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            long idEmpleado = Integer.parseInt(JOptionPane.showInputDialog (this, "Id de la cuenta del empleado?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            long saldo =Integer.parseInt( JOptionPane.showInputDialog (this, "Monto?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE));
+            String frecuencia=JOptionPane.showInputDialog (this, "Mensual(M) o Quincenal(Q)?", "Adicionar consigna", JOptionPane.QUESTION_MESSAGE);
+            String fecha;
+            if (frecuencia.equals("M"))
+            {
+            fecha=LocalDate.now().plusDays(30).toString();
+            System.out.print(fecha);
+            }
+            else
+            {
+            fecha=LocalDate.now().plusDays(15).toString();
+            }
+            if (jefe != null && empleado != null && frecuencia != null )
+            {
+            	if (nombre.equals(jefe)){
+	                VOConsigna tb = parranderos.adicionarConsigna (jefe,idJefe,empleado,idEmpleado,saldo,fecha,frecuencia);
+	
+	                if (tb == null)
+	                {
+	                    throw new Exception ("No se pudo");
+	                }
+	                String resultado = "En adicionarTipoBebida\n\n";
+	                resultado += "Tipo de bebida adicionado exitosamente: " + tb;
+	                resultado += "\n Operación terminada";
+	                panelDatos.actualizarInterfaz(resultado);
+            	}
+            }
+            else
+            {
+                panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+            }
+        } 
+        }
+        catch (Exception e) 
+        {
+//            e.printStackTrace();
+            String resultado = generarMensajeError(e);
+            panelDatos.actualizarInterfaz(resultado);
+        }
+    }
+    
+    public void verificarPagosAutomaticos(String fecha) {
+    	
+    	
+    	
+    }
+    
+    public void operacionCuentaV2() {
+    	
+    	try 
+    	{
+    		if(cajero || cliente)
+    		{
+    		String nombreConsignador = JOptionPane.showInputDialog (this, "Nombre de la cuenta de origen de consignacion", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE);
+    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre de la cuenta a consignar", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE);
+    		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Cantidad de dinero a transferir", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
+    		long idOrigen = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta que consigna?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
+    		long idDestino = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta a consignar?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));	
+    		if (nombreTb != null & nombreConsignador!=null & nombre.equals(nombreConsignador))
+    		{
+    			System.out.print("khe ?");
+    			
+	    			parranderos.operacionCuentaV2(nombreConsignador,idOrigen,saldo,nombreTb,idDestino);
+    			
+    			
+    			String resultado = "En operacion cuenta\n\n";
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+    		}
+    		else{
+    			panelDatos.actualizarInterfaz("No es un cliente o cajero");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}	
+    	
     }
     
 	/* ****************************************************************
@@ -908,6 +1011,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	/* ****************************************************************
 	 * 			Métodos de la Interacción
