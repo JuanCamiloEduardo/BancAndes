@@ -49,6 +49,14 @@
 				{
 					"label": "Iniciar/Cambiar Sesion",
 					"event": "buscarTipoUsuario"
+				},
+				{
+					"label": "Adicionar consigna periodicamente",
+					"event": "adicionarConsigna"
+				},
+				{
+					"label": "Cambio Cuenta V2",
+					"event": "operacionCuentaV2"
 				}
 			]
 		},
