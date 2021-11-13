@@ -57,6 +57,10 @@
 				{
 					"label": "Cambio Cuenta V2",
 					"event": "operacionCuentaV2"
+				},
+				{
+					"label": "Cambio Prestamo V2",
+					"event": "OperacionPrestamov2"
 				}
 			]
 		},
