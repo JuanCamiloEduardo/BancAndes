@@ -323,7 +323,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long numeroCuotas=Integer.parseInt(JOptionPane.showInputDialog (this, "NumeroCuotas?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
     		String diaPaga=JOptionPane.showInputDialog (this, "Dia Pago Cuota?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		long valorCuota=Integer.parseInt(JOptionPane.showInputDialog (this, "Valor Cuota Minima?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
-    		String gerente=JOptionPane.showInputDialog (this, "Dia Pago Cuota?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
+    		String gerente=JOptionPane.showInputDialog (this, "Gerente?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		if (nombreTipo != null & estado!= null & tipo!= null & diaPaga!=null )
     		{
     			System.out.println("0");
