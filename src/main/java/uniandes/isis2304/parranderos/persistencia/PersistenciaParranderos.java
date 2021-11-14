@@ -734,30 +734,21 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            System.out.print("**************************************************************");
-            System.out.print("**************************************************************");
             List<Cuenta> verificar =sqlCuenta.verificar(pm, nuevaId);
-            
-            System.out.print(verificar );
-            System.out.print("------------------------------------------------------------");
             if(verificar.isEmpty()) 
             {
-            	
             	return;
             }
             List<Consigna> lista = sqlConsigna.darConsignasEliminar(pm, jefe,cuentaEliminar);
             sqlConsigna.eliminarConsigna(pm, jefe, cuentaEliminar);
-            
             for (int i = 0; i<lista.size(); i++) {
-            	
             	sqlConsigna.adicionarConsigna(pm,lista.get(i).getJefe(),nuevaId,lista.get(i).getEmpleado(),lista.get(i).getIdEmpleado(),lista.get(i).getMonto(),lista.get(i).getFecha(),lista.get(i).getFrecuencia());
             	
             	
             }
-            lista.clear();
             
             tx.commit();
-           
+           lista.clear();
 
 
             return;
