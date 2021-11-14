@@ -863,20 +863,19 @@ public void buscarPrestamo( )
     	long Mayor =Long.MAX_VALUE,MayorM=Long.MAX_VALUE,MayorI=Long.MAX_VALUE,MayorN=Long.MAX_VALUE,MayorV=Long.MAX_VALUE;
     	long Menor=-2,MenorM=-2,MenorI=-2,MenorN=-2,MenorV=-2;
     	long Igual=-2,IgualM=-2,IgualI=-2,IgualN=-2,IgualV=-2;
-    	String igual="?",igualE="?",igualN="?";
-    	String esta="?",estaE="?",estaN="?";
+    	String igual="?||°°",igualE="?||°°",igualN="?||°°";
+    	String esta="?||°°",estaE="?||°°",estaN="?||°°";
     	System.out.print(listaPrestamos);
-    	JOptionPane.showMessageDialog(this,"hola");
         if (si)
         {
         	System.out.println("Aca2");
         	JOptionPane.showMessageDialog(this,"Para el perfecto funcionamiento de este requerimiento el usuario llenara el recuadro en caso de utilizar el filtro o lo dejara vacio de lo contrario");
         	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Mayor,Menor,Igual =[14,23,56] Como se buscan los numeros mayores a 14  que a su vez sean menores a 23 y tambien aquellos que sean iguales a 56 ");
         	String ID = JOptionPane.showInputDialog (this, "Filtro ID", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
-        	String Monto = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
-        	String Interes = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
-        	String NumeroCuotas = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
-        	String ValorCuota = JOptionPane.showInputDialog (this, "Nombre del jefe?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String Monto = JOptionPane.showInputDialog (this, "Filtro Monto?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String Interes = JOptionPane.showInputDialog (this, "Filtro Interes?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String NumeroCuotas = JOptionPane.showInputDialog (this, "Filtro Numero Cuotas?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String ValorCuota = JOptionPane.showInputDialog (this, "Filtro Valor Cuota?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
         	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Igual,Esta =[Abierto,E] Como se puede ver se estan buscando por aquellas que sean iguales a abierto o que tengan E");
         	String Tipo = JOptionPane.showInputDialog (this, "Filtro Tipo", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
         	String Estado = JOptionPane.showInputDialog (this, "Filtro Estado", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
@@ -943,11 +942,15 @@ public void buscarPrestamo( )
             for (int i = 0; i<listaPrestamos.size(); i++) {
             	Cambios.add(listaPrestamos.get(i));
             }
-            listaPrestamos=filtroString(esta,igual,Cambios,estaE,igualE,estaN,igualN);
+            ArrayList<Prestamo> PrimerFiltro=new ArrayList<Prestamo>();
+            ArrayList<Prestamo> SegundoFiltro=new ArrayList<Prestamo>();
+            PrimerFiltro=filtroString(esta,igual,Cambios,estaE,igualE,estaN,igualN);
             System.out.print("////////////////////////////////////////////////////////////////////////");
-            listaPrestamos=filtrolong(Mayor,Menor,Igual,Cambios ,MayorM,MenorM,IgualM,MayorI,MenorI,IgualI,MayorN,MenorN,IgualN,MayorV,MenorV,IgualV);
+            SegundoFiltro=filtrolong(Mayor,Menor,Igual,PrimerFiltro ,MayorM,MenorM,IgualM,MayorI,MenorI,IgualI,MayorN,MenorN,IgualN,MayorV,MenorV,IgualV);
             System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println(listaPrestamos);
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println(SegundoFiltro);
         }
             /*
             String resultado = "En buscar Tipo Bebida por nombre\n\n";
@@ -978,78 +981,145 @@ public void buscarPrestamo( )
 
 public ArrayList<Prestamo> filtrolong(long mayor,long menor,long igual,ArrayList<Prestamo> lista ,long mayorM,long menorM,long igualM,long mayorI,long menorI,long igualI,long mayorN,long menorN,long igualN,long mayorV,long menorV,long igualV)
 {
-	
+	ArrayList<Integer> Eliminar=new ArrayList<Integer>();
+	ArrayList<Prestamo> Cambios=new ArrayList<Prestamo>();
 	for (int i = 0; i<lista.size(); i++)
-	{
+	{	
+		System.out.println("Abajo");
+		System.out.println(lista.get(i).getId()==81);
+		System.out.println(lista.get(0).getId()==81);
+		System.out.println(lista.get(1).getId()==81);
+		System.out.println(lista.get(2).getId()==81);
+		System.out.println("Aca 15");
+		System.out.println(lista);
 		Prestamo index=lista.get(i);
-		if( igual!=lista.get(i).getId() ||  lista.get(i).getId()<menor || lista.get(i).getId()>mayor)
+		System.out.println(igual);
+		System.out.println(menor);
+		System.out.println(mayor);
+		System.out.println(lista.get(i).getId());
+		System.out.println(igual!=lista.get(i).getId());
+		
+		System.out.println(!(lista.get(i).getId() > mayor && lista.get(i).getId()  < menor));
+		
+		System.out.println(igual!=lista.get(i).getId() && !(lista.get(i).getId() > mayor && lista.get(i).getId()  < menor));
+		if(igual!=-2) {
+		if( igual!=lista.get(i).getId() && !(lista.get(i).getId() > mayor && lista.get(i).getId()  < menor))
 		{
-			lista.remove(i);
+			Eliminar.add(i);
 		}
-		if(igualM!=index.getMonto() ||  index.getMonto()<menorM || index.getMonto()>mayorM)
-		{
-			lista.remove(i);
 		}
-		if( igualI!=index.getInteres() ||  index.getInteres()<menorI || index.getInteres()>mayorI)
+		System.out.println("Aca 16");
+		System.out.println(lista);
+		if(igualM!=-2) {
+			
+		if(igualM!=index.getMonto() && !(index.getMonto() > mayorM  &&  index.getMonto()  < menorM))
 		{
-			lista.remove(i);
+			Eliminar.add(i);
 		}
-		if(igualN!=index.getNumeroCuotas() ||  index.getNumeroCuotas()<menorN || index.getNumeroCuotas()>mayorN)
-		{
-			lista.remove(i);
 		}
-		if(igualV!=index.getValorCuota() ||  index.getValorCuota()<menorV || index.getValorCuota()>mayorV)
+		System.out.println("Aca 17");
+		System.out.println(lista);
+		if(igualI!=-2) {
+		if( igualI!=index.getInteres() && !(index.getInteres() > mayorI  &&  index.getInteres()  < menorI))
 		{
-			lista.remove(i);
+			Eliminar.add(i);
+		}
+		}
+		System.out.println("Aca 18");
+		System.out.println(lista);
+		if(igualN!=-2) {
+		if(igualN!=index.getNumeroCuotas() && !(index.getNumeroCuotas() > mayorN  &&  index.getNumeroCuotas()  < menorN))
+		{
+			Eliminar.add(i);
+		}
+		}
+		System.out.println("Aca 19");
+		System.out.println(lista);
+		if(igualV!=-2) {
+		if(igualV!=index.getValorCuota() && !(index.getValorCuota() > mayorV  &&  index.getValorCuota()  < menorV))
+		{
+			Eliminar.add(i);
+		}
+		System.out.println(lista);
 		}
 				
 	}
-	return lista;
+	
+	for (int j = 0; j<lista.size(); j++)
+	{
+		if(!(Eliminar.contains(j))) {
+		Cambios.add(lista.get(j));
+		}
+	}
+	System.out.println(Cambios);
+	return Cambios;
+
+
 	
 }
+
 public ArrayList<Prestamo> filtroString(String esta,String igual,ArrayList<Prestamo> lista,String estaE,String igualE,String estaN,String igualN )
 {
 	
 	System.out.println("Aca 10");
-	System.out.println(esta+igual+estaE+igualE+estaN+igualN);
+	System.out.println("Antes de eliminar");
 	System.out.println(lista);
-	lista.get(0);
-	System.out.println(lista.get(0));
-	lista.remove(lista.get(0));
-	System.out.println("Despues de eliminar");
-	System.out.println(lista);
+	ArrayList<Integer> Eliminar=new ArrayList<Integer>();
+	ArrayList<Prestamo> Cambios=new ArrayList<Prestamo>();
 	for (int i = 0; i<lista.size(); i++)
 	{
 		Prestamo index=lista.get(i);
 	
 		System.out.println("Aca 10.5");
+		System.out.println("Abajo");
+		System.out.println(!igual.equals(index.getTipo()));
+		System.out.println(!index.getTipo().contains(esta));
+		System.out.println(!igual.equals(index.getTipo()) && !index.getTipo().contains(esta));
+
 		System.out.println(lista);
-		System.out.println("Antes de eliminar");
-		if( !igual.equals(index.getTipo()) || !index.getTipo().contains(esta)  )
+		if(!esta.equals("?||°°")) 
 		{
-			lista.remove(i);
+		if( !igual.equals(index.getTipo()) && !index.getTipo().contains(esta))
+		{
+			Eliminar.add(i);
 		}	
+		}
+		
+		
+		
 		System.out.println("Aca 11");
 		System.out.println(lista);
-		System.out.println("Antes de eliminar");
-		if( !igualE.equals(index.getEstado()) || !index.getEstado().contains(estaE)  )
+
+		if(!estaE.equals("?||°°")) 
+		{
+		if( !igualE.equals(index.getEstado()) && !index.getEstado().contains(estaE) )
 		{ 
-			lista.remove(i);
+			Eliminar.add(i);
 		}	
+		}
+		
 		System.out.println("Aca 12");
 		System.out.println(lista);
-		System.out.println("Antes de eliminar");
-		if( !igualN.equals(index.getNombre()) || !index.getNombre().contains(estaN)  )
+		
+		if(!estaN.equals("?||°°")) 
 		{
-			System.out.println(lista);
-			lista.remove(i);
-			System.out.println("Despues de eliminar");
-			System.out.println(lista);
-		}	
+		if( !igualN.equals(index.getNombre()) && !index.getNombre().contains(estaN)  )
+		{
+			
+			Eliminar.add(i);
+		}
+		}
 		System.out.println("Aca 13");
-
+		System.out.println(lista);
 	}
-	return lista;
+	
+	for (int j = 0; j<lista.size(); j++)
+	{
+		if(!(Eliminar.contains(j))) {
+		Cambios.add(lista.get(j));
+		}
+	}
+	return Cambios;
 	
 }
 
