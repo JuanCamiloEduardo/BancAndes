@@ -203,12 +203,26 @@ public class Parranderos
 
     }
 	
-	public List<Prestamo> buscarPrestamo ()
+	public List<Prestamo> buscarPrestamo(List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
     {
-        List<Prestamo> tb = pp.buscarPrestamo ();
+        List<Prestamo> tb = pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor);
         return tb;
     }
+	
 
+
+	public List<VOPrestamo> darVOPrestamo (List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
+	{
+		log.info ("Generando los VO de prestamo");        
+        List<VOPrestamo> voTipos = new LinkedList<VOPrestamo> ();
+        for (Prestamo tb : pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor))
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Tipos de bebida: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
+	
 	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
 	{	
 		System.out.println("0");

@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -594,12 +595,224 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
-	public List<Prestamo> buscarPrestamo ()
+	public List<Prestamo> buscarPrestamo (List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
     {
-        return sqlPrestamo.buscarPrestamo (pmf.getPersistenceManager());
+		List<Prestamo> listaPrestamos=sqlPrestamo.buscarPrestamo (pmf.getPersistenceManager());
+
+		System.out.println("Comienzo");
+		System.out.println(listaPrestamos);
+		List<Prestamo> list=new ArrayList<Prestamo>();
+		list=Filtro(listaPrestamos,LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor);
+
+		
+		
+        return list;
     }
+	public List<Prestamo> Filtro(List<Prestamo> listaPrestamos,List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
+	{
+		
+    	long Mayor =Long.MAX_VALUE,MayorM=Long.MAX_VALUE,MayorI=Long.MAX_VALUE,MayorN=Long.MAX_VALUE,MayorV=Long.MAX_VALUE;
+    	long Menor=-2,MenorM=-2,MenorI=-2,MenorN=-2,MenorV=-2;
+    	long Igual=-2,IgualM=-2,IgualI=-2,IgualN=-2,IgualV=-2;
+    	String igual="?||°°",igualE="?||°°",igualN="?||°°";
+    	String esta="?||°°",estaE="?||°°",estaN="?||°°";
+    	if (LTipo.size()==2) {
+   
+    		igual=LTipo.get(0);
+    		esta=LTipo.get(1);
+    	}
+    	
+    
+    	if (LEstado.size()==2) {
+    		igualE=LEstado.get(0);
+    		estaE=LEstado.get(1);
+    	}
+    	if (LNombre.size()==2) {
+    		igualN=LNombre.get(0);
+    		estaN=LNombre.get(1);
+    	}
+
+    	if (LID.size()==3) {
+    		Mayor =Long.parseLong(LID.get(0));
+    		Menor=Long.parseLong(LID.get(1));
+    		Igual=Long.parseLong(LID.get(2));
+    	}
+    	if (LMonto.size()==3) {
+    		MayorM =Long.parseLong(LMonto.get(0));
+    		MenorM=Long.parseLong(LMonto.get(1));
+    		IgualM=Long.parseLong(LMonto.get(2));
+    	}
+    	if (LInteres.size()==3) {
+    		MayorI =Long.parseLong(LInteres.get(0));
+    		MenorI=Long.parseLong(LInteres.get(1));
+    		IgualI=Long.parseLong(LInteres.get(2));
+    	}
+    	if (LNumero.size()==3) {
+    		MayorN =Long.parseLong(LNumero.get(0));
+    		MenorN=Long.parseLong(LNumero.get(1));
+    		IgualN=Long.parseLong(LNumero.get(2));
+    	}
+    	if (LValor.size()==3) {
+    		MayorV =Long.parseLong(LValor.get(0));
+    		MenorV=Long.parseLong(LValor.get(1));
+    		IgualV=Long.parseLong(LValor.get(2));
+    	}
+        
+        ArrayList<Prestamo> Cambios=new ArrayList<Prestamo>();
+        for (int i = 0; i<listaPrestamos.size(); i++) {
+        	Cambios.add(listaPrestamos.get(i));
+        }
+        ArrayList<Prestamo> PrimerFiltro=new ArrayList<Prestamo>();
+        /*ArrayList<Prestamo> SegundoFiltro=new ArrayList<Prestamo>();*/
+        List<Prestamo> SegundoFiltro=new ArrayList<Prestamo>();
+        PrimerFiltro=filtroString(esta,igual,Cambios,estaE,igualE,estaN,igualN);
+        System.out.print("////////////////////////////////////////////////////////////////////////");
+        SegundoFiltro=filtrolong(Mayor,Menor,Igual,PrimerFiltro ,MayorM,MenorM,IgualM,MayorI,MenorI,IgualI,MayorN,MenorN,IgualN,MayorV,MenorV,IgualV);
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println(SegundoFiltro);
+    	
+    	/*Pasar la de Arraylist a List"*/
+        return SegundoFiltro;
+
+//        	e.printStackTrace();
+
+		
+	}
 
 
+	public List<Prestamo> filtrolong(long mayor,long menor,long igual,ArrayList<Prestamo> lista ,long mayorM,long menorM,long igualM,long mayorI,long menorI,long igualI,long mayorN,long menorN,long igualN,long mayorV,long menorV,long igualV)
+	{
+		List<Prestamo> list=new ArrayList<Prestamo>();
+		ArrayList<Integer> Eliminar=new ArrayList<Integer>();
+	
+		
+		for (int i = 0; i<lista.size(); i++)
+		{	
+			Prestamo index=lista.get(i);
+
+			if(igual!=-2) {
+				System.out.println("Paso 1");
+				System.out.println(igual!=lista.get(i).getId() && !(lista.get(i).getId() > mayor && lista.get(i).getId()  < menor));
+			if( igual!=lista.get(i).getId() && !(lista.get(i).getId() > mayor && lista.get(i).getId()  < menor))
+			{
+				System.out.println("Paso 2");
+				Eliminar.add(i);
+			}
+			}
+
+			if(igualM!=-2) {
+				
+			if(igualM!=index.getMonto() && !(index.getMonto() > mayorM  &&  index.getMonto()  < menorM))
+			{
+				Eliminar.add(i);
+			}
+			}
+
+			if(igualI!=-2) {
+			if( igualI!=index.getInteres() && !(index.getInteres() > mayorI  &&  index.getInteres()  < menorI))
+			{
+				Eliminar.add(i);
+			}
+			}
+
+			if(igualN!=-2) {
+			if(igualN!=index.getNumeroCuotas() && !(index.getNumeroCuotas() > mayorN  &&  index.getNumeroCuotas()  < menorN))
+			{
+				Eliminar.add(i);
+			}
+			}
+
+			if(igualV!=-2) {
+			if(igualV!=index.getValorCuota() && !(index.getValorCuota() > mayorV  &&  index.getValorCuota()  < menorV))
+			{
+				Eliminar.add(i);
+			}
+	
+			}
+					
+		}
+		
+		for (int j = 0; j<lista.size(); j++)
+		{
+			if(!(Eliminar.contains(j))) {
+			list.add(lista.get(j));
+			}
+		}
+		System.out.println("ultima");
+		System.out.println(Eliminar);
+		System.out.println(list);
+		return list;
+
+
+		
+	}
+
+	public ArrayList<Prestamo> filtroString(String esta,String igual,ArrayList<Prestamo> lista,String estaE,String igualE,String estaN,String igualN )
+	{
+		
+		System.out.println("Aca 10");
+		System.out.println("Antes de eliminar");
+		System.out.println(lista);
+		ArrayList<Integer> Eliminar=new ArrayList<Integer>();
+		ArrayList<Prestamo> Cambios=new ArrayList<Prestamo>();
+		for (int i = 0; i<lista.size(); i++)
+		{
+			Prestamo index=lista.get(i);
+		
+			System.out.println("Aca 10.5");
+			System.out.println("Abajo");
+			System.out.println(!igual.equals(index.getTipo()));
+			System.out.println(!index.getTipo().contains(esta));
+			System.out.println(!igual.equals(index.getTipo()) && !index.getTipo().contains(esta));
+
+			System.out.println(lista);
+			if(!esta.equals("?||°°")) 
+			{
+			if( !igual.equals(index.getTipo()) && !index.getTipo().contains(esta))
+			{
+				Eliminar.add(i);
+			}	
+			}
+			
+			
+			
+			System.out.println("Aca 11");
+			System.out.println(lista);
+
+			if(!estaE.equals("?||°°")) 
+			{
+			if( !igualE.equals(index.getEstado()) && !index.getEstado().contains(estaE) )
+			{ 
+				Eliminar.add(i);
+			}	
+			}
+			
+			System.out.println("Aca 12");
+			System.out.println(lista);
+			
+			if(!estaN.equals("?||°°")) 
+			{
+			if( !igualN.equals(index.getNombre()) && !index.getNombre().contains(estaN)  )
+			{
+				
+				Eliminar.add(i);
+			}
+			}
+			System.out.println("Aca 13");
+			System.out.println(lista);
+		}
+		
+		for (int j = 0; j<lista.size(); j++)
+		{
+			if(!(Eliminar.contains(j))) {
+			Cambios.add(lista.get(j));
+			}
+		}
+		return Cambios;
+		
+	}
 
 	
 	
