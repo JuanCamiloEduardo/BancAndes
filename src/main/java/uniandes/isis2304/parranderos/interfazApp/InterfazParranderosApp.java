@@ -122,6 +122,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     private JMenuBar menuBar;
     private boolean adminBanc=false;
     private boolean gerenteOficina=false;
+    private boolean gerenteGeneral=false;
     private boolean cajero=false;
     private boolean cliente=false;
     private String nombre = "";
@@ -322,10 +323,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long numeroCuotas=Integer.parseInt(JOptionPane.showInputDialog (this, "NumeroCuotas?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
     		String diaPaga=JOptionPane.showInputDialog (this, "Dia Pago Cuota?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		long valorCuota=Integer.parseInt(JOptionPane.showInputDialog (this, "Valor Cuota Minima?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		String gerente=JOptionPane.showInputDialog (this, "Dia Pago Cuota?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		if (nombreTipo != null & estado!= null & tipo!= null & diaPaga!=null )
     		{
     			System.out.println("0");
-        		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota);
+        		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);
         		if (tb == null)
         		{
         			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
@@ -891,7 +893,7 @@ public void buscarPrestamo( )
     try 
     {
     	boolean si=true;
-        if (si)
+        if (cliente || gerenteOficina || gerenteGeneral)
         {
         	System.out.println("Aca2");
         	JOptionPane.showMessageDialog(this,"Para el perfecto funcionamiento de este requerimiento el usuario llenara el recuadro en caso de utilizar el filtro o lo dejara vacio de lo contrario");
@@ -915,7 +917,7 @@ public void buscarPrestamo( )
         	List<String> LNumero = new ArrayList<String>(Arrays.asList(NumeroCuotas.split(",")));
         	List<String> LValor = new ArrayList<String>(Arrays.asList(ValorCuota.split(",")));
         	
-        	List <VOPrestamo> listaPrestamos = parranderos.darVOPrestamo(LTipo, LEstado, LNombre, LID, LMonto, LInteres, LNumero, LValor);
+        	List <VOPrestamo> listaPrestamos = parranderos.darVOPrestamo(LTipo, LEstado, LNombre, LID, LMonto, LInteres, LNumero, LValor,nombre,cliente,gerenteOficina);
         	
         	
         	System.out.println("lEgggo");
@@ -1131,16 +1133,7 @@ public void buscarPrestamo( )
      * @param lista - La lista con los tipos de bebida
      * @return La cadena con una líea para cada tipo de bebida recibido
      */
-    private String listarTiposBebida(List<VOTipoBebida> lista) 
-    {
-    	String resp = "Los tipos de bebida existentes son:\n";
-    	int i = 1;
-        for (VOTipoBebida tb : lista)
-        {
-        	resp += i++ + ". " + tb.toString() + "\n";
-        }
-        return resp;
-	}
+
 
     /**
      * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO

@@ -10,6 +10,7 @@ public interface VOPrestamo {
 	public long getNumeroCuotas();
 	public long getValorCuota();
 	public String getDiaPaga();
+	public String getGerente();
 	@Override
 	public String toString();
 	

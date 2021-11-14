@@ -91,12 +91,12 @@ public class Parranderos
 	}
 	
 
-	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
+	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota,String gerente)
 	{
 		System.out.println("1");
         log.info ("Adicionando prestamo: " + nombre);
         System.out.println("2");
-        Prestamo tipoBebida = pp.adicionarPrestamo (tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);		
+        Prestamo tipoBebida = pp.adicionarPrestamo (tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);		
         log.info ("Adicionando prestamo: " + tipoBebida);
         return tipoBebida;
 	}
@@ -203,19 +203,19 @@ public class Parranderos
 
     }
 	
-	public List<Prestamo> buscarPrestamo(List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
+	public List<Prestamo> buscarPrestamo(List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
     {
-        List<Prestamo> tb = pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor);
+        List<Prestamo> tb = pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor,nombre,cliente,gerente);
         return tb;
     }
 	
 
 
-	public List<VOPrestamo> darVOPrestamo (List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
+	public List<VOPrestamo> darVOPrestamo (List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
 	{
 		log.info ("Generando los VO de prestamo");        
         List<VOPrestamo> voTipos = new LinkedList<VOPrestamo> ();
-        for (Prestamo tb : pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor))
+        for (Prestamo tb : pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor,nombre,cliente,gerente))
         {
         	voTipos.add (tb);
         }

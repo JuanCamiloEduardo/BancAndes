@@ -383,7 +383,7 @@ public class PersistenciaParranderos
         }
 	}
 	
-	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
+	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota,String gerente)
 	{
 		System.out.println("3");
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -393,12 +393,12 @@ public class PersistenciaParranderos
             tx.begin();
             long idPrestamo = nextval ();
             System.out.println("4");
-            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, idPrestamo,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
+            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, idPrestamo,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);
             tx.commit();
             System.out.println("8");
             log.trace ("Inserción de tipo de bebida: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             System.out.println("9");
-            return new Prestamo (idPrestamo,tipo,estado, nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
+            return new Prestamo (idPrestamo,tipo,estado, nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);
         }
         catch (Exception e)
         {
@@ -595,27 +595,29 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
-	public List<Prestamo> buscarPrestamo (List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
+	public List<Prestamo> buscarPrestamo (List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
     {
 		List<Prestamo> listaPrestamos=sqlPrestamo.buscarPrestamo (pmf.getPersistenceManager());
 
 		System.out.println("Comienzo");
 		System.out.println(listaPrestamos);
 		List<Prestamo> list=new ArrayList<Prestamo>();
-		list=Filtro(listaPrestamos,LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor);
+		list=Filtro(listaPrestamos,LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor,nombre,cliente,gerente);
 
 		
 		
         return list;
     }
-	public List<Prestamo> Filtro(List<Prestamo> listaPrestamos,List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor)
+	public List<Prestamo> Filtro(List<Prestamo> listaPrestamos,List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
 	{
-		
+	
     	long Mayor =Long.MAX_VALUE,MayorM=Long.MAX_VALUE,MayorI=Long.MAX_VALUE,MayorN=Long.MAX_VALUE,MayorV=Long.MAX_VALUE;
     	long Menor=-2,MenorM=-2,MenorI=-2,MenorN=-2,MenorV=-2;
     	long Igual=-2,IgualM=-2,IgualI=-2,IgualN=-2,IgualV=-2;
     	String igual="?||°°",igualE="?||°°",igualN="?||°°";
     	String esta="?||°°",estaE="?||°°",estaN="?||°°";
+    	
+
     	if (LTipo.size()==2) {
    
     		igual=LTipo.get(0);
@@ -657,7 +659,18 @@ public class PersistenciaParranderos
     		MenorV=Long.parseLong(LValor.get(1));
     		IgualV=Long.parseLong(LValor.get(2));
     	}
-        
+    	
+    	String oficina="895";
+    	if (cliente)
+    	{
+    		igualN=nombre;
+    		estaN="<<";
+    	}
+    	else if(gerente)
+    	{
+    		oficina=nombre;
+    	}
+
         ArrayList<Prestamo> Cambios=new ArrayList<Prestamo>();
         for (int i = 0; i<listaPrestamos.size(); i++) {
         	Cambios.add(listaPrestamos.get(i));
@@ -665,7 +678,7 @@ public class PersistenciaParranderos
         ArrayList<Prestamo> PrimerFiltro=new ArrayList<Prestamo>();
         /*ArrayList<Prestamo> SegundoFiltro=new ArrayList<Prestamo>();*/
         List<Prestamo> SegundoFiltro=new ArrayList<Prestamo>();
-        PrimerFiltro=filtroString(esta,igual,Cambios,estaE,igualE,estaN,igualN);
+        PrimerFiltro=filtroString(esta,igual,Cambios,estaE,igualE,estaN,igualN,oficina);
         System.out.print("////////////////////////////////////////////////////////////////////////");
         SegundoFiltro=filtrolong(Mayor,Menor,Igual,PrimerFiltro ,MayorM,MenorM,IgualM,MayorI,MenorI,IgualI,MayorN,MenorN,IgualN,MayorV,MenorV,IgualV);
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
@@ -731,6 +744,7 @@ public class PersistenciaParranderos
 			}
 	
 			}
+			
 					
 		}
 		
@@ -749,7 +763,7 @@ public class PersistenciaParranderos
 		
 	}
 
-	public ArrayList<Prestamo> filtroString(String esta,String igual,ArrayList<Prestamo> lista,String estaE,String igualE,String estaN,String igualN )
+	public ArrayList<Prestamo> filtroString(String esta,String igual,ArrayList<Prestamo> lista,String estaE,String igualE,String estaN,String igualN,String oficina )
 	{
 		
 		System.out.println("Aca 10");
@@ -792,16 +806,23 @@ public class PersistenciaParranderos
 			System.out.println("Aca 12");
 			System.out.println(lista);
 			
+			
 			if(!estaN.equals("?||°°")) 
 			{
+				
+				
 			if( !igualN.equals(index.getNombre()) && !index.getNombre().contains(estaN)  )
 			{
 				
 				Eliminar.add(i);
-			}
+			}			
 			}
 			System.out.println("Aca 13");
 			System.out.println(lista);
+			if (!oficina.equals("895") && !index.getGerente().equals(oficina)) 
+			{
+				Eliminar.add(i);
+			}
 		}
 		
 		for (int j = 0; j<lista.size(); j++)
