@@ -1,8 +1,8 @@
 package uniandes.isis2304.parranderos.negocio;
 
 public class Prestamo implements VOPrestamo {
- private long id;
- private String tipo;
+ private long id;           
+ private String tipo;        
  private String estado;
  private String nombre;
  private long monto;
@@ -11,9 +11,11 @@ public class Prestamo implements VOPrestamo {
  private String diaPaga;
  private long valorCuota;
  
+ 
+ 
 public Prestamo()
 {
-	this.id=0;
+	this.id=0;               
 	this.tipo="";
 	this.estado="";
 	this.nombre="";

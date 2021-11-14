@@ -202,13 +202,12 @@ public class Parranderos
         pp.eliminaryCrearConsigna(idJefe,nuevaId,jefe);
 
     }
-	/*
-	public TipoBebida darTipoBebidaPorNombre (String nombre)
+	
+	public List<Prestamo> buscarPrestamo ()
     {
-        log.info ("Buscando Tipo de bebida por nombre: " + nombre);
-        List<TipoBebida> tb = pp.darTipoBebidaPorNombre (nombre);
-        return !tb.isEmpty () ? tb.get (0) : null;
-    }*/
+        List<Prestamo> tb = pp.buscarPrestamo ();
+        return tb;
+    }
 
 	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
 	{	

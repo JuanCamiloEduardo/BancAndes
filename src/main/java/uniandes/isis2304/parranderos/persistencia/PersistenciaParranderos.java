@@ -594,6 +594,10 @@ public class PersistenciaParranderos
             pm.close();
         }
 	}
+	public List<Prestamo> buscarPrestamo ()
+    {
+        return sqlPrestamo.buscarPrestamo (pmf.getPersistenceManager());
+    }
 
 
 
@@ -717,13 +721,10 @@ public class PersistenciaParranderos
             pm.close();
         }
     }
-	/*
-	public List<Cuentaa> darTipoBebidaPorNombre (String nombre)
-    {
-       return sqlTipoBebida.darTiposBebidaPorNombre (pmf.getPersistenceManager(), nombre);
-    }
+	
 
-	*/
+
+	
 	public void eliminaryCrearConsigna(long cuentaEliminar,long nuevaId,String jefe) {
 		
 		PersistenceManager pm = pmf.getPersistenceManager();

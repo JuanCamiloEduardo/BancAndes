@@ -32,7 +32,13 @@ class SQLPrestamo {
 	{
 		this.pp = pp;
 	}
-
+	public List<Prestamo> buscarPrestamo (PersistenceManager pm) 
+    {
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPrestamo () );
+        q.setResultClass(Prestamo.class);
+        q.setParameters();
+        return (List<Prestamo>) q.executeList();
+    }
 	
 	public long adicionarPrestamo (PersistenceManager pm, long id, String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota) 
 	{
