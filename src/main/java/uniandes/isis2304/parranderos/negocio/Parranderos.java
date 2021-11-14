@@ -225,6 +225,13 @@ public class Parranderos
 		
 	}
 	
+	public List<Operaciones> darOperaciones() {
+		
+	List<Operaciones> operaciones = pp.darOperaciones ();
+	return operaciones;
+		
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los BEBEDORES
 	 *****************************************************************/

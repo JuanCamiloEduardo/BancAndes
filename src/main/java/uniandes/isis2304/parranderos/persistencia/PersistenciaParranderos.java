@@ -46,6 +46,7 @@ import uniandes.isis2304.parranderos.negocio.Sirven;
 import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
 import uniandes.isis2304.parranderos.negocio.Oficina;
+import uniandes.isis2304.parranderos.negocio.Operaciones;
 import uniandes.isis2304.parranderos.negocio.PuntoDeAtencion;
 import uniandes.isis2304.parranderos.negocio.Visitan;
 
@@ -106,6 +107,7 @@ public class PersistenciaParranderos
 	private SQLPuntoDeAtencion sqlPuntoDeAtencion;
 	private SQLCuenta sqlCuenta;
 	private SQLConsigna sqlConsigna;
+	private SQLOperaciones sqlOperaciones;
 
 
 	/* ****************************************************************
@@ -131,6 +133,7 @@ public class PersistenciaParranderos
 		tablas.add("CLIENTE");
 		tablas.add("GERENTEOFICINA");
 		tablas.add("CONSIGNA");
+		tablas.add("OPERACIONES");
 
 }
 
@@ -213,6 +216,7 @@ public class PersistenciaParranderos
 		sqlUtil = new SQLUtil(this);
 		sqlPrestamo=new SQLPrestamo(this);
 		sqlConsigna=new SQLConsigna(this);
+		sqlOperaciones=new SQLOperaciones(this);
 	}
 
 	/**
@@ -254,6 +258,10 @@ public class PersistenciaParranderos
 	}
 	
 	public String darTablaConsigna ()
+	{
+		return tablas.get (6);
+	}
+	public String darTablaOperaciones ()
 	{
 		return tablas.get (6);
 	}
@@ -839,6 +847,13 @@ public class PersistenciaParranderos
             }
             pm.close();
         }
+		
+	}
+	
+	public List<Operaciones> darOperaciones() {
+		
+	return sqlOperaciones.darOperaciones (pmf.getPersistenceManager());
+	   
 		
 	}
 

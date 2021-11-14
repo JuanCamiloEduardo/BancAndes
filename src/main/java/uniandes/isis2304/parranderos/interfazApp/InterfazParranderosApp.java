@@ -48,6 +48,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import uniandes.isis2304.parranderos.negocio.Operaciones;
 import uniandes.isis2304.parranderos.negocio.Parranderos;
 import uniandes.isis2304.parranderos.negocio.VOCliente;
 import uniandes.isis2304.parranderos.negocio.VOConsigna;
@@ -58,6 +59,7 @@ import uniandes.isis2304.parranderos.negocio.VOGerenteOficina;
 import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 import uniandes.isis2304.parranderos.negocio.VOUsuario;
 import uniandes.isis2304.parranderos.negocio.VOOficina;
+import uniandes.isis2304.parranderos.negocio.VOOperaciones;
 import uniandes.isis2304.parranderos.negocio.VOPuntoDeAtencion;
 
 
@@ -120,6 +122,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     private JMenuBar menuBar;
     private boolean adminBanc=false;
     private boolean gerenteOficina=false;
+    private boolean gerenteGeneral=false;
     private boolean cajero=false;
     private boolean cliente=false;
     private String nombre = "";
@@ -937,6 +940,103 @@ public void buscarTipoBebidaPorNombre( )
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}	
+    	
+    }
+    
+    public void consultarOperaciones() {
+    	
+    	try 
+    	{
+    		if( cliente || gerenteOficina || gerenteGeneral)
+    		{
+    		
+    		String tipo = JOptionPane.showInputDialog (this, "Indicar el tipo de operacion o dejar vacio", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE);
+    		String consignador = JOptionPane.showInputDialog (this, "Indicar el consignador o dejar vacio", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE);
+    		String destinatario = JOptionPane.showInputDialog (this, "Indicar el destinatario o dejar vacio", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE);
+    		long montosuperior = Integer.parseInt(JOptionPane.showInputDialog (this, "Indicar el monto superior o escribir 0", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
+    		long montoinferior = Integer.parseInt(JOptionPane.showInputDialog (this, "Indicar el monto inferior o escribir 0", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
+    		
+    		boolean condicion1 = (tipo.equals(""));
+    		boolean condicion2 = (consignador.equals(""));
+    		boolean condicion3 = (destinatario.equals(""));
+    		boolean condicion4 = (montosuperior==0);
+    		boolean condicion5 = (montoinferior==0);
+    		
+    		List<Operaciones> operaciones = parranderos.darOperaciones();
+    		String resultado="";
+    		
+    		for (int i=0; i<operaciones.size(); i++) {
+    			
+    			if((condicion1 = !condicion1) || (condicion2 = !condicion2) || (condicion3 = !condicion3) || (condicion4 = !condicion4)) {
+    				
+    				if (condicion1 = !condicion1) {
+    					if(operaciones.get(i).getTipo().equals(tipo)) {
+    						
+    					}
+    					else {
+    						continue;
+    					}
+    				}
+    				
+    				if (condicion2 = !condicion2) {
+    					if(operaciones.get(i).getConsignador().equals(consignador)) {
+    						
+    					}
+    					else {
+    						continue;
+    					}
+    				}
+    				
+    				if (condicion3 = !condicion3) {
+    					if(operaciones.get(i).getDestinatario().equals(destinatario)) {
+    						
+    					}
+    					else {
+    						continue;
+    					}
+    				}
+
+    				if (condicion4 = !condicion4) {
+    					if((operaciones.get(i).getMonto())<montosuperior) {
+    						
+    					}
+    					else {
+    						continue;
+    					}
+    				}
+
+    				if (condicion5 = !condicion5) {
+    					if((operaciones.get(i).getMonto())>montoinferior) {
+    						
+    					}
+    					else {
+    						continue;
+    					}
+    				}
+    				
+    				resultado+=operaciones.get(i).getId()+", "+operaciones.get(i).getTipo()+", "+operaciones.get(i).getConsignador()+", "+operaciones.get(i).getIdConsignador()+", "+operaciones.get(i).getDestinatario()+", "+operaciones.get(i).getIdDestinatario()+", "+operaciones.get(i).getMonto()+", "+operaciones.get(i).getFecha();
+    				
+    			}
+    			
+    			else {
+    				resultado+=operaciones.get(i).getId()+", "+operaciones.get(i).getTipo()+", "+operaciones.get(i).getConsignador()+", "+operaciones.get(i).getIdConsignador()+", "+operaciones.get(i).getDestinatario()+", "+operaciones.get(i).getIdDestinatario()+", "+operaciones.get(i).getMonto()+", "+operaciones.get(i).getFecha();
+    			}
+    			
+    		}
+    		
+    		panelDatos.actualizarInterfaz(resultado);
+    		
+    		}
+    		else{
+    			panelDatos.actualizarInterfaz("No es un cliente o gerente");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
     	
     }
     
