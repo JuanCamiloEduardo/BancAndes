@@ -263,7 +263,7 @@ public class PersistenciaParranderos
 	}
 	public String darTablaOperaciones ()
 	{
-		return tablas.get (6);
+		return tablas.get (7);
 	}
 	
 	private long nextval ()
@@ -433,6 +433,7 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlPrestamo.cambioPrestamo(pm, nombre,id,nuevaCuota);
             System.out.println("10");
+            long idOperacion = nextval ();
             tx.commit();
 
             return resp;
@@ -463,6 +464,13 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlCuenta.cambioCuenta(pm, nombre,id,saldo);
             System.out.println("10");
+            long idOperacion = nextval ();
+            if (saldo<0) {
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, Math.abs(id), "", 0, saldo, LocalDate.now().toString());
+            }
+            else {
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, Math.abs(id), saldo, LocalDate.now().toString());
+            }
             tx.commit();
 
             return resp;
@@ -493,6 +501,8 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlCuenta.cambioCuenta(pm, nombre,id,(-1)*Math.abs(saldo));
             sqlPrestamo.cambioPrestamo(pm, nombre, idprestamo,Math.abs(saldo));
+            long idOperacion = nextval ();
+            sqlPrestamo.adicionarOperacion(pm, idOperacion, "prestamo", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString());
             System.out.println("10");
             tx.commit();
 
@@ -787,7 +797,8 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlCuenta.cambioCuenta(pm, nombreConsignador,idConsignador,(Math.abs(saldo))*(-1));
             sqlCuenta.cambioCuenta(pm, nombreDestino,idDestino,Math.abs(saldo));
-            
+            long idOperacion = nextval ();
+            sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombreConsignador, idConsignador, nombreDestino, idDestino, Math.abs(saldo), LocalDate.now().toString());
             System.out.println("10");
             tx.commit();
 
@@ -852,8 +863,13 @@ public class PersistenciaParranderos
 	
 	public List<Operaciones> darOperaciones() {
 		
-	return sqlOperaciones.darOperaciones (pmf.getPersistenceManager());
-	   
+		return sqlOperaciones.darOperaciones (pmf.getPersistenceManager());
+		
+	}
+	
+	public List<Cuenta> darCuentas() {
+		
+		return sqlCuenta.darCuenta (pmf.getPersistenceManager());
 		
 	}
 

@@ -58,7 +58,7 @@ class SQLOperaciones
 	public List<Operaciones> darOperaciones (PersistenceManager pm) 
     {
         Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaOperaciones ());
-        q.setResultClass(Consigna.class);
+        q.setResultClass(Operaciones.class);
         return (List<Operaciones>) q.executeList();
     }
 

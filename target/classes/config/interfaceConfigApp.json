@@ -65,6 +65,10 @@
 								{
 					"label": "Eliminar Cuenta V2",
 					"event": "eliminarCrearConsigna"
+				},
+								{
+					"label": "Consultar operaciones",
+					"event": "consultarOperaciones"
 				}
 				
 				

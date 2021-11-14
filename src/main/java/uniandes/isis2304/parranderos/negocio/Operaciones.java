@@ -64,7 +64,7 @@ public class Operaciones implements VOOperaciones{
 		return idConsignador;
 	}
 
-	public void setIdconsignador(long idConsignador) {
+	public void setIdConsignador(long idConsignador) {
 		this.idConsignador = idConsignador;
 	}
 

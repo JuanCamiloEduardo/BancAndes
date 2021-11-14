@@ -119,6 +119,7 @@ CREATE TABLE PRESTAMO
     NUMEROCUOTAS NUMBER,
     DIAPAGA VARCHAR2(20), 
     VALORCUOTA NUMBER,
+    GERENTE VARCHAR(20),
 	CONSTRAINT PRESTAMO_PK PRIMARY KEY (ID)
 );
 
@@ -163,6 +164,7 @@ CREATE TABLE OPERACIONES
     IDDESTINATARIO NUMBER, 
 	MONTO NUMBER, 
     FECHA VARCHAR2(20),
+    GERENTE VARCHAR(20),
     CONSTRAINT OPERACIONES_PK PRIMARY KEY (ID)
     );
     
@@ -191,4 +193,13 @@ ALTER TABLE OPERACIONES
     CHECK (tipo = 'prestamo' or tipo = 'transferencia')
 ENABLE;
 select * from prestamo;
+delete from prestamo where ;
+select * from cuenta;
+delete from cuenta where ;
+select * from operaciones;
+delete from operaciones where ;
+insert into operaciones (id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (1013,'transferencia','s.ara',63,'d.pulidon',83,62500,'2021-11-14');
+select * from usuario;
+delete from usuario where ;
+DROP TABLE PRESTAMO;
 COMMIT;
