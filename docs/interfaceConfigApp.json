@@ -1,0 +1,147 @@
+{
+	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Requerimientos Funcionales",
+		  "options":
+			[
+				
+				{
+					"label": "Adicionar Usuario",
+					"event": "adicionarUsuario"
+				},
+				{
+
+					"label": "Adicionar Prestamo",
+					"event": "adicionarPrestamo"
+				},
+				{
+					"label": "Cambio Prestamo",
+					"event": "OperacionPrestamo"
+				},
+				{
+					"label": "Adicionar Oficina",
+					"event": "adicionarOficina"
+				},
+				{
+					"label": "Adicionar Punto de Atencion",
+					"event": "adicionarPuntoDeAtencion"
+				},
+				{
+					"label": "Adicionar Cuenta",
+					"event": "adicionarCuenta"
+				},
+				{
+					"label": "Cerrar Cuenta",
+					"event": "cerrarCuenta"
+				},
+				{
+					"label": "Cambio Cuenta",
+					"event": "OperacionCuenta"
+				},
+				{
+					"label": "Cerrar Prestamo",
+					"event": "cerrarPrestamo"
+				},
+				{
+					"label": "Iniciar/Cambiar Sesion",
+					"event": "buscarTipoUsuario"
+				},
+				{
+					"label": "Adicionar consigna periodicamente",
+					"event": "adicionarConsigna"
+				},
+				{
+					"label": "Cambio Cuenta V2",
+					"event": "operacionCuentaV2"
+				},
+				{
+					"label": "Cambio Prestamo V2",
+					"event": "OperacionPrestamov2"
+				},
+				{
+					"label": "Eliminar Cuenta V2",
+					"event": "eliminarCrearConsigna"
+				},
+				{
+					"label": "Consultar operaciones",
+					"event": "consultarOperaciones"
+				},
+				{
+					"label": "Buscar Prestamos",
+					"event": "buscarPrestamo"
+				}
+				
+				
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Bancandes",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de bancandes",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentación",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	
