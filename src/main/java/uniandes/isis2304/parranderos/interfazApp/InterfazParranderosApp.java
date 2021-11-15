@@ -268,7 +268,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     	{	
     		if ( adminBanc || gerenteOficina)
         	{
-    		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de usuario?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
+    		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del usuario?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		String login = JOptionPane.showInputDialog (this, "Login?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		String clave = JOptionPane.showInputDialog (this, "Clave?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		long numeroDocumento =Integer.parseInt( JOptionPane.showInputDialog (this, "numeroDocumento?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE));
@@ -330,7 +330,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		if (nombreTipo != null & estado!= null & tipo!= null & diaPaga!=null )
     		{
     			System.out.println("0");
-        		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota,nombre);
+        		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota, nombre);
         		if (tb == null)
         		{
         			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
@@ -588,7 +588,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		
     		String tipo = JOptionPane.showInputDialog (this, "Tipo del punto de atencion?", "Adicionar tipo", JOptionPane.QUESTION_MESSAGE);
     		String localizacion = JOptionPane.showInputDialog (this, "Localizacion?", "Adicionar locaclizacion", JOptionPane.QUESTION_MESSAGE);
-    		String oficina = JOptionPane.showInputDialog (this, "Oficina en caso de tener?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
+    		String oficina = JOptionPane.showInputDialog (this, "Id de la oficina en caso de tener?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
     		
     		if (tipo != null & localizacion!= null)
     		{
@@ -925,7 +925,6 @@ public void buscarPrestamo( )
         	List<String> LValor = new ArrayList<String>(Arrays.asList(ValorCuota.split(",")));
         	
         	List <VOPrestamo> listaPrestamos = parranderos.darVOPrestamo(LTipo, LEstado, LNombre, LID, LMonto, LInteres, LNumero, LValor,nombre,cliente,gerenteOficina);
-        	
         	
         	System.out.println("lEgggo");
         	System.out.println(listaPrestamos);

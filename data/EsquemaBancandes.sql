@@ -77,16 +77,19 @@ CREATE TABLE PuntoDeAtencion (
     id NUMBER,
     tipo VARCHAR(20),
     localizacion VARCHAR(20),
-    oficina VARCHAR(20),
+    oficina NUMBER,
     CONSTRAINT PuntoDeAtencion_PK PRIMARY KEY (id)
 );
 
 ALTER TABLE PuntoDeAtencion
-ADD CONSTRAINT CK_PuntoDeAtencion
-CHECK ((tipo = 'fisico' AND oficina !=NULL) OR (tipo = 'virtual' AND localizacion = 'Bancandes' AND oficina = NULL))
+    ADD CONSTRAINT CK_PuntoDeAtencion
+    CHECK ((tipo = 'fisico' AND oficina !=NULL) OR (tipo = 'virtual' AND localizacion = 'Bancandes' AND oficina = NULL))
 ENABLE;
 
-
+ALTER TABLE PuntoDeAtencion
+    ADD CONSTRAINT FK_PuntoDeAtencion
+    FOREIGN KEY (oficina) REFERENCES Oficina(id)
+ENABLE;
 
 CREATE TABLE Cuenta(
     id NUMBER,
@@ -128,9 +131,9 @@ ALTER TABLE PRESTAMO
     FOREIGN KEY (NOMBRE) REFERENCES usuario(login)
 ENABLE;
 
-ALTER TABLE PuntoDeAtencion
+ALTER TABLE PRESTAMO
     ADD CONSTRAINT CK_Prestamo
-    CHECK (estado = 'abierto' or estado = 'cerrado')
+    CHECK ((ESTADO = 'abierto') or (ESTADO = 'cerrado'))
 ENABLE;
 
 CREATE TABLE CONSIGNA
@@ -152,6 +155,16 @@ ENABLE;
 ALTER TABLE CONSIGNA
     ADD CONSTRAINT FK_CONSIGNA_2
     FOREIGN KEY (IDEMPLEADO) REFERENCES CUENTA(id)
+ENABLE;
+
+ALTER TABLE CONSIGNA
+    ADD CONSTRAINT FK_CONSIGNA_3
+    FOREIGN KEY (JEFE) REFERENCES Usuario(login)
+ENABLE;
+
+ALTER TABLE CONSIGNA
+    ADD CONSTRAINT FK_CONSIGNA_4
+    FOREIGN KEY (EMPLEADO) REFERENCES Usuario(login)
 ENABLE;
 
 CREATE TABLE OPERACIONES
@@ -192,5 +205,13 @@ ALTER TABLE OPERACIONES
     ADD CONSTRAINT OPERACIONES_FK_5
     CHECK (tipo = 'prestamo' or tipo = 'transferencia')
 ENABLE;
+
+select * from consigna;
+select * from cuenta;
+select * from oficina;
+select * from operaciones;
+select * from prestamo;
+select * from puntodeatencion;
+select * from usuario;
 
 COMMIT;
