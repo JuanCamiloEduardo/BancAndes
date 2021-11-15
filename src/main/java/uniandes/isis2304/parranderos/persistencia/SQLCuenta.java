@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Consigna;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
 
 public class SQLCuenta {
+	private SQLUtil sqlUtil;
+	
 	/* ****************************************************************
 	 * 			Constantes
 	 *****************************************************************/
@@ -111,5 +113,10 @@ public class SQLCuenta {
 	 * 	el segundo elemento representa el número de bebidas que sirve (Una bebida que se sirve en dos horarios cuenta dos veces)
 	 */
 
+	public void adicionarOperacion(PersistenceManager pm, long id, String tipo, String consignador, long idconsignador, String destinatario, long iddestinatario, long monto, String fecha) {
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaOperaciones () + "(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)");
+        q.setParameters(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha);
+        q.executeUnique();
+	}
 
 }

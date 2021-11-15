@@ -2,7 +2,9 @@ package uniandes.isis2304.parranderos.persistencia;
 
 import java.util.List;
 
+import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 
 import uniandes.isis2304.parranderos.negocio.Prestamo;
@@ -10,6 +12,7 @@ import uniandes.isis2304.parranderos.negocio.Prestamo;
 
 
 class SQLPrestamo {
+	private SQLUtil sqlUtil;
 	
 	private final static String SQL = PersistenciaParranderos.SQL;
 
@@ -30,6 +33,7 @@ class SQLPrestamo {
 	 */
 	public SQLPrestamo (PersistenciaParranderos pp)
 	{
+		
 		this.pp = pp;
 	}
 
@@ -68,4 +72,11 @@ class SQLPrestamo {
 		q.setResultClass(Prestamo.class);
 		return (List<Prestamo>) q.execute();
 	}
+	
+	public void adicionarOperacion(PersistenceManager pm, long id, String tipo, String consignador, long idconsignador, String destinatario, long iddestinatario, long monto, String fecha) {
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaOperaciones () + "(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)");
+		q.setParameters(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha);
+        q.executeUnique();
+	}
+	
 }

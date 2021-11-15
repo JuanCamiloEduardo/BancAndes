@@ -46,6 +46,7 @@ import uniandes.isis2304.parranderos.negocio.Sirven;
 import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
 import uniandes.isis2304.parranderos.negocio.Oficina;
+import uniandes.isis2304.parranderos.negocio.Operaciones;
 import uniandes.isis2304.parranderos.negocio.PuntoDeAtencion;
 import uniandes.isis2304.parranderos.negocio.Visitan;
 
@@ -106,6 +107,7 @@ public class PersistenciaParranderos
 	private SQLPuntoDeAtencion sqlPuntoDeAtencion;
 	private SQLCuenta sqlCuenta;
 	private SQLConsigna sqlConsigna;
+	private SQLOperaciones sqlOperaciones;
 
 
 	/* ****************************************************************
@@ -131,6 +133,7 @@ public class PersistenciaParranderos
 		tablas.add("CLIENTE");
 		tablas.add("GERENTEOFICINA");
 		tablas.add("CONSIGNA");
+		tablas.add("OPERACIONES");
 
 }
 
@@ -213,6 +216,7 @@ public class PersistenciaParranderos
 		sqlUtil = new SQLUtil(this);
 		sqlPrestamo=new SQLPrestamo(this);
 		sqlConsigna=new SQLConsigna(this);
+		sqlOperaciones=new SQLOperaciones(this);
 	}
 
 	/**
@@ -256,6 +260,10 @@ public class PersistenciaParranderos
 	public String darTablaConsigna ()
 	{
 		return tablas.get (6);
+	}
+	public String darTablaOperaciones ()
+	{
+		return tablas.get (7);
 	}
 	
 	private long nextval ()
@@ -425,6 +433,7 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlPrestamo.cambioPrestamo(pm, nombre,id,nuevaCuota);
             System.out.println("10");
+            long idOperacion = nextval ();
             tx.commit();
 
             return resp;
@@ -455,6 +464,13 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlCuenta.cambioCuenta(pm, nombre,id,saldo);
             System.out.println("10");
+            long idOperacion = nextval ();
+            if (saldo<0) {
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, Math.abs(id), "", 0, saldo, LocalDate.now().toString());
+            }
+            else {
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, Math.abs(id), saldo, LocalDate.now().toString());
+            }
             tx.commit();
 
             return resp;
@@ -485,6 +501,8 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlCuenta.cambioCuenta(pm, nombre,id,(-1)*Math.abs(saldo));
             sqlPrestamo.cambioPrestamo(pm, nombre, idprestamo,Math.abs(saldo));
+            long idOperacion = nextval ();
+            sqlPrestamo.adicionarOperacion(pm, idOperacion, "prestamo", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString());
             System.out.println("10");
             tx.commit();
 
@@ -779,7 +797,8 @@ public class PersistenciaParranderos
             tx.begin();
             long resp = sqlCuenta.cambioCuenta(pm, nombreConsignador,idConsignador,(Math.abs(saldo))*(-1));
             sqlCuenta.cambioCuenta(pm, nombreDestino,idDestino,Math.abs(saldo));
-            
+            long idOperacion = nextval ();
+            sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombreConsignador, idConsignador, nombreDestino, idDestino, Math.abs(saldo), LocalDate.now().toString());
             System.out.println("10");
             tx.commit();
 
@@ -839,6 +858,18 @@ public class PersistenciaParranderos
             }
             pm.close();
         }
+		
+	}
+	
+	public List<Operaciones> darOperaciones() {
+		
+		return sqlOperaciones.darOperaciones (pmf.getPersistenceManager());
+		
+	}
+	
+	public List<Cuenta> darCuentas() {
+		
+		return sqlCuenta.darCuenta (pmf.getPersistenceManager());
 		
 	}
 
