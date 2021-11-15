@@ -57,7 +57,7 @@ class SQLPrestamo {
 	public long cambioPrestamo (PersistenceManager pm, String nombre,long id,long monto) 
 	{
 	
-		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPrestamo() + " SET monto=monto-? WHERE nombre = ? AND id=? AND ?>valorcuota");
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPrestamo() + " SET monto=monto-? WHERE nombre = ? AND id=? AND ?>valorcuota AND estado='abierto'");
 		q.setParameters(monto,nombre,id,monto);
 	
         return (long) q.executeUnique();

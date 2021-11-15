@@ -466,10 +466,10 @@ public class PersistenciaParranderos
             
             long idOperacion = nextval ();
             if (saldo<0) {
-            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, Math.abs(id), "", 0, saldo, LocalDate.now().toString());
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString());
             }
             else {
-            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, Math.abs(id), saldo, LocalDate.now().toString());
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, id, Math.abs(saldo), LocalDate.now().toString());
             }
             tx.commit();
 

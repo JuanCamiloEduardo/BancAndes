@@ -60,7 +60,7 @@ public class SQLCuenta {
 	public long cambioCuenta (PersistenceManager pm, String cliente,long id,long saldo) 
 	{
 
-		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCuenta() + " SET saldo=saldo+?  WHERE cliente = ? AND id=?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCuenta() + " SET saldo=saldo+?  WHERE cliente = ? AND id=? AND tipo != 'cerrado'");
 		q.setParameters(saldo,cliente,id);
 		
         return (long) q.executeUnique();

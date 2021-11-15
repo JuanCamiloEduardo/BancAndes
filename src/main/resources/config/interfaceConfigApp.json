@@ -63,7 +63,7 @@
 					"event": "OperacionPrestamov2"
 				},
 				{
-					"label": "Eliminar Cuenta V2",
+					"label": "Cerrar Cuenta V2",
 					"event": "eliminarCrearConsigna"
 				},
 				{

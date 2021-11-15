@@ -280,7 +280,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String ciudad=JOptionPane.showInputDialog (this, "ciudad?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		String departamento=JOptionPane.showInputDialog (this, "Tipo Usuario?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE);
     		long codigoPostal=Integer.parseInt(JOptionPane.showInputDialog (this, "Codigopostal?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE));
-    		if (nombreTipo != null & login!= null & clave!= null  & tipoDocumento!= null & nacionalidad!= null & direccionFisica!= null & direccionElectronica!= null & ciudad!= null & departamento!= null  )
+    		if (nombreTipo != null && login!= null && clave!= null  && tipoDocumento!= null && nacionalidad!= null && direccionFisica!= null && direccionElectronica!= null && ciudad!= null && departamento!= null  )
     		{
     			
         		VOUsuario tb = parranderos.adicionarUsuario(nombreTipo,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,departamento,codigoPostal);
@@ -327,7 +327,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String diaPaga=JOptionPane.showInputDialog (this, "Dia Pago Cuota?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		long valorCuota=Integer.parseInt(JOptionPane.showInputDialog (this, "Valor Cuota Minima?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
     		
-    		if (nombreTipo != null & estado!= null & tipo!= null & diaPaga!=null )
+    		if (nombreTipo != null && estado!= null && tipo!= null && diaPaga!=null )
     		{
     			
         		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota, nombre);
@@ -413,7 +413,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de cliente?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE);
     		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Dinero(para sacar - y meter +) ?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
-    		if (nombreTb != null )
+    		if (nombreTb != null && (nombreTb.equals(nombre) || cajero))
     		{
     			parranderos.operacionCuenta(nombreTb,id,saldo);
     			
@@ -541,7 +541,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String gerenteUsuario = JOptionPane.showInputDialog (this, "Usuario del gerente?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
     		long puntosDeAtencion =Integer.parseInt( JOptionPane.showInputDialog (this, "numero de puntos de atencion?", "Adicionar puntos de atencion", JOptionPane.QUESTION_MESSAGE));
     		
-    		if (nombre != null & direccion!= null & gerenteUsuario!= null)
+    		if (nombre != null && direccion!= null && gerenteUsuario!= null)
     		{
         		VOOficina tb = parranderos.adicionarOficina(nombre,direccion,gerenteUsuario,puntosDeAtencion);
         		if (tb == null)
@@ -590,7 +590,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String localizacion = JOptionPane.showInputDialog (this, "Localizacion?", "Adicionar locaclizacion", JOptionPane.QUESTION_MESSAGE);
     		String oficina = JOptionPane.showInputDialog (this, "Id de la oficina en caso de tener?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
     		
-    		if (tipo != null & localizacion!= null)
+    		if (tipo != null && localizacion!= null)
     		{
         		VOPuntoDeAtencion tb = parranderos.adicionarPuntoDeAtencion(tipo,localizacion,oficina);
         		if (tb == null)
@@ -609,7 +609,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		}
     		else
     		{
-    			panelDatos.actualizarInterfaz("No es un gerente oficina");
+    			panelDatos.actualizarInterfaz("No es un admin");
     		}
 		} 
     	catch (Exception e) 
@@ -630,7 +630,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String cliente = JOptionPane.showInputDialog (this, "Cliente de la cuenta?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
     		String gerente = JOptionPane.showInputDialog (this, "Gerente de la cuenta?", "Adicionar gerente", JOptionPane.QUESTION_MESSAGE);
     		
-    		if (tipo != null & cliente!= null & gerente!=null)
+    		if (tipo != null && cliente!= null && gerente!=null)
     		{
         		VOCuenta tb = parranderos.adicionarCuenta(tipo,saldo,cliente,gerente);
         		if (tb == null)
@@ -669,7 +669,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long valorCuota = Integer.parseInt(JOptionPane.showInputDialog (this, "Cuota?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
     		long idcuenta = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
     		long idprestamo = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID del prestamo?", "Operacion Prestamo", JOptionPane.QUESTION_MESSAGE));
-    		if (nombreTb != null )
+    		if (nombreTb != null && nombreTb.equals(nombre))
     		{
     			long Quitar=-valorCuota;
     			//Operacion en la cuenta 
@@ -707,7 +707,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String loginTb = JOptionPane.showInputDialog (this, "Login", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		String claveTb = JOptionPane.showInputDialog (this, "Clave", "Iniciar sesion", JOptionPane.QUESTION_MESSAGE);
     		verificarPagosAutomaticos(LocalDate.now());
-    		if (loginTb != null & claveTb!= null)
+    		if (loginTb != null && claveTb!= null)
     		{	
     			nombre=loginTb;
     			String tipo = parranderos.darUsuario(loginTb,claveTb);
@@ -940,11 +940,11 @@ public void buscarPrestamo( )
     		if(cajero || cliente)
     		{
     		String nombreConsignador = JOptionPane.showInputDialog (this, "Nombre de la cuenta de origen de consignacion", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE);
-    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre de la cuenta a consignar", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE);
-    		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Cantidad de dinero a transferir", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		long idOrigen = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta que consigna?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
-    		long idDestino = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta a consignar?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));	
-    		if (nombreTb != null & nombreConsignador!=null & nombre.equals(nombreConsignador))
+    		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Cantidad de dinero a transferir", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
+    		String nombreTb = JOptionPane.showInputDialog (this, "Nombre de la cuenta destino", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE);
+    		long idDestino = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta destino?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));	
+    		if (nombreTb != null && nombreConsignador!=null && nombre.equals(nombreConsignador))
     		{
     			
     			
@@ -1002,8 +1002,9 @@ public void buscarPrestamo( )
     		
     		List<Operaciones> operaciones = parranderos.darOperaciones();
     		String resultado="";
+    		
     		for (int i=0; i<operaciones.size(); i++) {
-    			
+
     			permiso=false;
     			if (gerenteGeneral) {
     				permiso = true;

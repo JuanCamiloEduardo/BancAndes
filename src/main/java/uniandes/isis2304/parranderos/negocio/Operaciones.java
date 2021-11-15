@@ -99,5 +99,12 @@ public class Operaciones implements VOOperaciones{
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
+
+	@Override
+	public String toString() {
+		return "Operaciones [id=" + id + ", tipo=" + tipo + ", consignador=" + consignador + ", idConsignador="
+				+ idConsignador + ", destinatario=" + destinatario + ", idDestinatario=" + idDestinatario + ", monto="
+				+ monto + ", fecha=" + fecha + "]";
+	}
 	
 }

@@ -1707,3 +1707,146 @@ ORA-02290: restricción de control (ISIS2304D15202120.CK_PUNTODEATENCION) violad
 13:22:30,148 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando punto de atencion
 13:23:53,571 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando punto de atencion
 13:23:53,669 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando punto de atencion
+13:54:05,372 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+13:54:05,373 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+13:54:05,391 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:56:44,510 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: a.pulidon
+13:57:13,437 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: a.pulidon
+13:57:40,901 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: a.pulidon
+13:58:23,469 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+13:58:23,470 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+13:58:23,508 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:58:37,694 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: j.burbanon
+13:59:10,289 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando punto de atencion
+13:59:10,422 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando punto de atencion
+14:01:42,264 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: c.burbanon
+14:01:54,582 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en la cuenta: 130
+14:03:33,464 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: j.nietob
+14:04:01,705 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 130
+14:04:01,978 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO OPERACIONES(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304D15202120.OPERACIONES_FK_4) violada - clave principal no encontrada
+
+14:04:02,021 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: -1 tuplas actualizadas
+14:04:49,621 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:05:03,199 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 130
+14:05:03,302 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO OPERACIONES(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304D15202120.OPERACIONES_FK_4) violada - clave principal no encontrada
+
+14:05:03,322 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: -1 tuplas actualizadas
+14:05:27,600 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 130
+14:05:27,718 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO OPERACIONES(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304D15202120.OPERACIONES_FK_4) violada - clave principal no encontrada
+
+14:05:27,753 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: -1 tuplas actualizadas
+14:06:00,017 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 130
+14:06:00,146 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO OPERACIONES(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)".
+ORA-02291: restricción de integridad (ISIS2304D15202120.OPERACIONES_FK_4) violada - clave principal no encontrada
+
+14:06:00,178 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: -1 tuplas actualizadas
+14:08:25,278 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: j.nietob
+14:08:40,348 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 130
+14:08:40,491 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas
+14:14:59,521 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:14:59,521 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:14:59,553 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:16:28,629 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: c.burbanon
+14:16:36,041 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en la cuenta: 130
+14:20:09,069 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
+14:20:09,276 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
+14:22:44,047 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:22:44,047 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:22:44,066 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:23:38,645 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:23:47,739 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:23:47,740 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:23:47,762 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:23:56,664 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:24:40,200 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: a.pulidon
+14:25:08,196 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
+14:25:08,325 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
+14:25:22,233 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:25:59,624 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando Consigna: d.pulidon
+14:25:59,705 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando Consigna: Consigna [jefe=d.pulidon, empleado=j.nietob, monto=250000, fecha=2021-11-15]
+14:26:32,522 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Exception : Error con la ejecucion de Query de SQL "UPDATE CUENTA SET saldo=saldo+?  WHERE cliente = ? AND id=? AND estado = 'abierto'".
+ORA-00904: "ESTADO": identificador no válido
+
+14:26:32,632 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:29:40,309 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:29:40,310 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:29:40,338 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:29:49,211 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:30:53,349 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando Consigna: d.pulidon
+14:30:53,416 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando Consigna: Consigna [jefe=d.pulidon, empleado=j.nietob, monto=150000, fecha=2021-11-15]
+14:31:04,858 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:32:01,049 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.nietop
+14:32:28,828 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 129
+14:32:28,893 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas
+14:37:17,209 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:37:17,210 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:37:17,238 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:37:39,720 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.nietop
+14:37:55,866 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 141
+14:37:56,012 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas
+14:38:10,400 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:38:32,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 141
+14:38:32,529 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas
+14:39:02,631 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: a.pulidon
+14:39:10,911 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en el prestamo: 129
+14:39:10,978 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Aumentando sedes de bares de una ciudad: 1 tuplas actualizadas
+14:39:44,610 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:41:59,323 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:43:27,322 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:43:27,323 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:43:27,356 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:43:35,405 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:45:33,923 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:45:33,924 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:45:33,959 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:45:40,704 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:46:51,660 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Realizando un cambio en las cuentas
+14:49:09,806 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:49:09,806 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:49:09,831 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:51:05,770 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+14:51:05,771 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+14:51:05,797 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:51:29,816 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:52:10,632 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: a.pulidon
+14:53:00,794 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
+14:53:00,927 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando cuenta
+14:53:12,153 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+14:53:42,430 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Adicionando Consigna: d.pulidon
+14:53:42,558 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Exception : No puede cambiar el ResultSet del Query
+
+15:09:50,281 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+15:09:50,282 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+15:09:50,306 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:11:11,141 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+15:11:21,856 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Operaciones: 
+15:11:54,508 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Operaciones: 
+15:12:09,215 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: a.nietop
+15:12:16,342 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Operaciones: 
+15:14:45,346 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+15:14:45,347 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+15:14:45,372 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:14:54,801 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+15:15:02,761 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Operaciones: 
+15:16:47,188 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+15:16:47,189 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+15:16:47,216 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:16:56,326 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+15:17:03,074 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Operaciones: 
+15:18:24,711 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+15:18:24,712 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+15:18:24,734 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:18:34,475 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+15:18:40,087 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Operaciones: 
+15:33:50,548 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROM CONSIGNA WHERE FECHA = ?".
+Conexión cerrada
+15:34:17,653 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+15:34:17,654 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+15:34:17,703 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:34:56,007 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Tipo de bebida por nombre: d.pulidon
+15:35:07,303 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Buscando Operaciones: 
+15:36:02,663 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Generando los VO de prestamo
+15:36:02,722 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Generando los VO de Tipos de bebida: 1 existentes
