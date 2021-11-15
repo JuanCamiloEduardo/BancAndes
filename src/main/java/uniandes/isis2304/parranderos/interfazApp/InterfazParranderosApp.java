@@ -724,6 +724,10 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     			{
     				gerenteOficina=true;
     			}
+    			else if (tipo.toLowerCase().equals("gerentegeneral"))
+    			{
+    				gerenteGeneral=true;
+    			}
 
     			
     			String resultado = "En buscar Tipo Bebida por nombre\n\n";
