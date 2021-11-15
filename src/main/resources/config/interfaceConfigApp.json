@@ -66,22 +66,16 @@
 					"label": "Eliminar Cuenta V2",
 					"event": "eliminarCrearConsigna"
 				},
-								{
-					"label": "Consultar operaciones",
-					"event": "consultarOperaciones"
-				}
-				
+				{
 					"label": "Consultar operaciones",
 					"event": "consultarOperaciones"
 				},
 				{
-				
-					"label": "Buscar Prestamo",
+					"label": "Buscar Prestamos",
 					"event": "buscarPrestamo"
 				}
-
-
-
+				
+				
 			]
 		},
 		{ "menuTitle": "Mantenimiento",

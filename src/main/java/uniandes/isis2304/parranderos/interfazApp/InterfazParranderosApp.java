@@ -899,7 +899,7 @@ public void buscarPrestamo( )
 	
     try 
     {
-    	boolean si=true;
+
         if (cliente || gerenteOficina || gerenteGeneral)
         {
         	System.out.println("Aca2");
