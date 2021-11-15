@@ -36,14 +36,20 @@ class SQLPrestamo {
 		
 		this.pp = pp;
 	}
-
+	public List<Prestamo> buscarPrestamo (PersistenceManager pm) 
+    {
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPrestamo () );
+        q.setResultClass(Prestamo.class);
+        q.setParameters();
+        return (List<Prestamo>) q.executeList();
+    }
 	
-	public long adicionarPrestamo (PersistenceManager pm, long id, String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota) 
+	public long adicionarPrestamo (PersistenceManager pm, long id, String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota,String gerente) 
 	{
 		System.out.println("5");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPrestamo () + "(id,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota) values (?, ?, ?,?,?,?,?,?,?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPrestamo () + "(id,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente) values (?, ?, ?,?,?,?,?,?,?,?)");
         System.out.println("6");
-        q.setParameters(id, tipo, estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);
+        q.setParameters(id, tipo, estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);
         System.out.println("7");
         return (long)q.executeUnique();            
 	}

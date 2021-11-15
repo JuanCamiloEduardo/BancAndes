@@ -91,12 +91,12 @@ public class Parranderos
 	}
 	
 
-	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota)
+	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota,String gerente)
 	{
 		System.out.println("1");
         log.info ("Adicionando prestamo: " + nombre);
         System.out.println("2");
-        Prestamo tipoBebida = pp.adicionarPrestamo (tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota);		
+        Prestamo tipoBebida = pp.adicionarPrestamo (tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);		
         log.info ("Adicionando prestamo: " + tipoBebida);
         return tipoBebida;
 	}
@@ -202,14 +202,27 @@ public class Parranderos
         pp.eliminaryCrearConsigna(idJefe,nuevaId,jefe);
 
     }
-	/*
-	public TipoBebida darTipoBebidaPorNombre (String nombre)
+	
+	public List<Prestamo> buscarPrestamo(List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
     {
-        log.info ("Buscando Tipo de bebida por nombre: " + nombre);
-        List<TipoBebida> tb = pp.darTipoBebidaPorNombre (nombre);
-        return !tb.isEmpty () ? tb.get (0) : null;
-    }*/
+        List<Prestamo> tb = pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor,nombre,cliente,gerente);
+        return tb;
+    }
+	
 
+
+	public List<VOPrestamo> darVOPrestamo (List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
+	{
+		log.info ("Generando los VO de prestamo");        
+        List<VOPrestamo> voTipos = new LinkedList<VOPrestamo> ();
+        for (Prestamo tb : pp.buscarPrestamo (LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor,nombre,cliente,gerente))
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Tipos de bebida: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
+	
 	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
 	{	
 		System.out.println("0");
