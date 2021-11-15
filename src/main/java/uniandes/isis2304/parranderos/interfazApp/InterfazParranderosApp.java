@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
@@ -51,6 +52,7 @@ import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
 import uniandes.isis2304.parranderos.negocio.Operaciones;
 import uniandes.isis2304.parranderos.negocio.Parranderos;
+import uniandes.isis2304.parranderos.negocio.Prestamo;
 import uniandes.isis2304.parranderos.negocio.VOCliente;
 import uniandes.isis2304.parranderos.negocio.VOConsigna;
 import uniandes.isis2304.parranderos.negocio.VOPrestamo;
@@ -324,10 +326,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long numeroCuotas=Integer.parseInt(JOptionPane.showInputDialog (this, "NumeroCuotas?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
     		String diaPaga=JOptionPane.showInputDialog (this, "Dia Pago Cuota?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE);
     		long valorCuota=Integer.parseInt(JOptionPane.showInputDialog (this, "Valor Cuota Minima?", "Adicionar Prestamo", JOptionPane.QUESTION_MESSAGE));
+    		
     		if (nombreTipo != null & estado!= null & tipo!= null & diaPaga!=null )
     		{
     			System.out.println("0");
-        		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota);
+        		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota,nombre);
         		if (tb == null)
         		{
         			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
@@ -890,6 +893,63 @@ public void buscarTipoBebidaPorNombre( )
         panelDatos.actualizarInterfaz(resultado);
     }
 }*/
+
+public void buscarPrestamo( )
+{
+	
+    try 
+    {
+    	boolean si=true;
+        if (cliente || gerenteOficina || gerenteGeneral)
+        {
+        	System.out.println("Aca2");
+        	JOptionPane.showMessageDialog(this,"Para el perfecto funcionamiento de este requerimiento el usuario llenara el recuadro en caso de utilizar el filtro o lo dejara vacio de lo contrario");
+        	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Mayor,Menor,Igual =[14,23,56] Como se buscan los numeros mayores a 14  que a su vez sean menores a 23 y tambien aquellos que sean iguales a 56 ");
+        	String ID = JOptionPane.showInputDialog (this, "Filtro ID", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String Monto = JOptionPane.showInputDialog (this, "Filtro Monto?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String Interes = JOptionPane.showInputDialog (this, "Filtro Interes?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String NumeroCuotas = JOptionPane.showInputDialog (this, "Filtro Numero Cuotas?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String ValorCuota = JOptionPane.showInputDialog (this, "Filtro Valor Cuota?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Igual,Esta =[Abierto,E] Como se puede ver se estan buscando por aquellas que sean iguales a abierto o que tengan E");
+        	String Tipo = JOptionPane.showInputDialog (this, "Filtro Tipo", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String Estado = JOptionPane.showInputDialog (this, "Filtro Estado", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	String Nombre = JOptionPane.showInputDialog (this, "Filtro Nombre", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+        	
+        	List<String> LTipo = new ArrayList<String>(Arrays.asList(Tipo.split(",")));
+        	List<String> LEstado = new ArrayList<String>(Arrays.asList(Estado.split(",")));
+        	List<String> LNombre = new ArrayList<String>(Arrays.asList(Nombre.split(",")));
+        	List<String> LID = new ArrayList<String>(Arrays.asList(ID.split(",")));
+        	List<String> LMonto = new ArrayList<String>(Arrays.asList(Monto.split(",")));
+        	List<String> LInteres = new ArrayList<String>(Arrays.asList(Interes.split(",")));
+        	List<String> LNumero = new ArrayList<String>(Arrays.asList(NumeroCuotas.split(",")));
+        	List<String> LValor = new ArrayList<String>(Arrays.asList(ValorCuota.split(",")));
+        	
+        	List <VOPrestamo> listaPrestamos = parranderos.darVOPrestamo(LTipo, LEstado, LNombre, LID, LMonto, LInteres, LNumero, LValor,nombre,cliente,gerenteOficina);
+        	
+        	
+        	System.out.println("lEgggo");
+        	System.out.println(listaPrestamos);
+        	System.out.print("**************************************************************");
+        	
+        
+			String resultado = "En listarTipoBebida";
+			resultado +=  "\n" + listarP (listaPrestamos);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n OperaciÃ³n terminada";
+            }
+
+    }
+    catch (Exception e) 
+    {
+//        e.printStackTrace();
+        String resultado = generarMensajeError(e);
+        panelDatos.actualizarInterfaz(resultado);
+    }
+}
+
+
+
+
     
     public void verificarPagosAutomaticos(LocalDate fecha) {
     	
@@ -1261,16 +1321,7 @@ public void buscarTipoBebidaPorNombre( )
      * @param lista - La lista con los tipos de bebida
      * @return La cadena con una líea para cada tipo de bebida recibido
      */
-    private String listarTiposBebida(List<VOTipoBebida> lista) 
-    {
-    	String resp = "Los tipos de bebida existentes son:\n";
-    	int i = 1;
-        for (VOTipoBebida tb : lista)
-        {
-        	resp += i++ + ". " + tb.toString() + "\n";
-        }
-        return resp;
-	}
+
 
     /**
      * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
@@ -1372,6 +1423,16 @@ public void buscarTipoBebidaPorNombre( )
      * Este método ejecuta la aplicación, creando una nueva interfaz
      * @param args Arreglo de argumentos que se recibe por línea de comandos
      */
+    private String listarP(List<VOPrestamo> lista) 
+    {
+    	String resp = "Los tipos de bebida existentes son:\n";
+    	int i = 1;
+        for (VOPrestamo tb : lista)
+        {
+        	resp += i++ + ". " + tb.toString() + "\n";
+        }
+        return resp;
+	}
     public static void main( String[] args )
     {
         try

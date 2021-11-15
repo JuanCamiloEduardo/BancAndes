@@ -1,8 +1,8 @@
 package uniandes.isis2304.parranderos.negocio;
 
 public class Prestamo implements VOPrestamo {
- private long id;
- private String tipo;
+ private long id;           
+ private String tipo;        
  private String estado;
  private String nombre;
  private long monto;
@@ -10,10 +10,13 @@ public class Prestamo implements VOPrestamo {
  private long numeroCuotas;
  private String diaPaga;
  private long valorCuota;
+ private String gerente;
+ 
+ 
  
 public Prestamo()
 {
-	this.id=0;
+	this.id=0;               
 	this.tipo="";
 	this.estado="";
 	this.nombre="";
@@ -22,7 +25,7 @@ public Prestamo()
 	this.numeroCuotas=0;
 	this.diaPaga="";
 	this.valorCuota=0;
-	
+	this.gerente="";
 }
 
 
@@ -30,7 +33,7 @@ public Prestamo()
 
 
 public Prestamo(long id, String tipo, String estado, String nombre, long monto, long interes, long numeroCuotas,
-		String diaPaga, long valorCuota) {
+		String diaPaga, long valorCuota,String gerente) {
 	super();
 	this.id = id;
 	this.tipo = tipo;
@@ -41,6 +44,23 @@ public Prestamo(long id, String tipo, String estado, String nombre, long monto, 
 	this.numeroCuotas = numeroCuotas;
 	this.diaPaga = diaPaga;
 	this.valorCuota = valorCuota;
+	this.gerente=gerente;
+}
+
+
+
+
+
+public String getGerente() {
+	return gerente;
+}
+
+
+
+
+
+public void setGerente(String gerente) {
+	this.gerente = gerente;
 }
 
 

@@ -62,7 +62,7 @@
 					"label": "Cambio Prestamo V2",
 					"event": "OperacionPrestamov2"
 				},
-								{
+				{
 					"label": "Eliminar Cuenta V2",
 					"event": "eliminarCrearConsigna"
 				},
@@ -71,7 +71,13 @@
 					"event": "consultarOperaciones"
 				}
 				
+					"label": "Consultar operaciones",
 				
+					"label": "Buscar Prestamo",
+					"event": "buscarPrestamo"
+				}
+
+
 			]
 		},
 		{ "menuTitle": "Mantenimiento",
