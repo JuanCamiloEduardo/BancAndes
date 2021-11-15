@@ -76,6 +76,7 @@
 				},
 				{
 				
+					"label": "Buscar Prestamo",
 					"event": "buscarPrestamo"
 				}
 
