@@ -67,6 +67,10 @@
 					"event": "eliminarCrearConsigna"
 				},
 				{
+					"label": "Consultar operaciones",
+					"event": "consultarOperaciones"
+				},
+				{
 				
 					"label": "Buscar Prestamo",
 					"event": "buscarPrestamo"
