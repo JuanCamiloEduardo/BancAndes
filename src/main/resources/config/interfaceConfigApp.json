@@ -75,9 +75,9 @@
 					"label": "Buscar Prestamo",
 					"event": "buscarPrestamo"
 				}
-				
-				
-				
+
+
+
 			]
 		},
 		{ "menuTitle": "Mantenimiento",
@@ -146,4 +146,3 @@
 		
 	]
 }
-	
