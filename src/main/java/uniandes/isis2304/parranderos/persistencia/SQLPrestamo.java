@@ -46,29 +46,29 @@ class SQLPrestamo {
 	
 	public long adicionarPrestamo (PersistenceManager pm, long id, String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota,String gerente) 
 	{
-		System.out.println("5");
+
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPrestamo () + "(id,tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente) values (?, ?, ?,?,?,?,?,?,?,?)");
-        System.out.println("6");
+
         q.setParameters(id, tipo, estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);
-        System.out.println("7");
+
         return (long)q.executeUnique();            
 	}
 	
 	public long cambioPrestamo (PersistenceManager pm, String nombre,long id,long monto) 
 	{
-		System.out.println("8");
+	
 		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPrestamo() + " SET monto=monto-? WHERE nombre = ? AND id=? AND ?>valorcuota");
 		q.setParameters(monto,nombre,id,monto);
-		System.out.println("9");
+	
         return (long) q.executeUnique();
 	}
 	
 	public long cerrarPrestamo (PersistenceManager pm, String nombre,long id) 
 	{
-		System.out.println("8");
+	
 		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPrestamo() + " SET estado='cerrado'  WHERE nombre = ? AND id=? AND monto=0");
 		q.setParameters(nombre,id);
-		System.out.println("9");
+	
         return (long) q.executeUnique();
 	}
 	

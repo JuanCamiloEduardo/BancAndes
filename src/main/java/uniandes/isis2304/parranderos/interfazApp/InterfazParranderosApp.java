@@ -282,7 +282,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long codigoPostal=Integer.parseInt(JOptionPane.showInputDialog (this, "Codigopostal?", "Adicionar usuario", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTipo != null & login!= null & clave!= null  & tipoDocumento!= null & nacionalidad!= null & direccionFisica!= null & direccionElectronica!= null & ciudad!= null & departamento!= null  )
     		{
-    			System.out.println("0");
+    			
         		VOUsuario tb = parranderos.adicionarUsuario(nombreTipo,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,departamento,codigoPostal);
         		if (tb == null)
         		{
@@ -329,7 +329,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		
     		if (nombreTipo != null & estado!= null & tipo!= null & diaPaga!=null )
     		{
-    			System.out.println("0");
+    			
         		VOPrestamo tb = parranderos.adicionarPrestamo (tipo,estado,nombreTipo,monto,interes,numeroCuotas,diaPaga,valorCuota, nombre);
         		if (tb == null)
         		{
@@ -860,39 +860,7 @@ public void eliminarCrearConsigna( )
             panelDatos.actualizarInterfaz(resultado);
         }
     }
-/*
-public void buscarTipoBebidaPorNombre( )
-{
-    try 
-    {
-        String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Buscar tipo de bebida por nombre", JOptionPane.QUESTION_MESSAGE);
-        if (nombreTb != null)
-        {
-            VOTipoBebida tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTb);
-            String resultado = "En buscar Tipo Bebida por nombre\n\n";
-            if (tipoBebida != null)
-            {
-                resultado += "El tipo de bebida es: " + tipoBebida;
-            }
-            else
-            {
-                resultado += "Un tipo de bebida con nombre: " + nombreTb + " NO EXISTE\n";
-            }
-            resultado += "\n Operación terminada";
-            panelDatos.actualizarInterfaz(resultado);
-        }
-        else
-        {
-            panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-        }
-    } 
-    catch (Exception e) 
-    {
-//        e.printStackTrace();
-        String resultado = generarMensajeError(e);
-        panelDatos.actualizarInterfaz(resultado);
-    }
-}*/
+
 
 public void buscarPrestamo( )
 {
@@ -902,7 +870,7 @@ public void buscarPrestamo( )
 
         if (cliente || gerenteOficina || gerenteGeneral)
         {
-        	System.out.println("Aca2");
+        	
         	JOptionPane.showMessageDialog(this,"Para el perfecto funcionamiento de este requerimiento el usuario llenara el recuadro en caso de utilizar el filtro o lo dejara vacio de lo contrario");
         	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Mayor,Menor,Igual =[14,23,56] Como se buscan los numeros mayores a 14  que a su vez sean menores a 23 y tambien aquellos que sean iguales a 56 ");
         	String ID = JOptionPane.showInputDialog (this, "Filtro ID", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
@@ -926,9 +894,7 @@ public void buscarPrestamo( )
         	
         	List <VOPrestamo> listaPrestamos = parranderos.darVOPrestamo(LTipo, LEstado, LNombre, LID, LMonto, LInteres, LNumero, LValor,nombre,cliente,gerenteOficina);
         	
-        	System.out.println("lEgggo");
-        	System.out.println(listaPrestamos);
-        	System.out.print("**************************************************************");
+
         	
         
 			String resultado = "En listarTipoBebida";

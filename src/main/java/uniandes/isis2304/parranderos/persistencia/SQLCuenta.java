@@ -51,7 +51,7 @@ public class SQLCuenta {
 	 */
 	public long adicionarCuenta (PersistenceManager pm, long idCuenta, String tipo,long saldo,String cliente,String gerente) 
 	{
-		System. out. println("6");
+	
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCuenta  () + "(id, tipo,saldo,cliente,gerente) values (?,?,?,?,?)");
         q.setParameters(idCuenta, tipo,saldo,cliente,gerente);
         return (long) q.executeUnique();            
@@ -59,10 +59,10 @@ public class SQLCuenta {
 
 	public long cambioCuenta (PersistenceManager pm, String cliente,long id,long saldo) 
 	{
-		System.out.println("8");
+
 		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCuenta() + " SET saldo=saldo+?  WHERE cliente = ? AND id=?");
 		q.setParameters(saldo,cliente,id);
-		System.out.println("9");
+		
         return (long) q.executeUnique();
 	}
 	public List<Cuenta> verificar (PersistenceManager pm, long id) 
@@ -76,10 +76,10 @@ public class SQLCuenta {
 	
 	public long cerrarCuenta (PersistenceManager pm,long id) 
 	{
-		System.out.println("8");
+	
 		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCuenta() + " SET tipo='cerrada' WHERE id=? AND saldo=0");
 		q.setParameters(id);
-		System.out.println("9");
+	
         return (long) q.executeUnique();
 	}
 	

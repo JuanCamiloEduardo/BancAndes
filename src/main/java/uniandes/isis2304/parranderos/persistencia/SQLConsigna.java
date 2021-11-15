@@ -75,27 +75,27 @@ class SQLConsigna
 	 */
 	public long adicionarConsigna (PersistenceManager pm,String jefe, long idJefe, String empleado, long idEmpleado, long monto, String fecha,String frecuencia) 
     {
-		System.out.println("Aja3");
+	
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaConsigna  () + "(jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia) values (?,?,?,?,?,?,?)");
         q.setParameters(jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia);
-        System.out.println("Aja4");
+        
         return (long) q.executeUnique();
     }
 	
 	public long eliminarConsigna (PersistenceManager pm,String jefe, long idJefe) 
     {
-		System.out.println("Aja3");
+		
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaConsigna  () + " WHERE jefe=? AND idJefe=? ");
         q.setParameters(jefe,idJefe);
-        System.out.println("Aja4");
+ 
         return (long) q.executeUnique();
     }
 	public long eliminarsara (PersistenceManager pm) 
     {
-		System.out.println("Aja3");
+		
         Query q = pm.newQuery(SQL, "DROP TABLE " + pp.darTablaConsigna  ());
         q.setParameters();
-        System.out.println("Aja4");
+       
         return (long) q.executeUnique();
     }
 	

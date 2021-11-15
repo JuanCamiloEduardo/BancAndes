@@ -82,9 +82,9 @@ public class Parranderos
 	
 	public Usuario adicionarUsuario(String nombre,String login,String clave,long numeroDocumento,String tipoDocumento,String nacionalidad,String direccionFisica,String direccionElectronica,long telefono,String ciudad,String departamento,long codigoPostal)
 	{
-		System.out.println("1");
+	
         log.info ("Adicionando usuario: " + nombre);
-        System.out.println("2");
+
         Usuario tipoBebida = pp.adicionarUsuario(nombre,login,clave,numeroDocumento,tipoDocumento,nacionalidad,direccionFisica,direccionElectronica,telefono,ciudad,departamento,codigoPostal);		
         log.info ("Adicionando usuario: " + tipoBebida);
         return tipoBebida;
@@ -93,54 +93,53 @@ public class Parranderos
 
 	public Prestamo adicionarPrestamo(String tipo,String estado,String nombre,long monto,long interes,long numeroCuotas,String diaPaga,long valorCuota,String gerente)
 	{
-		System.out.println("1");
         log.info ("Adicionando prestamo: " + nombre);
-        System.out.println("2");
+       
         Prestamo tipoBebida = pp.adicionarPrestamo (tipo,estado,nombre,monto,interes,numeroCuotas,diaPaga,valorCuota,gerente);		
         log.info ("Adicionando prestamo: " + tipoBebida);
         return tipoBebida;
 	}
 	public long operacionPrestamo (String nombre,long id,long valorCuota)
 	{	
-		System.out.println("0");
+		
 		log.info ("Realizando un cambio en el prestamo: " + id );
 		long tb = pp.cambioPrestamo (nombre,id,valorCuota);
-		System.out.println("10");
+		
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
 	
 	public long operacionCuenta (String nombre,long id,long saldo)
 	{	
-		System.out.println("0");
+		
 		log.info ("Realizando un cambio en el prestamo: " + id );
 		long tb = pp.cambioCuenta (nombre,id,saldo);
-		System.out.println("10");
+		
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
 	public long operacionPrestamoV2 (String nombre,long id,long saldo,long idprestamo)
 	{	
-		System.out.println("0");
+		
 		log.info ("Realizando un cambio en el prestamo: " + id );
 		long tb = pp.cambioPrestamov2(nombre,id,saldo,idprestamo);
-		System.out.println("10");
+		
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
 	public long cerrarPrestamo (String nombre,long id)
 	{	
-		System.out.println("0");
+		
 		log.info ("Realizando un cambio en el prestamo: " + id );
 		long tb = pp.cerrarPrestamo (nombre,id);
-		System.out.println("10");
+		
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
 	
 	public long cerrarCuenta (long id)
 	{	
-		System.out.println("0");
+		
 		log.info ("Realizando un cambio en la cuenta: " + id );
 		long tb = pp.cerrarCuenta (id);
 		return tb;
@@ -183,13 +182,12 @@ public class Parranderos
 			}
 		}
 		String hola=tb.get(numero).getTipo();
-		System.out.print(tb.get(numero));
+		
 		return hola;
 	}
 	
 	public Consigna adicionarConsigna(String jefe, long idJefe, String empleado, long idEmpleado, long monto,String fecha, String frecuencia)
     {
-        System.out.println("Aja1");
 		log.info ("Adicionando Consigna: " + jefe);
         Consigna nuevaconsigna = pp.adicionarConsigna (jefe,idJefe,empleado,idEmpleado,monto,fecha,frecuencia);
         log.info ("Adicionando Consigna: " + nuevaconsigna);
@@ -197,7 +195,6 @@ public class Parranderos
     }
 	public void eliminarCrearConsigna(String jefe,long nuevaId, long idJefe)
     {
-        System.out.println("Aja1");
 		log.info ("Adicionando Consigna: " + jefe);
         pp.eliminaryCrearConsigna(idJefe,nuevaId,jefe);
 
@@ -225,10 +222,10 @@ public class Parranderos
 	
 	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
 	{	
-		System.out.println("0");
+		
 		log.info ("Realizando un cambio en las cuentas");
 		long tb = pp.cambioCuentaV2 (nombreConsignador,idConsignador,saldo,nombreDestino,idDestino);
-		System.out.println("10");
+		
 		return tb;
 	}
 	

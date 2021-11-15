@@ -114,7 +114,7 @@ class SQLUsuario
 	{	
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaUsuario  () + " WHERE login = ? AND clave = ?");
 		q.setResultClass(Usuario.class);
-		System.out.print(q.toString());
+		
 		q.setParameters(login,clave);
 		return (List<Usuario>) q.executeList();
 	}
