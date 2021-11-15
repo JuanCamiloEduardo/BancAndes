@@ -11,6 +11,7 @@ DROP TABLE OFICINA CASCADE CONSTRAINTS;
 DROP TABLE PUNTODEATENCION CASCADE CONSTRAINTS;
 DROP TABLE CUENTA CASCADE CONSTRAINTS;
 DROP TABLE PRESTAMO CASCADE CONSTRAINTS;
+DROP TABLE OPERACIONES CASCADE CONSTRAINTS;
 COMMMIT;
 
 -- Eliminar el contenido de todas las tablas de la base de datos
@@ -20,5 +21,6 @@ delete from puntodeatencion;
 delete from oficina;
 delete from cuenta;
 delete from usuario;
+delete from operaciones;
 commit;
 

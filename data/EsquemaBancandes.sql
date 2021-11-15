@@ -192,14 +192,5 @@ ALTER TABLE OPERACIONES
     ADD CONSTRAINT OPERACIONES_FK_5
     CHECK (tipo = 'prestamo' or tipo = 'transferencia')
 ENABLE;
-select * from prestamo;
-delete from prestamo where ;
-select * from cuenta;
-delete from cuenta where ;
-select * from operaciones;
-delete from operaciones where ;
-insert into operaciones (id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (1013,'transferencia','s.ara',63,'d.pulidon',83,62500,'2021-11-14');
-select * from usuario;
-delete from usuario where ;
-DROP TABLE PRESTAMO;
+
 COMMIT;
