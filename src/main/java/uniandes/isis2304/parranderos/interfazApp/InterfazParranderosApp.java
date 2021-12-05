@@ -17,6 +17,7 @@ package uniandes.isis2304.parranderos.interfazApp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +31,10 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
@@ -1123,12 +1127,12 @@ public void buscarPrestamo( )
 	    					}
 	    				}
 	    				
-	    				resultado+=operaciones.get(i).getId()+", "+operaciones.get(i).getTipo()+", "+operaciones.get(i).getConsignador()+", "+operaciones.get(i).getIdConsignador()+", "+operaciones.get(i).getDestinatario()+", "+operaciones.get(i).getIdDestinatario()+", "+operaciones.get(i).getMonto()+", "+operaciones.get(i).getFecha();
+	    				resultado+=operaciones.get(i).getId()+", "+operaciones.get(i).getTipo()+", "+operaciones.get(i).getConsignador()+", "+operaciones.get(i).getIdConsignador()+", "+operaciones.get(i).getDestinatario()+", "+operaciones.get(i).getIdDestinatario()+", "+operaciones.get(i).getMonto()+", "+operaciones.get(i).getFecha()+", "+operaciones.get(i).getPuntoDeAtencion();
 	    				resultado+="\n";
 	    			}
 	    			
 	    			else {
-	    				resultado+=operaciones.get(i).getId()+", "+operaciones.get(i).getTipo()+", "+operaciones.get(i).getConsignador()+", "+operaciones.get(i).getIdConsignador()+", "+operaciones.get(i).getDestinatario()+", "+operaciones.get(i).getIdDestinatario()+", "+operaciones.get(i).getMonto()+", "+operaciones.get(i).getFecha();
+	    				resultado+=operaciones.get(i).getId()+", "+operaciones.get(i).getTipo()+", "+operaciones.get(i).getConsignador()+", "+operaciones.get(i).getIdConsignador()+", "+operaciones.get(i).getDestinatario()+", "+operaciones.get(i).getIdDestinatario()+", "+operaciones.get(i).getMonto()+", "+operaciones.get(i).getFecha()+", "+operaciones.get(i).getPuntoDeAtencion();
 	    				resultado+="\n";
 	    			}
     			}
@@ -1271,7 +1275,108 @@ public void buscarPrestamo( )
     		
     		if(gerenteGeneral) {
     			
+    			long id1 = Integer.parseInt(JOptionPane.showInputDialog (this, "Indicar la id del punto de atencion 1", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE));
+    			long id2 = Integer.parseInt(JOptionPane.showInputDialog (this, "Indicar la id del punto de atencion 2", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE));
     			
+    			if ((id1 > 0) && (id2 > 0)) {
+    				
+    				List<Operaciones> operaciones = parranderos.darOperaciones();
+    	    		String resultado="";
+    	    		List lista1 = new ArrayList();
+    	    		List lista2 = new ArrayList();
+    	    		HashMap mapa = new HashMap();
+    	    		
+    	    		for (int i=0; i<operaciones.size(); i++) {
+    	    			
+    	    			if((operaciones.get(i).getPuntoDeAtencion())==id1){
+    	    				if (operaciones.get(i).getConsignador() != null) {
+    	    					String consignador = operaciones.get(i).getConsignador();
+    	    					if (lista1.contains(consignador)==false) {
+    	    						lista1.add(consignador);
+    	    						mapa.put(consignador, new ArrayList());
+    	    						
+    	    						((List) mapa.get(consignador)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    					else {
+    	    						
+    	    						((List) mapa.get(consignador)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    				}
+    	    				
+    	    				if (operaciones.get(i).getDestinatario() != null) {
+    	    					String destinatario = operaciones.get(i).getDestinatario();
+    	    					if (lista1.contains(destinatario)==false) {
+    	    						lista1.add(destinatario);
+    	    						mapa.put(destinatario, new ArrayList());
+    	    						
+    	    						((List) mapa.get(destinatario)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    					else {
+    	    						
+    	    						((List) mapa.get(destinatario)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    				}
+    	    				
+    					}
+    	    			else if((operaciones.get(i).getPuntoDeAtencion())==id2){
+    	    				if (operaciones.get(i).getConsignador() != null) {
+    	    					String consignador = operaciones.get(i).getConsignador();
+    	    					if (lista2.contains(consignador)==false) {
+    	    						lista2.add(consignador);
+    	    						mapa.put(consignador, new ArrayList());
+    	    						
+    	    						((List) mapa.get(consignador)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    					else {
+    	    						
+    	    						((List) mapa.get(consignador)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    				}
+    	    				
+    	    				if (operaciones.get(i).getDestinatario() != null) {
+    	    					String destinatario = operaciones.get(i).getDestinatario();
+    	    					if (lista2.contains(destinatario)==false) {
+    	    						lista2.add(destinatario);
+    	    						mapa.put(destinatario, new ArrayList());
+    	    						
+    	    						((List) mapa.get(destinatario)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    					else {
+    	    						
+    	    						((List) mapa.get(destinatario)).add(operaciones.get(i));
+    	    						
+    	    					}
+    	    				}
+    	    				
+    					}
+    	    			
+    	    		}
+    	    		
+    	    		Iterator new_Iterator = mapa.entrySet().iterator();
+    	           
+    	    		while (new_Iterator.hasNext()) {
+    	    			Map.Entry<String, List> newMap = (Map.Entry<String, List>) new_Iterator.next();
+    	    			if((lista1.contains(newMap.getKey())) && (lista2.contains(newMap.getKey()))) {
+    	    				resultado+=newMap.getKey()+": "+newMap.getValue()+"\n";
+    	    			}
+    	    		}
+    	    		
+    	    	panelDatos.actualizarInterfaz(resultado);
+    	    		
+    			}
+    			
+    			else {
+    				
+    				panelDatos.actualizarInterfaz("No selecciono valores validos de id");
+    				
+    			}
     			
     		}
     		

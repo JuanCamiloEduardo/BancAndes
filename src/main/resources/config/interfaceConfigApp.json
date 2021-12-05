@@ -77,6 +77,14 @@
 				{
 					"label": "Consultar operaciones v2",
 					"event": "consultarOperacionesv2"
+				},
+				{
+					"label": "Consultar consignas",
+					"event": "consultarConsignas"
+				},
+				{
+					"label": "Consultar puntos de atencion",
+					"event": "consultarPuntosDeAtencion"
 				}
 				
 				

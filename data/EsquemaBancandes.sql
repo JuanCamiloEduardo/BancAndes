@@ -71,19 +71,18 @@ ALTER TABLE Oficina
     FOREIGN KEY (gerenteUsuario) REFERENCES Usuario(login)
 ENABLE;
 
-
-
 CREATE TABLE PuntoDeAtencion (
     id NUMBER,
     tipo VARCHAR(20),
     localizacion VARCHAR(20),
     oficina NUMBER,
+    cajero VARCHAR(20),
     CONSTRAINT PuntoDeAtencion_PK PRIMARY KEY (id)
 );
 
 ALTER TABLE PuntoDeAtencion
     ADD CONSTRAINT CK_PuntoDeAtencion
-    CHECK ((tipo = 'fisico' AND oficina !=NULL) OR (tipo = 'virtual' AND localizacion = 'Bancandes' AND oficina = NULL))
+    CHECK ((tipo = 'fisico' AND oficina !=NULL AND cajero!=NULL) OR (tipo = 'virtual' AND localizacion = 'Bancandes' AND oficina = NULL AND cajero!=NULL))
 ENABLE;
 
 ALTER TABLE PuntoDeAtencion
@@ -176,10 +175,11 @@ CREATE TABLE OPERACIONES
     DESTINATARIO VARCHAR(20),
     IDDESTINATARIO NUMBER, 
 	MONTO NUMBER, 
-    FECHA VARCHAR2(20),
+    FECHA DATE,
+    PUNTODEATENCION NUMBER,
     CONSTRAINT OPERACIONES_PK PRIMARY KEY (ID)
     );
-    
+
 ALTER TABLE OPERACIONES
     ADD CONSTRAINT OPERACIONES_CK
     CHECK (tipo = 'prestamo' or tipo = 'transferencia')
