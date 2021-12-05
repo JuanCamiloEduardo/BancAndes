@@ -1206,6 +1206,58 @@ public void buscarPrestamo( )
             panelDatos.actualizarInterfaz(resultado);
         }
     }
+    public void consultarOperacionesv3( )
+    {
+    	
+        try 
+        {
+
+            if (true)
+            {
+            	
+            	JOptionPane.showMessageDialog(this,"Para el perfecto funcionamiento de este requerimiento el usuario llenara el recuadro en caso de utilizar el filtro o lo dejara vacio de lo contrario");
+            	
+            	String Inicial= JOptionPane.showInputDialog (this, "Fecha Inicial con formato yyyy-mm-dd hh24:mi:ss", "Buscar Operacion", JOptionPane.QUESTION_MESSAGE);
+            	String Final = JOptionPane.showInputDialog (this, "Fecha Final con formato yyyy-mm-dd hh24:mi:ss", "Buscar Operacion", JOptionPane.QUESTION_MESSAGE);
+            	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Mayor,Menor,Igual =[14,23,56] Como se buscan los numeros mayores a 14  que a su vez sean menores a 23 y tambien aquellos que sean iguales a 56 ");
+            	String ID = JOptionPane.showInputDialog (this, "Filtro ID", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Monto = JOptionPane.showInputDialog (this, "Filtro Monto?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Interes = JOptionPane.showInputDialog (this, "Filtro Id Consignador?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String NumeroCuotas = JOptionPane.showInputDialog (this, "Filtro Id Destinatario?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Igual,Esta =[Abierto,E] Como se puede ver se estan buscando por aquellas que sean iguales a abierto o que tengan E");
+            	String Tipo = JOptionPane.showInputDialog (this, "Filtro Tipo Operacion", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Estado = JOptionPane.showInputDialog (this, "Filtro Nombre Consignador", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Nombre = JOptionPane.showInputDialog (this, "Filtro Nombre Destinatario", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	
+            	
+            	List<String> LEstado = new ArrayList<String>(Arrays.asList(Estado.split(",")));
+            	List<String> LNombre = new ArrayList<String>(Arrays.asList(Nombre.split(",")));
+            	List<String> LID = new ArrayList<String>(Arrays.asList(ID.split(",")));
+            	List<String> LMonto = new ArrayList<String>(Arrays.asList(Monto.split(",")));
+            	List<String> LInteres = new ArrayList<String>(Arrays.asList(Interes.split(",")));
+            	List<String> LNumero = new ArrayList<String>(Arrays.asList(NumeroCuotas.split(",")));
+
+            	Timestamp FechaI=Timestamp.valueOf(Inicial);
+            	Timestamp FechaF=Timestamp.valueOf(Final);
+            	List <VOOperaciones> listaPrestamos = parranderos.darVOOperacionv3(FechaI,FechaF,Tipo, LEstado, LNombre, LID, LMonto, LInteres, LNumero);
+            	
+
+            	
+            
+    			String resultado = "En listarTipoBebida";
+    			resultado +=  "\n" + listarO (listaPrestamos);
+    			panelDatos.actualizarInterfaz(resultado);
+    			resultado += "\n OperaciÃ³n terminada";
+                }
+
+        }
+        catch (Exception e) 
+        {
+//            e.printStackTrace();
+            String resultado = generarMensajeError(e);
+            panelDatos.actualizarInterfaz(resultado);
+        }
+    }
     
     public void consultarConsignas() {
     	

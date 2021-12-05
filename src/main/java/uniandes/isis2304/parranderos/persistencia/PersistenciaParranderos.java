@@ -627,11 +627,34 @@ public class PersistenciaParranderos
     {
 		List<Operaciones> listaPrestamos=sqlOperaciones.buscarOperacionv2 (pmf.getPersistenceManager(),FechaI,FechaF);
 		List<Operaciones> list=new ArrayList<Operaciones>();
-		System.out.println(listaPrestamos.size());
-		System.out.println(listaPrestamos);
-		System.out.println("LLEGO3");
+
 		
 		list=FiltroOperaciones(listaPrestamos,Tipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero);
+
+		
+		
+        return list;
+    }
+	public List<Operaciones> buscarOperacionv3 (Timestamp FechaI,Timestamp FechaF,String Tipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero)
+    {
+		List<Operaciones> listaPrestamos=sqlOperaciones.buscarOperacionv2 (pmf.getPersistenceManager(),FechaI,FechaF);
+		List<Operaciones> list=new ArrayList<Operaciones>();
+
+		
+		list=FiltroOperaciones(listaPrestamos,Tipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero);
+	
+		for (int i = 0; i<listaPrestamos.size(); i++)
+		{	
+			if(list.contains(listaPrestamos.get(i)))
+			{
+				list.remove(listaPrestamos.get(i));
+			}
+			else
+			{
+				list.add(listaPrestamos.get(i));
+			}
+		
+		}
 
 		
 		
@@ -773,7 +796,7 @@ public class PersistenciaParranderos
     
         List<Operaciones> SegundoFiltro=new ArrayList<Operaciones>();
         PrimerFiltro=filtroStringOperaciones(Tipo,Cambios,estaE,igualE,estaN,igualN);
-   
+        
         SegundoFiltro=filtrolongOperaciones2(Mayor,Menor,Igual,PrimerFiltro ,MayorM,MenorM,IgualM,MayorI,MenorI,IgualI,MayorN,MenorN,IgualN,MayorV,MenorV,IgualV);
        
     	
@@ -963,27 +986,32 @@ public class PersistenciaParranderos
 		ArrayList<Operaciones> Cambios=new ArrayList<Operaciones>();
 		for (int i = 0; i<lista.size(); i++)
 		{
+
+			
 			Operaciones index=lista.get(i);
-			if(!igual.equals("?||°°")) 
+
+			if(!igual.equals("") )
 			{
 			if(!igual.equals(index.getTipo()))
 			{
 				Eliminar.add(i);
 			}	
 			}
+			
 
 
 			if(!estaE.equals("?||°°")) 
 			{
-			System.out.println("consignador");
-			System.out.println(estaE);
-			System.out.println(!igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE));
+
+			
+		
 			if( !igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE) )
 			{ 
+				
 				Eliminar.add(i);
 			}	
 			}
-	
+
 			
 			
 			if(!estaN.equals("?||°°")) 
@@ -993,8 +1021,11 @@ public class PersistenciaParranderos
 			{
 				
 				Eliminar.add(i);
-			}			
+			}		
+
 			}
+
+			
 		}
 		
 		
