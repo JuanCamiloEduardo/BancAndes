@@ -1188,6 +1188,7 @@ public void buscarPrestamo( )
         }
     }
     
+    public void consultarConsignas() {
     	
     	try 
     	{

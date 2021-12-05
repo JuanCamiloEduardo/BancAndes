@@ -33,6 +33,7 @@ public class Operaciones implements VOOperaciones{
 		this.cajero = "";
 	}
 	
+	public Operaciones(long id, String tipo, String consignador, long idConsignador, String destinatario,
 			long idDestinatario, long monto, String fecha, String cajero) {
 		super();
 		this.id = id;
