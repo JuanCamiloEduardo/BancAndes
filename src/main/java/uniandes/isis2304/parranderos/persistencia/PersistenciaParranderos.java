@@ -361,7 +361,7 @@ public class PersistenciaParranderos
 
 	
 
-	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina)
+	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina, String cajero)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -369,11 +369,11 @@ public class PersistenciaParranderos
         {   
             tx.begin();
             long idPuntoDeAtencion = nextval ();
-            long tuplasInsertadas = sqlPuntoDeAtencion.adicionarPuntoDeAtencion(pm, idPuntoDeAtencion, tipo,localizacion,oficina);
+            long tuplasInsertadas = sqlPuntoDeAtencion.adicionarPuntoDeAtencion(pm, idPuntoDeAtencion, tipo,localizacion,oficina,cajero);
             tx.commit();
             log.trace ("Inserción de punto de atencion: " + tuplasInsertadas + " tuplas insertadas");
             
-            return new PuntoDeAtencion (idPuntoDeAtencion, tipo,localizacion,oficina);
+            return new PuntoDeAtencion (idPuntoDeAtencion, tipo,localizacion,oficina,cajero);
         }
         catch (Exception e)
         {
@@ -1259,6 +1259,12 @@ public class PersistenciaParranderos
 	public List<Cuenta> darCuentas() {
 		
 		return sqlCuenta.darCuenta (pmf.getPersistenceManager());
+		
+	}
+	
+	public List<PuntoDeAtencion> darPuntoDeAtencion() {
+		
+		return sqlPuntoDeAtencion.darPuntoDeAtencion (pmf.getPersistenceManager());
 		
 	}
 

@@ -153,10 +153,10 @@ public class Parranderos
         return oficina;
 	}
 	
-	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo, String localizacion, String oficina)
+	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo, String localizacion, String oficina, String cajero)
 	{
         log.info ("Adicionando punto de atencion");
-        PuntoDeAtencion puntoDeAtencion = pp.adicionarPuntoDeAtencion(tipo,localizacion,oficina);		
+        PuntoDeAtencion puntoDeAtencion = pp.adicionarPuntoDeAtencion(tipo,localizacion,oficina,cajero);		
         log.info ("Adicionando punto de atencion");
         return puntoDeAtencion;
 	}
@@ -260,6 +260,14 @@ public class Parranderos
 		List<Cuenta> cuentas = pp.darCuentas();
 		return cuentas;
 	
+	}
+	
+	public List<PuntoDeAtencion> darPuntosDeAtencion(){
+		
+		List<PuntoDeAtencion> puntosdeatencion = pp.darPuntoDeAtencion();
+		
+		return puntosdeatencion;
+		
 	}
 	
 	/* ****************************************************************
