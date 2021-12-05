@@ -66,7 +66,7 @@ class SQLOperaciones
 	 
 	public List<Operaciones> buscarOperacionv2 (PersistenceManager pm,Timestamp Inicial,Timestamp Final) 
 		 {
-				System.out.println(Inicial);
+				
 		        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaOperaciones ()+ " WHERE fecha BETWEEN ? AND ?");
 		        q.setParameters(Inicial,Final);
 		        q.setResultClass(Operaciones.class);
