@@ -361,7 +361,7 @@ public class PersistenciaParranderos
 
 	
 
-	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina)
+	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina, String cajero)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -369,11 +369,11 @@ public class PersistenciaParranderos
         {   
             tx.begin();
             long idPuntoDeAtencion = nextval ();
-            long tuplasInsertadas = sqlPuntoDeAtencion.adicionarPuntoDeAtencion(pm, idPuntoDeAtencion, tipo,localizacion,oficina);
+            long tuplasInsertadas = sqlPuntoDeAtencion.adicionarPuntoDeAtencion(pm, idPuntoDeAtencion, tipo,localizacion,oficina,cajero);
             tx.commit();
             log.trace ("Inserción de punto de atencion: " + tuplasInsertadas + " tuplas insertadas");
             
-            return new PuntoDeAtencion (idPuntoDeAtencion, tipo,localizacion,oficina);
+            return new PuntoDeAtencion (idPuntoDeAtencion, tipo,localizacion,oficina,cajero);
         }
         catch (Exception e)
         {
@@ -454,7 +454,7 @@ public class PersistenciaParranderos
         }
 	}
 	
-	public long cambioCuenta (String nombre,long id,long saldo)
+	public long cambioCuenta (String nombre,long id,long saldo, long puntodeatencion)
 	{
 		
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -466,10 +466,10 @@ public class PersistenciaParranderos
             
             long idOperacion = nextval ();
             if (saldo<0) {
-            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString());
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
             }
             else {
-            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, id, Math.abs(saldo), LocalDate.now().toString());
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, id, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
             }
             tx.commit();
 
@@ -491,7 +491,7 @@ public class PersistenciaParranderos
         }
 	}
 	
-	public long cambioPrestamov2 (String nombre,long id,long saldo,long idprestamo)
+	public long cambioPrestamov2 (String nombre,long id,long saldo,long idprestamo,long puntodeatencion)
 	{
 	
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -502,7 +502,7 @@ public class PersistenciaParranderos
             long resp = sqlCuenta.cambioCuenta(pm, nombre,id,(-1)*Math.abs(saldo));
             sqlPrestamo.cambioPrestamo(pm, nombre, idprestamo,Math.abs(saldo));
             long idOperacion = nextval ();
-            sqlPrestamo.adicionarOperacion(pm, idOperacion, "prestamo", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString());
+            sqlPrestamo.adicionarOperacion(pm, idOperacion, "prestamo", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
           
             tx.commit();
 
@@ -1176,7 +1176,7 @@ public class PersistenciaParranderos
 		
 	}
 	
-	public long cambioCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
+	public long cambioCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino, long puntodeatencion)
 	{
 	
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1187,7 +1187,7 @@ public class PersistenciaParranderos
             long resp = sqlCuenta.cambioCuenta(pm, nombreConsignador,idConsignador,(Math.abs(saldo))*(-1));
             sqlCuenta.cambioCuenta(pm, nombreDestino,idDestino,Math.abs(saldo));
             long idOperacion = nextval ();
-            sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombreConsignador, idConsignador, nombreDestino, idDestino, Math.abs(saldo), LocalDate.now().toString());
+            sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombreConsignador, idConsignador, nombreDestino, idDestino, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
             
             tx.commit();
 
@@ -1221,7 +1221,7 @@ public class PersistenciaParranderos
             
             for (int i = 0; i<lista.size(); i++) {
             	
-            	cambioCuentaV2(lista.get(i).getJefe(),lista.get(i).getIdJefe(),lista.get(i).getMonto(),lista.get(i).getEmpleado(),lista.get(i).getIdEmpleado());
+            	cambioCuentaV2(lista.get(i).getJefe(),lista.get(i).getIdJefe(),lista.get(i).getMonto(),lista.get(i).getEmpleado(),lista.get(i).getIdEmpleado(),0);
             	
             }
             
@@ -1259,6 +1259,12 @@ public class PersistenciaParranderos
 	public List<Cuenta> darCuentas() {
 		
 		return sqlCuenta.darCuenta (pmf.getPersistenceManager());
+		
+	}
+	
+	public List<PuntoDeAtencion> darPuntoDeAtencion() {
+		
+		return sqlPuntoDeAtencion.darPuntoDeAtencion (pmf.getPersistenceManager());
 		
 	}
 

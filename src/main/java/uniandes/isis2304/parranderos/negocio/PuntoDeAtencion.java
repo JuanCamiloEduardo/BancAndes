@@ -5,6 +5,7 @@ public class PuntoDeAtencion implements VOPuntoDeAtencion{
 	private String tipo;
 	private String localizacion;
 	private String oficina;
+	private String cajero;
 	
 	public PuntoDeAtencion() {
 		super();
@@ -12,14 +13,16 @@ public class PuntoDeAtencion implements VOPuntoDeAtencion{
 		this.tipo = "";
 		this.localizacion = "";
 		this.oficina = "";
+		this.cajero = "";
 	}
 	
-	public PuntoDeAtencion(long id, String tipo, String localizacion, String oficina) {
+	public PuntoDeAtencion(long id, String tipo, String localizacion, String oficina, String cajero) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
 		this.localizacion = localizacion;
 		this.oficina = oficina;
+		this.cajero = cajero;
 	}
 
 	public long getId() {
@@ -54,10 +57,18 @@ public class PuntoDeAtencion implements VOPuntoDeAtencion{
 		this.oficina = oficina;
 	}
 
+	public String getCajero() {
+		return cajero;
+	}
+
+	public void setCajero(String cajero) {
+		this.cajero = cajero;
+	}
+
 	@Override
 	public String toString() {
 		return "PuntoDeAtencion [id=" + id + ", tipo=" + tipo + ", localizacion=" + localizacion + ", oficina="
-				+ oficina + "]";
+				+ oficina + ", cajero=" + cajero + "]";
 	}
 	
 }

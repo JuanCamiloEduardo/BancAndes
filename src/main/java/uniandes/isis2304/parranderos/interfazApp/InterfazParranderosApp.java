@@ -54,6 +54,7 @@ import uniandes.isis2304.parranderos.negocio.Cuenta;
 import uniandes.isis2304.parranderos.negocio.Operaciones;
 import uniandes.isis2304.parranderos.negocio.Parranderos;
 import uniandes.isis2304.parranderos.negocio.Prestamo;
+import uniandes.isis2304.parranderos.negocio.PuntoDeAtencion;
 import uniandes.isis2304.parranderos.negocio.VOCliente;
 import uniandes.isis2304.parranderos.negocio.VOConsigna;
 import uniandes.isis2304.parranderos.negocio.VOPrestamo;
@@ -415,9 +416,14 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Dinero(para sacar - y meter +) ?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTb != null && (nombreTb.equals(nombre) || cajero))
-    		{
-    			parranderos.operacionCuenta(nombreTb,id,saldo);
-    			
+    		{	
+    			if (cajero) {
+    				long puntodeatencion = obtenerPuntoDeAtencion();
+    				parranderos.operacionCuenta(nombreTb,id,saldo,puntodeatencion);
+    			}
+    			else {
+    				parranderos.operacionCuenta(nombreTb,id,saldo,0);
+    			}
     
     			String resultado = "En operacion cuenta\n\n";
     			/*
@@ -590,10 +596,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String tipo = JOptionPane.showInputDialog (this, "Tipo del punto de atencion?", "Adicionar tipo", JOptionPane.QUESTION_MESSAGE);
     		String localizacion = JOptionPane.showInputDialog (this, "Localizacion?", "Adicionar locaclizacion", JOptionPane.QUESTION_MESSAGE);
     		String oficina = JOptionPane.showInputDialog (this, "Id de la oficina en caso de tener?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
+    		String cajero = JOptionPane.showInputDialog (this, "Login del cajero en caso de tener?", "Adicionar oficina", JOptionPane.QUESTION_MESSAGE);
     		
     		if (tipo != null && localizacion!= null)
     		{
-        		VOPuntoDeAtencion tb = parranderos.adicionarPuntoDeAtencion(tipo,localizacion,oficina);
+        		VOPuntoDeAtencion tb = parranderos.adicionarPuntoDeAtencion(tipo,localizacion,oficina,cajero);
         		if (tb == null)
         		{
         			throw new Exception ("No se pudo crear el punto de atencion");
@@ -674,7 +681,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		{
     			long Quitar=-valorCuota;
     			//Operacion en la cuenta 
-    			parranderos.operacionPrestamoV2(nombreTb,idcuenta,Quitar,idprestamo);
+    			if (cajero) {
+    				long puntodeatencion = obtenerPuntoDeAtencion();
+    				parranderos.operacionPrestamoV2(nombreTb,idcuenta,Quitar,idprestamo,puntodeatencion);
+    			}
+    			else {
+    				parranderos.operacionPrestamoV2(nombreTb,idcuenta,Quitar,idprestamo,0);
+    			}
     			String resultado = "Realizando su transaccion ";
     			//Operacion en el prestamo
     			resultado += "\n Operación terminada";
@@ -948,10 +961,14 @@ public void buscarPrestamo( )
     		if (nombreTb != null && nombreConsignador!=null && nombre.equals(nombreConsignador))
     		{
     			
-    			
-	    			parranderos.operacionCuentaV2(nombreConsignador,idOrigen,saldo,nombreTb,idDestino);
-    			
-    			
+    			if (cajero) {
+    				long puntodeatencion = obtenerPuntoDeAtencion();
+	    			parranderos.operacionCuentaV2(nombreConsignador,idOrigen,saldo,nombreTb,idDestino,puntodeatencion);
+    			}
+    			else {
+    				parranderos.operacionCuentaV2(nombreConsignador,idOrigen,saldo,nombreTb,idDestino,0);
+    			}
+    		
     			String resultado = "En operacion cuenta\n\n";
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
@@ -1185,6 +1202,108 @@ public void buscarPrestamo( )
             panelDatos.actualizarInterfaz(resultado);
         }
     }
+    
+    public void consultarConsignas() {
+    	
+    	try 
+    	{
+    		if(gerenteGeneral)
+    		{
+    		long montoinferior = Integer.parseInt(JOptionPane.showInputDialog (this, "Indicar el monto menor de consignas a consultar", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE));
+    		String tipo = JOptionPane.showInputDialog (this, "Indicar el tipo de operacion", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE);
+    		
+    		boolean condicion0 = (montoinferior==0);
+    		boolean condicion1 = (tipo.equals(""));
+    		
+    		
+    		List<Operaciones> operaciones = parranderos.darOperaciones();
+    		String resultado="";
+    		
+    		if((!condicion0) || (!condicion1)) {
+    		
+    			for (int i=0; i<operaciones.size(); i++) {
+	    				
+	    			if (condicion0 == false) {
+    					if((operaciones.get(i).getMonto())>=montoinferior) {
+    					}
+    					else {
+    						continue;
+    					}
+    				}
+	    				
+	    			if (condicion1 == false) {
+	    				if(operaciones.get(i).getTipo().equals(tipo)) {
+	    				}
+	    				else {
+	    					continue;
+	    				}
+	    			}
+	    				
+	    			resultado+=operaciones.get(i).getId()+", "+operaciones.get(i).getTipo()+", "+operaciones.get(i).getConsignador()+", "+operaciones.get(i).getIdConsignador()+", "+operaciones.get(i).getDestinatario()+", "+operaciones.get(i).getIdDestinatario()+", "+operaciones.get(i).getMonto()+", "+operaciones.get(i).getFecha();
+	    			resultado+="\n";
+	    			}
+    			
+    			panelDatos.actualizarInterfaz(resultado);
+    			
+    		}
+    		
+    		else {
+    			panelDatos.actualizarInterfaz("No selecciono un filtro de busqueda");
+    		}
+    		
+    		}
+    		else{
+    			panelDatos.actualizarInterfaz("No es un cliente o gerente");
+    		}
+		}
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    	
+    }
+    
+    public void consultarPuntosDeAtencion() {
+    	
+    	try {
+    		
+    		if(gerenteGeneral) {
+    			
+    			
+    			
+    		}
+    		
+    	}
+    	
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    	
+    }
+    
+	public long obtenerPuntoDeAtencion() {
+    	
+    	List <PuntoDeAtencion> puntosdeatencion = parranderos.darPuntosDeAtencion();
+    	
+    	for (int i=0; i<puntosdeatencion.size(); i++) {
+    		
+    		if (puntosdeatencion.get(i).getCajero().equals(nombre)) {
+    			
+    			return puntosdeatencion.get(i).getId();
+    			
+    		}
+    		
+    	}
+    	
+    	return 0;
+    	
+    }
+    
     
     public boolean verificarGerenteOficina(String gerente, long id) {
     	

@@ -45,11 +45,11 @@ class SQLPuntoDeAtencion {
 	 * @param horario - El horario en que el bar sirve la bebida (DIURNO, NOCTURNO, TDOOS)
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarPuntoDeAtencion (PersistenceManager pm, long idPuntoDeAtencion, String tipo,String localizacion,String oficina) 
+	public long adicionarPuntoDeAtencion (PersistenceManager pm, long idPuntoDeAtencion, String tipo,String localizacion,String oficina,String cajero) 
 	{
 		System. out. println("6");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPuntoDeAtencion  () + "(id, tipo,localizacion,oficina) values (?,?,?,?)");
-        q.setParameters(idPuntoDeAtencion, tipo,localizacion,oficina);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPuntoDeAtencion  () + "(id, tipo,localizacion,oficina,cajero) values (?,?,?,?,?)");
+        q.setParameters(idPuntoDeAtencion, tipo,localizacion,oficina,cajero);
         return (long) q.executeUnique();            
 	}
 
