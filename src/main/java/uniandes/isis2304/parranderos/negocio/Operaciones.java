@@ -12,6 +12,8 @@ public class Operaciones implements VOOperaciones{
 	private long idDestinatario;
 	private long monto;
 	private Timestamp  fecha;
+	private String fecha;
+	private String cajero;
 	
 	public Operaciones() {
 		super();
@@ -27,6 +29,11 @@ public class Operaciones implements VOOperaciones{
 	
 	public Operaciones(long id, String tipo, String consignador, long idConsignador, String destinatario,
 			long idDestinatario, long monto, Timestamp fecha) {
+		this.fecha = "";
+		this.cajero = "";
+	}
+	
+			long idDestinatario, long monto, String fecha, String cajero) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -36,6 +43,7 @@ public class Operaciones implements VOOperaciones{
 		this.idDestinatario = idDestinatario;
 		this.monto = monto;
 		this.fecha = fecha;
+		this.cajero = cajero;
 	}
 
 	public long getId() {
@@ -104,12 +112,19 @@ public class Operaciones implements VOOperaciones{
 		this.fecha = fecha;
 	}
 
+	public String getCajero() {
+		return cajero;
+	}
+
+	public void setCajero(String cajero) {
+		this.cajero = cajero;
+	}
 
 	@Override
 	public String toString() {
 		return "Operaciones [id=" + id + ", tipo=" + tipo + ", consignador=" + consignador + ", idConsignador="
 				+ idConsignador + ", destinatario=" + destinatario + ", idDestinatario=" + idDestinatario + ", monto="
-				+ monto + ", fecha=" + fecha + "]";
+				+ monto + ", fecha=" + fecha + ", cajero=" + cajero + "]";
 	}
 
 
