@@ -12,7 +12,7 @@ public class Operaciones implements VOOperaciones{
 	private long idDestinatario;
 	private long monto;
 	private Timestamp  fecha;
-	private String cajero;
+	private long puntoDeAtencion;
 	
 	public Operaciones() {
 		super();
@@ -24,14 +24,11 @@ public class Operaciones implements VOOperaciones{
 		this.idDestinatario = 0;
 		this.monto = 0;
 		this.fecha = new Timestamp (0);
+		this.puntoDeAtencion = 0;
 	}
 	
 	public Operaciones(long id, String tipo, String consignador, long idConsignador, String destinatario,
-			long idDestinatario, long monto, Timestamp fecha) {
-	}
-	
-	public Operaciones(long id, String tipo, String consignador, long idConsignador, String destinatario,
-			long idDestinatario, long monto, Timestamp fecha, String cajero) {
+			long idDestinatario, long monto, Timestamp fecha, long puntoDeAtencion) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -41,7 +38,7 @@ public class Operaciones implements VOOperaciones{
 		this.idDestinatario = idDestinatario;
 		this.monto = monto;
 		this.fecha = fecha;
-		this.cajero = cajero;
+		this.puntoDeAtencion = puntoDeAtencion;
 	}
 
 	public long getId() {
@@ -100,9 +97,7 @@ public class Operaciones implements VOOperaciones{
 		this.monto = monto;
 	}
 
-
-	public Timestamp getFecha() 
-	{
+	public Timestamp getFecha() {
 		return fecha;
 	}
 
@@ -110,21 +105,19 @@ public class Operaciones implements VOOperaciones{
 		this.fecha = fecha;
 	}
 
-	public String getCajero() {
-		return cajero;
+	public long getPuntoDeAtencion() {
+		return puntoDeAtencion;
 	}
 
-	public void setCajero(String cajero) {
-		this.cajero = cajero;
+	public void setPuntoDeAtencion(long puntoDeAtencion) {
+		this.puntoDeAtencion = puntoDeAtencion;
 	}
 
 	@Override
 	public String toString() {
 		return "Operaciones [id=" + id + ", tipo=" + tipo + ", consignador=" + consignador + ", idConsignador="
 				+ idConsignador + ", destinatario=" + destinatario + ", idDestinatario=" + idDestinatario + ", monto="
-				+ monto + ", fecha=" + fecha + ", cajero=" + cajero + "]";
+				+ monto + ", fecha=" + fecha + ", puntoDeAtencion=" + puntoDeAtencion + "]";
 	}
-
-
 	
 }

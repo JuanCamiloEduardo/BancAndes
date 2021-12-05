@@ -416,9 +416,14 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		long saldo = Integer.parseInt(JOptionPane.showInputDialog (this, "Dinero(para sacar - y meter +) ?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Numero ID de la cuenta?", "Operacion Cuenta", JOptionPane.QUESTION_MESSAGE));
     		if (nombreTb != null && (nombreTb.equals(nombre) || cajero))
-    		{
-    			parranderos.operacionCuenta(nombreTb,id,saldo);
-    			
+    		{	
+    			if (cajero) {
+    				long puntodeatencion = obtenerPuntoDeAtencion();
+    				parranderos.operacionCuenta(nombreTb,id,saldo,puntodeatencion);
+    			}
+    			else {
+    				parranderos.operacionCuenta(nombreTb,id,saldo,0);
+    			}
     
     			String resultado = "En operacion cuenta\n\n";
     			/*
@@ -676,7 +681,13 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		{
     			long Quitar=-valorCuota;
     			//Operacion en la cuenta 
-    			parranderos.operacionPrestamoV2(nombreTb,idcuenta,Quitar,idprestamo);
+    			if (cajero) {
+    				long puntodeatencion = obtenerPuntoDeAtencion();
+    				parranderos.operacionPrestamoV2(nombreTb,idcuenta,Quitar,idprestamo,puntodeatencion);
+    			}
+    			else {
+    				parranderos.operacionPrestamoV2(nombreTb,idcuenta,Quitar,idprestamo,0);
+    			}
     			String resultado = "Realizando su transaccion ";
     			//Operacion en el prestamo
     			resultado += "\n Operación terminada";
@@ -950,10 +961,14 @@ public void buscarPrestamo( )
     		if (nombreTb != null && nombreConsignador!=null && nombre.equals(nombreConsignador))
     		{
     			
-    			
-	    			parranderos.operacionCuentaV2(nombreConsignador,idOrigen,saldo,nombreTb,idDestino);
-    			
-    			
+    			if (cajero) {
+    				long puntodeatencion = obtenerPuntoDeAtencion();
+	    			parranderos.operacionCuentaV2(nombreConsignador,idOrigen,saldo,nombreTb,idDestino,puntodeatencion);
+    			}
+    			else {
+    				parranderos.operacionCuentaV2(nombreConsignador,idOrigen,saldo,nombreTb,idDestino,0);
+    			}
+    		
     			String resultado = "En operacion cuenta\n\n";
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
@@ -1271,23 +1286,21 @@ public void buscarPrestamo( )
     	
     }
     
-	public List obtenerPuntoDeAtencion() {
+	public long obtenerPuntoDeAtencion() {
     	
     	List <PuntoDeAtencion> puntosdeatencion = parranderos.darPuntosDeAtencion();
-    	
-    	List retorno = new ArrayList();
     	
     	for (int i=0; i<puntosdeatencion.size(); i++) {
     		
     		if (puntosdeatencion.get(i).getCajero().equals(nombre)) {
     			
-    			retorno.add(puntosdeatencion.get(i).getId());
+    			return puntosdeatencion.get(i).getId();
     			
     		}
     		
     	}
     	
-    	return retorno;
+    	return 0;
     	
     }
     

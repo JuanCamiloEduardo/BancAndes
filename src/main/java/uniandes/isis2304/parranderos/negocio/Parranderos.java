@@ -109,20 +109,20 @@ public class Parranderos
 		return tb;
 	}
 	
-	public long operacionCuenta (String nombre,long id,long saldo)
+	public long operacionCuenta (String nombre,long id,long saldo,long puntodeatencion)
 	{	
 		
 		log.info ("Realizando un cambio en el prestamo: " + id );
-		long tb = pp.cambioCuenta (nombre,id,saldo);
+		long tb = pp.cambioCuenta (nombre,id,saldo,puntodeatencion);
 		
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
 	}
-	public long operacionPrestamoV2 (String nombre,long id,long saldo,long idprestamo)
+	public long operacionPrestamoV2 (String nombre,long id,long saldo,long idprestamo, long puntodeatencion)
 	{	
 		
 		log.info ("Realizando un cambio en el prestamo: " + id );
-		long tb = pp.cambioPrestamov2(nombre,id,saldo,idprestamo);
+		long tb = pp.cambioPrestamov2(nombre,id,saldo,idprestamo,puntodeatencion);
 		
 		log.info ("Aumentando sedes de bares de una ciudad: " + tb + " tuplas actualizadas");
 		return tb;
@@ -232,11 +232,11 @@ public class Parranderos
         return voTipos;
 	}
 	
-	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
+	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino,long puntodeatencion)
 	{	
 		
 		log.info ("Realizando un cambio en las cuentas");
-		long tb = pp.cambioCuentaV2 (nombreConsignador,idConsignador,saldo,nombreDestino,idDestino);
+		long tb = pp.cambioCuentaV2 (nombreConsignador,idConsignador,saldo,nombreDestino,idDestino,puntodeatencion);
 		
 		return tb;
 	}

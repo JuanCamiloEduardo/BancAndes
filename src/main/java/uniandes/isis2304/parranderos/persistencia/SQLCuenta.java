@@ -114,9 +114,9 @@ public class SQLCuenta {
 	 * 	el segundo elemento representa el número de bebidas que sirve (Una bebida que se sirve en dos horarios cuenta dos veces)
 	 */
 
-	public void adicionarOperacion(PersistenceManager pm, long id, String tipo, String consignador, long idconsignador, String destinatario, long iddestinatario, long monto, String fecha) {
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaOperaciones () + "(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)");
-        q.setParameters(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,new Timestamp (System.currentTimeMillis()));
+	public void adicionarOperacion(PersistenceManager pm, long id, String tipo, String consignador, long idconsignador, String destinatario, long iddestinatario, long monto, String fecha,long puntodeatencion) {
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaOperaciones () + "(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha,puntodeatencion) values (?,?,?,?,?,?,?,?,?)");
+        q.setParameters(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,new Timestamp (System.currentTimeMillis()),puntodeatencion);
         q.executeUnique();
 	}
 
