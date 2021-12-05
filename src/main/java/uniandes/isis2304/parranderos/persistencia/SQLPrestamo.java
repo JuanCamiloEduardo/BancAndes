@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.JDOHelper;
@@ -81,7 +82,7 @@ class SQLPrestamo {
 	
 	public void adicionarOperacion(PersistenceManager pm, long id, String tipo, String consignador, long idconsignador, String destinatario, long iddestinatario, long monto, String fecha) {
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaOperaciones () + "(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha) values (?,?,?,?,?,?,?,?)");
-		q.setParameters(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,fecha);
+		q.setParameters(id,tipo,consignador,idconsignador,destinatario,iddestinatario,monto,new Timestamp (System.currentTimeMillis()));
         q.executeUnique();
 	}
 	

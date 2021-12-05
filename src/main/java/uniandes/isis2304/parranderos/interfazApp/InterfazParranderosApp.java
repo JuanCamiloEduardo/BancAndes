@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -977,7 +978,7 @@ public void buscarPrestamo( )
     	
     	try 
     	{
-    		if( cliente || gerenteOficina || gerenteGeneral)
+    		if(cliente || gerenteOficina || gerenteGeneral)
     		{
     		long id = Integer.parseInt(JOptionPane.showInputDialog (this, "Indicar por cual id especifico buscar o escribir 0", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE));
     		String tipo = JOptionPane.showInputDialog (this, "Indicar el tipo de operacion o dejar vacio", "Consultar Operaciones", JOptionPane.QUESTION_MESSAGE);
@@ -1001,6 +1002,7 @@ public void buscarPrestamo( )
     		boolean permiso = false;
     		
     		List<Operaciones> operaciones = parranderos.darOperaciones();
+    		System.out.print(operaciones);
     		String resultado="";
     		
     		for (int i=0; i<operaciones.size(); i++) {
@@ -1129,6 +1131,59 @@ public void buscarPrestamo( )
 			panelDatos.actualizarInterfaz(resultado);
 		}
     	
+    }
+    
+    public void consultarOperacionesv2( )
+    {
+    	
+        try 
+        {
+
+            if (true)
+            {
+            	
+            	JOptionPane.showMessageDialog(this,"Para el perfecto funcionamiento de este requerimiento el usuario llenara el recuadro en caso de utilizar el filtro o lo dejara vacio de lo contrario");
+            	
+            	String Inicial= JOptionPane.showInputDialog (this, "Fecha Inicial con formato yyyy-mm-dd hh24:mi:ss", "Buscar Operacion", JOptionPane.QUESTION_MESSAGE);
+            	String Final = JOptionPane.showInputDialog (this, "Fecha Final con formato yyyy-mm-dd hh24:mi:ss", "Buscar Operacion", JOptionPane.QUESTION_MESSAGE);
+            	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Mayor,Menor,Igual =[14,23,56] Como se buscan los numeros mayores a 14  que a su vez sean menores a 23 y tambien aquellos que sean iguales a 56 ");
+            	String ID = JOptionPane.showInputDialog (this, "Filtro ID", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Monto = JOptionPane.showInputDialog (this, "Filtro Monto?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Interes = JOptionPane.showInputDialog (this, "Filtro Id Consignador?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String NumeroCuotas = JOptionPane.showInputDialog (this, "Filtro Id Destinatario?", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	JOptionPane.showMessageDialog(this,"Los siguientes filtros se llenan de la siguiente forma Igual,Esta =[Abierto,E] Como se puede ver se estan buscando por aquellas que sean iguales a abierto o que tengan E");
+            	String Tipo = JOptionPane.showInputDialog (this, "Filtro Tipo Operacion", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Estado = JOptionPane.showInputDialog (this, "Filtro Nombre Consignador", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	String Nombre = JOptionPane.showInputDialog (this, "Filtro Nombre Destinatario", "Buscar Prestamo", JOptionPane.QUESTION_MESSAGE);
+            	
+            	
+            	List<String> LEstado = new ArrayList<String>(Arrays.asList(Estado.split(",")));
+            	List<String> LNombre = new ArrayList<String>(Arrays.asList(Nombre.split(",")));
+            	List<String> LID = new ArrayList<String>(Arrays.asList(ID.split(",")));
+            	List<String> LMonto = new ArrayList<String>(Arrays.asList(Monto.split(",")));
+            	List<String> LInteres = new ArrayList<String>(Arrays.asList(Interes.split(",")));
+            	List<String> LNumero = new ArrayList<String>(Arrays.asList(NumeroCuotas.split(",")));
+
+            	Timestamp FechaI=Timestamp.valueOf(Inicial);
+            	Timestamp FechaF=Timestamp.valueOf(Final);
+            	List <VOOperaciones> listaPrestamos = parranderos.darVOOperacion(FechaI,FechaF,Tipo, LEstado, LNombre, LID, LMonto, LInteres, LNumero);
+            	
+
+            	
+            
+    			String resultado = "En listarTipoBebida";
+    			resultado +=  "\n" + listarO (listaPrestamos);
+    			panelDatos.actualizarInterfaz(resultado);
+    			resultado += "\n OperaciÃ³n terminada";
+                }
+
+        }
+        catch (Exception e) 
+        {
+//            e.printStackTrace();
+            String resultado = generarMensajeError(e);
+            panelDatos.actualizarInterfaz(resultado);
+        }
     }
     
     public boolean verificarGerenteOficina(String gerente, long id) {
@@ -1394,6 +1449,16 @@ public void buscarPrestamo( )
     	String resp = "Los tipos de bebida existentes son:\n";
     	int i = 1;
         for (VOPrestamo tb : lista)
+        {
+        	resp += i++ + ". " + tb.toString() + "\n";
+        }
+        return resp;
+	}
+    private String listarO(List<VOOperaciones> lista) 
+    {
+    	String resp = "Los tipos de bebida existentes son:\n";
+    	int i = 1;
+        for (VOOperaciones tb : lista)
         {
         	resp += i++ + ". " + tb.toString() + "\n";
         }

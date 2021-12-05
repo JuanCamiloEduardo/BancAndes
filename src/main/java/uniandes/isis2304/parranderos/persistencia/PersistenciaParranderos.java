@@ -622,6 +622,22 @@ public class PersistenciaParranderos
 		
         return list;
     }
+	
+	public List<Operaciones> buscarOperacion (Timestamp FechaI,Timestamp FechaF,String Tipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero)
+    {
+		List<Operaciones> listaPrestamos=sqlOperaciones.buscarOperacionv2 (pmf.getPersistenceManager(),FechaI,FechaF);
+		List<Operaciones> list=new ArrayList<Operaciones>();
+		System.out.println(listaPrestamos.size());
+		System.out.println(listaPrestamos);
+		System.out.println("LLEGO3");
+		
+		list=FiltroOperaciones(listaPrestamos,Tipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero);
+
+		
+		
+        return list;
+    }
+	
 	public List<Prestamo> Filtro(List<Prestamo> listaPrestamos,List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
 	{
 	
@@ -704,7 +720,70 @@ public class PersistenciaParranderos
 
 		
 	}
+	public List<Operaciones> FiltroOperaciones(List<Operaciones> listaPrestamos,String Tipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero)
+	{
+	
+    	long Mayor =Long.MAX_VALUE,MayorM=Long.MAX_VALUE,MayorI=Long.MAX_VALUE,MayorN=Long.MAX_VALUE,MayorV=Long.MAX_VALUE;
+    	long Menor=-2,MenorM=-2,MenorI=-2,MenorN=-2,MenorV=-2;
+    	long Igual=-2,IgualM=-2,IgualI=-2,IgualN=-2,IgualV=-2;
+    	String igual="?||°°",igualE="?||°°",igualN="?||°°";
+    	String esta="?||°°",estaE="?||°°",estaN="?||°°";
+    	
 
+    	
+    
+    	if (LEstado.size()==2) {
+    		igualE=LEstado.get(0);
+    		estaE=LEstado.get(1);
+    	}
+    	if (LNombre.size()==2) {
+    		igualN=LNombre.get(0);
+    		estaN=LNombre.get(1);
+    	}
+
+    	if (LID.size()==3) {
+    		Mayor =Long.parseLong(LID.get(0));
+    		Menor=Long.parseLong(LID.get(1));
+    		Igual=Long.parseLong(LID.get(2));
+    	}
+    	if (LMonto.size()==3) {
+    		MayorM =Long.parseLong(LMonto.get(0));
+    		MenorM=Long.parseLong(LMonto.get(1));
+    		IgualM=Long.parseLong(LMonto.get(2));
+    	}
+    	if (LInteres.size()==3) {
+    		MayorI =Long.parseLong(LInteres.get(0));
+    		MenorI=Long.parseLong(LInteres.get(1));
+    		IgualI=Long.parseLong(LInteres.get(2));
+    	}
+    	if (LNumero.size()==3) {
+    		MayorN =Long.parseLong(LNumero.get(0));
+    		MenorN=Long.parseLong(LNumero.get(1));
+    		IgualN=Long.parseLong(LNumero.get(2));
+    	}
+
+    	
+
+
+        ArrayList<Operaciones> Cambios=new ArrayList<Operaciones>();
+        for (int i = 0; i<listaPrestamos.size(); i++) {
+        	Cambios.add(listaPrestamos.get(i));
+        }
+        ArrayList<Operaciones> PrimerFiltro=new ArrayList<Operaciones>();
+    
+        List<Operaciones> SegundoFiltro=new ArrayList<Operaciones>();
+        PrimerFiltro=filtroStringOperaciones(Tipo,Cambios,estaE,igualE,estaN,igualN);
+   
+        SegundoFiltro=filtrolongOperaciones2(Mayor,Menor,Igual,PrimerFiltro ,MayorM,MenorM,IgualM,MayorI,MenorI,IgualI,MayorN,MenorN,IgualN,MayorV,MenorV,IgualV);
+       
+    	
+    	/*Pasar la de Arraylist a List"*/
+        return SegundoFiltro;
+
+//        	e.printStackTrace();
+
+		
+	}
 
 	public List<Prestamo> filtrolong(long mayor,long menor,long igual,ArrayList<Prestamo> lista ,long mayorM,long menorM,long igualM,long mayorI,long menorI,long igualI,long mayorN,long menorN,long igualN,long mayorV,long menorV,long igualV)
 	{
@@ -766,9 +845,59 @@ public class PersistenciaParranderos
 		}
 
 		return list;
-
-
+	}
+	
+	public List<Operaciones> filtrolongOperaciones2(long mayor,long menor,long igual,ArrayList<Operaciones> lista ,long mayorM,long menorM,long igualM,long mayorI,long menorI,long igualI,long mayorN,long menorN,long igualN,long mayorV,long menorV,long igualV)
+	{
+		List<Operaciones> list=new ArrayList<Operaciones>();
+		ArrayList<Integer> Eliminar=new ArrayList<Integer>();
+	
 		
+		for (int i = 0; i<lista.size(); i++)
+		{	
+			Operaciones index=lista.get(i);
+
+			if(igual!=-2) {
+				
+			if( igual!=lista.get(i).getId() && !(lista.get(i).getId() > mayor && lista.get(i).getId()  < menor))
+			{
+				
+				Eliminar.add(i);
+			}
+			}
+
+			if(igualI!=-2) {
+			if( igualI!=index.getIdConsignador() && !(index.getIdConsignador() > mayorI  &&  index.getIdConsignador()  < menorI))
+			{
+				Eliminar.add(i);
+			}
+			}
+			
+			if(igualN!=-2) {
+			if(igualN!=index.getIdDestinatario() && !(index.getIdDestinatario() > mayorN  &&  index.getIdDestinatario()  < menorN))
+			{
+				Eliminar.add(i);
+			}
+			}
+			
+			if(igualM!=-2) {
+				
+			if(igualM!=index.getMonto() && !(index.getMonto() > mayorM  &&  index.getMonto()  < menorM))
+			{
+				Eliminar.add(i);
+			}
+			}
+					
+		}
+		
+		for (int j = 0; j<lista.size(); j++)
+		{
+			if(!(Eliminar.contains(j))) {
+			list.add(lista.get(j));
+			}
+		}
+
+		return list;
 	}
 
 	public ArrayList<Prestamo> filtroString(String esta,String igual,ArrayList<Prestamo> lista,String estaE,String igualE,String estaN,String igualN,String oficina )
@@ -813,11 +942,61 @@ public class PersistenciaParranderos
 			}			
 			}
 
-			if (!oficina.equals("895") && !index.getGerente().equals(oficina)) 
-			{
-				Eliminar.add(i);
+		}
+		
+		
+		for (int j = 0; j<lista.size(); j++)
+		{
+			if(!(Eliminar.contains(j))) {
+			Cambios.add(lista.get(j));
 			}
 		}
+		return Cambios;
+		
+	}
+	
+	public ArrayList<Operaciones> filtroStringOperaciones(String igual,ArrayList<Operaciones> lista,String estaE,String igualE,String estaN,String igualN )
+	{
+		
+
+		ArrayList<Integer> Eliminar=new ArrayList<Integer>();
+		ArrayList<Operaciones> Cambios=new ArrayList<Operaciones>();
+		for (int i = 0; i<lista.size(); i++)
+		{
+			Operaciones index=lista.get(i);
+			if(!igual.equals("?||°°")) 
+			{
+			if(!igual.equals(index.getTipo()))
+			{
+				Eliminar.add(i);
+			}	
+			}
+
+
+			if(!estaE.equals("?||°°")) 
+			{
+			System.out.println("consignador");
+			System.out.println(estaE);
+			System.out.println(!igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE));
+			if( !igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE) )
+			{ 
+				Eliminar.add(i);
+			}	
+			}
+	
+			
+			
+			if(!estaN.equals("?||°°")) 
+			{
+				
+			if( !igualN.equals(index.getDestinatario()) && !index.getDestinatario().contains(estaN)  )
+			{
+				
+				Eliminar.add(i);
+			}			
+			}
+		}
+		
 		
 		for (int j = 0; j<lista.size(); j++)
 		{
@@ -829,7 +1008,6 @@ public class PersistenciaParranderos
 		
 	}
 
-	
 	
 	
  

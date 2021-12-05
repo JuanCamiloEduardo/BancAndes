@@ -73,6 +73,10 @@
 				{
 					"label": "Buscar Prestamos",
 					"event": "buscarPrestamo"
+				},
+				{
+					"label": "Consultar operaciones v2",
+					"event": "consultarOperacionesv2"
 				}
 				
 				
