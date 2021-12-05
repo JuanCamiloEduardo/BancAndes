@@ -361,7 +361,7 @@ public class PersistenciaParranderos
 
 	
 
-	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina)
+	public PuntoDeAtencion adicionarPuntoDeAtencion(String tipo,String localizacion,String oficina, String cajero)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -369,11 +369,11 @@ public class PersistenciaParranderos
         {   
             tx.begin();
             long idPuntoDeAtencion = nextval ();
-            long tuplasInsertadas = sqlPuntoDeAtencion.adicionarPuntoDeAtencion(pm, idPuntoDeAtencion, tipo,localizacion,oficina);
+            long tuplasInsertadas = sqlPuntoDeAtencion.adicionarPuntoDeAtencion(pm, idPuntoDeAtencion, tipo,localizacion,oficina,cajero);
             tx.commit();
             log.trace ("Inserción de punto de atencion: " + tuplasInsertadas + " tuplas insertadas");
             
-            return new PuntoDeAtencion (idPuntoDeAtencion, tipo,localizacion,oficina);
+            return new PuntoDeAtencion (idPuntoDeAtencion, tipo,localizacion,oficina,cajero);
         }
         catch (Exception e)
         {
@@ -454,7 +454,7 @@ public class PersistenciaParranderos
         }
 	}
 	
-	public long cambioCuenta (String nombre,long id,long saldo)
+	public long cambioCuenta (String nombre,long id,long saldo, long puntodeatencion)
 	{
 		
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -466,10 +466,10 @@ public class PersistenciaParranderos
             
             long idOperacion = nextval ();
             if (saldo<0) {
-            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString());
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
             }
             else {
-            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, id, Math.abs(saldo), LocalDate.now().toString());
+            	sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", "", 0, nombre, id, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
             }
             tx.commit();
 
@@ -491,7 +491,7 @@ public class PersistenciaParranderos
         }
 	}
 	
-	public long cambioPrestamov2 (String nombre,long id,long saldo,long idprestamo)
+	public long cambioPrestamov2 (String nombre,long id,long saldo,long idprestamo,long puntodeatencion)
 	{
 	
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -502,7 +502,7 @@ public class PersistenciaParranderos
             long resp = sqlCuenta.cambioCuenta(pm, nombre,id,(-1)*Math.abs(saldo));
             sqlPrestamo.cambioPrestamo(pm, nombre, idprestamo,Math.abs(saldo));
             long idOperacion = nextval ();
-            sqlPrestamo.adicionarOperacion(pm, idOperacion, "prestamo", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString());
+            sqlPrestamo.adicionarOperacion(pm, idOperacion, "prestamo", nombre, id, "", 0, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
           
             tx.commit();
 
@@ -627,9 +627,7 @@ public class PersistenciaParranderos
     {
 		List<Operaciones> listaPrestamos=sqlOperaciones.buscarOperacionv2 (pmf.getPersistenceManager(),FechaI,FechaF);
 		List<Operaciones> list=new ArrayList<Operaciones>();
-		System.out.println(listaPrestamos.size());
-		System.out.println(listaPrestamos);
-		System.out.println("LLEGO3");
+
 		
 		list=FiltroOperaciones(listaPrestamos,Tipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero);
 
@@ -641,18 +639,26 @@ public class PersistenciaParranderos
     {
 		List<Operaciones> listaPrestamos=sqlOperaciones.buscarOperacionv2 (pmf.getPersistenceManager(),FechaI,FechaF);
 		List<Operaciones> list=new ArrayList<Operaciones>();
-		System.out.println(listaPrestamos.size());
-		System.out.println(listaPrestamos);
-		System.out.println("LLEGO3");
+
 		
 		list=FiltroOperaciones(listaPrestamos,Tipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero);
-		for (int i = 0; i<list.size(); i++)
+	
+		for (int i = 0; i<listaPrestamos.size(); i++)
 		{	
-			listaPrestamos.remove(list.get(i));
+			if(list.contains(listaPrestamos.get(i)))
+			{
+				list.remove(listaPrestamos.get(i));
+			}
+			else
+			{
+				list.add(listaPrestamos.get(i));
+			}
+		
 		}
+
 		
 		
-        return listaPrestamos;
+        return list;
     }
 	
 	public List<Prestamo> Filtro(List<Prestamo> listaPrestamos,List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
@@ -790,7 +796,7 @@ public class PersistenciaParranderos
     
         List<Operaciones> SegundoFiltro=new ArrayList<Operaciones>();
         PrimerFiltro=filtroStringOperaciones(Tipo,Cambios,estaE,igualE,estaN,igualN);
-   
+        
         SegundoFiltro=filtrolongOperaciones2(Mayor,Menor,Igual,PrimerFiltro ,MayorM,MenorM,IgualM,MayorI,MenorI,IgualI,MayorN,MenorN,IgualN,MayorV,MenorV,IgualV);
        
     	
@@ -980,27 +986,32 @@ public class PersistenciaParranderos
 		ArrayList<Operaciones> Cambios=new ArrayList<Operaciones>();
 		for (int i = 0; i<lista.size(); i++)
 		{
+
+			
 			Operaciones index=lista.get(i);
-			if(!igual.equals("?||°°")) 
+
+			if(!igual.equals("") )
 			{
 			if(!igual.equals(index.getTipo()))
 			{
 				Eliminar.add(i);
 			}	
 			}
+			
 
 
 			if(!estaE.equals("?||°°")) 
 			{
-			System.out.println("consignador");
-			System.out.println(estaE);
-			System.out.println(!igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE));
+
+			
+		
 			if( !igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE) )
 			{ 
+				
 				Eliminar.add(i);
 			}	
 			}
-	
+
 			
 			
 			if(!estaN.equals("?||°°")) 
@@ -1010,8 +1021,11 @@ public class PersistenciaParranderos
 			{
 				
 				Eliminar.add(i);
-			}			
+			}		
+
 			}
+
+			
 		}
 		
 		
@@ -1193,7 +1207,7 @@ public class PersistenciaParranderos
 		
 	}
 	
-	public long cambioCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
+	public long cambioCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino, long puntodeatencion)
 	{
 	
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1204,7 +1218,7 @@ public class PersistenciaParranderos
             long resp = sqlCuenta.cambioCuenta(pm, nombreConsignador,idConsignador,(Math.abs(saldo))*(-1));
             sqlCuenta.cambioCuenta(pm, nombreDestino,idDestino,Math.abs(saldo));
             long idOperacion = nextval ();
-            sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombreConsignador, idConsignador, nombreDestino, idDestino, Math.abs(saldo), LocalDate.now().toString());
+            sqlCuenta.adicionarOperacion(pm, idOperacion, "transferencia", nombreConsignador, idConsignador, nombreDestino, idDestino, Math.abs(saldo), LocalDate.now().toString(),puntodeatencion);
             
             tx.commit();
 
@@ -1238,7 +1252,7 @@ public class PersistenciaParranderos
             
             for (int i = 0; i<lista.size(); i++) {
             	
-            	cambioCuentaV2(lista.get(i).getJefe(),lista.get(i).getIdJefe(),lista.get(i).getMonto(),lista.get(i).getEmpleado(),lista.get(i).getIdEmpleado());
+            	cambioCuentaV2(lista.get(i).getJefe(),lista.get(i).getIdJefe(),lista.get(i).getMonto(),lista.get(i).getEmpleado(),lista.get(i).getIdEmpleado(),0);
             	
             }
             
@@ -1276,6 +1290,12 @@ public class PersistenciaParranderos
 	public List<Cuenta> darCuentas() {
 		
 		return sqlCuenta.darCuenta (pmf.getPersistenceManager());
+		
+	}
+	
+	public List<PuntoDeAtencion> darPuntoDeAtencion() {
+		
+		return sqlPuntoDeAtencion.darPuntoDeAtencion (pmf.getPersistenceManager());
 		
 	}
 

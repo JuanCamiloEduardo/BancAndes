@@ -77,6 +77,10 @@
 				{
 					"label": "Consultar operaciones v2",
 					"event": "consultarOperacionesv2"
+				},
+				{
+					"label": "Consultar operaciones v3",
+					"event": "consultarOperacionesv3"
 				}
 				
 				
