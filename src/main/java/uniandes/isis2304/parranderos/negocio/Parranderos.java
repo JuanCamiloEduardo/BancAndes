@@ -220,6 +220,18 @@ public class Parranderos
         return voTipos;
 	}
 	
+	public List<VOOperaciones> darVOOperacion ( Timestamp FechaI, Timestamp FechaF,String nombre,boolean cliente,boolean gerente)
+	{
+		log.info ("Generando los VO de operaciones");        
+        List<VOOperaciones> voTipos = new LinkedList<VOOperaciones> ();
+        for (Operaciones tb : pp.buscarOperacion (FechaI,FechaF,nombre,cliente,gerente))
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Tipos de bebida: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
+	
 	public long operacionCuentaV2 (String nombreConsignador,long idConsignador,long saldo,String nombreDestino,long idDestino)
 	{	
 		

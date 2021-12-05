@@ -1,5 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.sql.Timestamp;
+
 public interface VOOperaciones {
 
 	public long getId();
@@ -9,7 +11,7 @@ public interface VOOperaciones {
 	public String getDestinatario();
 	public long getIdDestinatario();
 	public long getMonto();
-	public String getFecha();
+	public Timestamp getFecha();
 	
 	
 	

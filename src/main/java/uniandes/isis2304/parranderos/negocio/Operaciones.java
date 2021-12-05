@@ -1,5 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.sql.Timestamp;
+
 public class Operaciones implements VOOperaciones{
 
 	private long id;
@@ -9,7 +11,7 @@ public class Operaciones implements VOOperaciones{
 	private String destinatario;
 	private long idDestinatario;
 	private long monto;
-	private String fecha;
+	private Timestamp  fecha;
 	
 	public Operaciones() {
 		super();
@@ -20,11 +22,11 @@ public class Operaciones implements VOOperaciones{
 		this.destinatario = "";
 		this.idDestinatario = 0;
 		this.monto = 0;
-		this.fecha = "";
+		this.fecha = new Timestamp (0);
 	}
 	
 	public Operaciones(long id, String tipo, String consignador, long idConsignador, String destinatario,
-			long idDestinatario, long monto, String fecha) {
+			long idDestinatario, long monto, Timestamp fecha) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -92,13 +94,16 @@ public class Operaciones implements VOOperaciones{
 		this.monto = monto;
 	}
 
-	public String getFecha() {
+
+	public Timestamp getFecha() 
+	{
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
+
 
 	@Override
 	public String toString() {
@@ -106,5 +111,7 @@ public class Operaciones implements VOOperaciones{
 				+ idConsignador + ", destinatario=" + destinatario + ", idDestinatario=" + idDestinatario + ", monto="
 				+ monto + ", fecha=" + fecha + "]";
 	}
+
+
 	
 }

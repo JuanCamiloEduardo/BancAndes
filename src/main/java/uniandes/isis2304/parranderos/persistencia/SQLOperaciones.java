@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import uniandes.isis2304.parranderos.negocio.Consigna;
 import uniandes.isis2304.parranderos.negocio.Cuenta;
 import uniandes.isis2304.parranderos.negocio.GerenteOficina;
 import uniandes.isis2304.parranderos.negocio.Operaciones;
+import uniandes.isis2304.parranderos.negocio.Prestamo;
 import uniandes.isis2304.parranderos.negocio.TipoBebida;
 import uniandes.isis2304.parranderos.negocio.Usuario;
 
@@ -61,5 +63,16 @@ class SQLOperaciones
         q.setResultClass(Operaciones.class);
         return (List<Operaciones>) q.executeList();
     }
+	 
+	public List<Operaciones> buscarOperacionv2 (PersistenceManager pm,Timestamp Inicial,Timestamp Final) 
+		 {
+				System.out.println(Inicial);
+		        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaOperaciones ()+ " WHERE fecha BETWEEN ? AND ?");
+		        q.setParameters(Inicial,Final);
+		        q.setResultClass(Operaciones.class);
+		        return (List<Operaciones>) q.executeList();
+		 }
+		
+	
 
 }

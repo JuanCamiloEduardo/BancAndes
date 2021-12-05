@@ -622,6 +622,22 @@ public class PersistenciaParranderos
 		
         return list;
     }
+	
+	public List<Operaciones> buscarOperacion (Timestamp FechaI,Timestamp FechaF,String nombre,boolean cliente,boolean gerente)
+    {
+		List<Operaciones> listaPrestamos=sqlOperaciones.buscarOperacionv2 (pmf.getPersistenceManager(),FechaI,FechaF);
+		List<Operaciones> list=new ArrayList<Operaciones>();
+		System.out.println(listaPrestamos.size());
+		System.out.println(listaPrestamos);
+		System.out.println("LLEGO3");
+		/*
+		list=Filtro(listaPrestamos,LTipo,LEstado,LNombre,LID,LMonto,LInteres,LNumero,LValor,nombre,cliente,gerente);
+
+		*/
+		
+        return listaPrestamos;
+    }
+	
 	public List<Prestamo> Filtro(List<Prestamo> listaPrestamos,List<String> LTipo,List<String> LEstado,List<String> LNombre,List<String> LID, List<String> LMonto,List<String> LInteres,List<String> LNumero,List<String> LValor,String nombre,boolean cliente,boolean gerente)
 	{
 	
