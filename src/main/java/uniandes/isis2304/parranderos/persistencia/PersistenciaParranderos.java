@@ -755,11 +755,11 @@ public class PersistenciaParranderos
 
     	
     
-    	if (LEstado.size()==2) {
+    	if (LEstado.size()==2 && LEstado.get(0) != null && LEstado.get(1) != null) {
     		igualE=LEstado.get(0);
     		estaE=LEstado.get(1);
     	}
-    	if (LNombre.size()==2) {
+    	if (LNombre.size()==2 && LNombre.get(0) != null && LNombre.get(1) != null ) {
     		igualN=LNombre.get(0);
     		estaN=LNombre.get(1);
     	}
