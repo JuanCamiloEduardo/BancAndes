@@ -1334,7 +1334,7 @@ public void buscarPrestamo( )
     			
     			if ((id1 > 0) && (id2 > 0)) {
     				
-    				List<Operaciones> operaciones = parranderos.darOperaciones();
+    				List<Operaciones> operaciones = parranderos.darOperacionesPuntos(id1,id2);
     	    		String resultado="";
     	    		List lista1 = new ArrayList();
     	    		List lista2 = new ArrayList();

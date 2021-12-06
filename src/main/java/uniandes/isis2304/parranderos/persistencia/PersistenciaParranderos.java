@@ -1287,6 +1287,12 @@ public class PersistenciaParranderos
 		
 	}
 	
+	public List<Operaciones> darOperacionesPuntos(long id1, long id2) {
+		
+		return sqlOperaciones.darOperacionesPuntos (pmf.getPersistenceManager(),id1,id2);
+		
+	}
+	
 	public List<Cuenta> darCuentas() {
 		
 		return sqlCuenta.darCuenta (pmf.getPersistenceManager());

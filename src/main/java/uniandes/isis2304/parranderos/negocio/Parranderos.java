@@ -266,6 +266,14 @@ public class Parranderos
 	
 	}
 	
+	public List<Operaciones> darOperacionesPuntos(long id1, long id2) {
+		
+		log.info ("Buscando Operaciones: ");
+		List<Operaciones> operaciones = pp.darOperacionesPuntos(id1,id2);
+		return operaciones;
+	
+	}
+	
 	public List<Cuenta> darCuentas() {
 		
 		List<Cuenta> cuentas = pp.darCuentas();

@@ -63,6 +63,14 @@ class SQLOperaciones
         q.setResultClass(Operaciones.class);
         return (List<Operaciones>) q.executeList();
     }
+	
+	public List<Operaciones> darOperacionesPuntos (PersistenceManager pm, long id1, long id2) 
+    {
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaOperaciones ()+" WHERE (PUNTODEATENCION=?) OR (PUNTODEATENCION=?)");
+        q.setParameters(id1,id2);
+        q.setResultClass(Operaciones.class);
+        return (List<Operaciones>) q.executeList();
+    }
 	 
 	public List<Operaciones> buscarOperacionv2 (PersistenceManager pm,Timestamp Inicial,Timestamp Final) 
 		 {
