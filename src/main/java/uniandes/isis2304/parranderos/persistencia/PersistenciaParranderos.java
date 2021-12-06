@@ -1005,7 +1005,7 @@ public class PersistenciaParranderos
 
 			
 		
-			if( !igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE) )
+			if( !igualE.equals(index.getConsignador()) && !index.getConsignador().contains(estaE) && index.getConsignador() != null)
 			{ 
 				
 				Eliminar.add(i);
@@ -1017,7 +1017,7 @@ public class PersistenciaParranderos
 			if(!estaN.equals("?||°°")) 
 			{
 				
-			if( !igualN.equals(index.getDestinatario()) && !index.getDestinatario().contains(estaN)  )
+			if( !igualN.equals(index.getDestinatario()) && !index.getDestinatario().contains(estaN)  && index.getDestinatario() != null )
 			{
 				
 				Eliminar.add(i);
